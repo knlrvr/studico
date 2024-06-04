@@ -1,8 +1,6 @@
 'use client'
 
-import { Authenticated, Unauthenticated } from "convex/react";
 import { ModeToggle } from "./theme";
-import { SignInButton, UserButton } from "@clerk/nextjs";
 
 import {
     Breadcrumb,
@@ -13,6 +11,7 @@ import {
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 import Link from "next/link";
+import { HeaderActions } from "./header-actions";
 
 export default function Header() {
     return (
@@ -34,12 +33,7 @@ export default function Header() {
 
             <div className="flex items-center gap-4">
                 <ModeToggle />
-                <Unauthenticated>
-                    <SignInButton />
-                </Unauthenticated>
-                <Authenticated>
-                    <UserButton />
-                </Authenticated>
+                <HeaderActions />
             </div>
         </div>
     )
