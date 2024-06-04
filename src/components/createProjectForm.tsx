@@ -40,7 +40,7 @@ export default function CreateProjectForm({
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
         // testing (:
-        await new Promise((resolve) => setTimeout(resolve, 2000))
+        // await new Promise((resolve) => setTimeout(resolve, 2000))
         await createProject({ title: values.title });
         onSave();
     }
