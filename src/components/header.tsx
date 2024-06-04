@@ -17,7 +17,7 @@ import { HeaderActions } from "./header-actions";
 
 export default function Header() {
     return (
-        <div className="fixed p-4 border-b flex justify-between items-center w-full container mx-auto bg-background">
+        <div className="fixed p-4 border-b flex justify-between items-center w-full mx-auto bg-background">
 
             <div className="flex items-center gap-4">
                 <Link href="/" className="font-extrabold tracking-widest text-lg">STUDICO</Link>
