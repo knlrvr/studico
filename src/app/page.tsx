@@ -5,28 +5,29 @@ import { Authenticated, Unauthenticated, useMutation, useQuery } from "convex/re
 import { api } from "../../convex/_generated/api";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/theme";
+import ProjectCard from "@/components/projectCard";
+import { Plus } from "lucide-react";
+import CreateProject from "@/components/createProject";
+
+
 
 export default function Home() {
 
-  const createProject = useMutation(api.projects.createProject)
   const projects = useQuery(api.projects.getProjects)
 
   return (
-    <main className="flex flex-col min-h-screen justify-center items-center">
-
+    <main className="flex flex-col pt-24 px-4">
       <Authenticated>
-        <Button
-          className="my-8"
-          onClick={() => 
-            createProject({ title: 'hello 1' })
-          }
-        >
-          Click Me!
-        </Button>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-neutral-500 text-lg tracking-wide">My Projects</h1>
+          <CreateProject />
+        </div>
 
+        <div className="grid grid-cols-4 gap-4">
           {projects?.map((project) => (
-            <div key={project._id}>{project.title}</div>
+            <ProjectCard key={project._id} project={project} />
           ))}
+        </div>
       </Authenticated>
     </main>
   );

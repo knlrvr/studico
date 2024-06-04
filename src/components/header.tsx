@@ -2,6 +2,8 @@
 
 import { ModeToggle } from "./theme";
 
+import Link from "next/link";
+
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -10,15 +12,15 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import Link from "next/link";
+
 import { HeaderActions } from "./header-actions";
 
 export default function Header() {
     return (
-        <div className="fixed p-4 border-b flex justify-between items-center w-full container mx-auto">
+        <div className="fixed p-4 border-b flex justify-between items-center w-full container mx-auto bg-background">
 
             <div className="flex items-center gap-4">
-                <h1 className="font-extrabold tracking-widest italic text-lg">STUDICO</h1>
+                <Link href="/" className="font-extrabold tracking-widest text-lg">STUDICO</Link>
                 
                 {/* Pages / Conditional? */}
                 <Breadcrumb>
