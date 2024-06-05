@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
-import { Bell, Folder, LayoutDashboard, Menu, MessageSquare, Settings, User } from "lucide-react"
+import { Bell, Folder, LayoutDashboard, Menu, MessageSquare, Search, Settings, User } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
@@ -17,7 +17,7 @@ export default function Component() {
         <Link href="#" className="">
           <span className="hidden sm:flex font-extrabold tracking-wider text-xl mt-2 ml-2">Studico</span>
         </Link>
-        <nav className="hidden mt-8 items-start gap-6 text-sm font-medium sm:flex flex-col w-48">
+        <nav className="hidden mt-[2.75rem] items-start gap-6 text-sm font-medium sm:flex flex-col w-48">
           <Link
             href="/dashboard"
             className={cn(
@@ -68,6 +68,18 @@ export default function Component() {
             <span>Messages</span>
           </Link>
           <Link
+            href="/dashboard/search"
+            className={cn(
+                "p-2 rounded-lg w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150",
+                {
+                    'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white': pathname.endsWith('/dashboard/search')
+                }
+                )}            prefetch={false}
+          >
+            <Search className="w-5 h-5" />
+            <span>Search All</span>
+          </Link>
+          <Link
             href="/dashboard/profile"
             className={cn(
                 "p-2 rounded-lg w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150",
@@ -79,7 +91,6 @@ export default function Component() {
             <User className="w-5 h-5" />
             <span>Profile</span>
           </Link>
-          
           <Link
             href="/dashboard/settings"
             className={cn(
@@ -123,6 +134,14 @@ export default function Component() {
                 <Link href="/dashboard/notifications" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
                   <Bell className="w-5 h-5" />
                   <span>Notifications</span>
+                </Link>
+                <Link href="/dashboard/messages" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
+                  <MessageSquare className="w-5 h-5" />
+                  <span>Messages</span>
+                </Link>
+                <Link href="/dashboard/search" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
+                  <Search className="w-5 h-5" />
+                  <span>Search All</span>
                 </Link>
                 <Link href="/dashboard/profile" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
                   <User className="w-5 h-5" />

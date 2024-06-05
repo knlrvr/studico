@@ -12,3 +12,5 @@ export default defineSchema({
         projectId: v.id('projects'),
     }).index('by_projectId', ['projectId'])
 });
+
+// TO DO: Add vector search on all fields

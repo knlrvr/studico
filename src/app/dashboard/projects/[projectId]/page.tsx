@@ -39,13 +39,14 @@ export default function ProjectPage({
                   <TabsTrigger value="files">Files</TabsTrigger>
                   <TabsTrigger value="chat">
                     Messages 
-                    {/* make conditional!!! */}
+                    {/* make conditional, depends on newMessages !!! ? */}
                     <span className="ml-2 inline-flex text-xs bg-green-500 rounded-full p-1"></span>
                   </TabsTrigger>
               </TabsList>
             </div>
+
             <TabsContent value="overview">
-              Overview of project, including recent changes and other history.
+              Overview of project, including recent changes, progress, and other history.
             </TabsContent>
             <TabsContent value="files">
               Files related to project. 
@@ -54,7 +55,6 @@ export default function ProjectPage({
               <ProjectMessages params={{ projectId: params.projectId }} />
             </TabsContent>
         </Tabs>
-
     </main>
   );
 }
