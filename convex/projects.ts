@@ -31,7 +31,7 @@ export const getProjects = query({
         
         return await ctx.db.query('projects')
             .withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', userId
-            )).collect()
+            )).order('desc').collect()
     },
 });
 
