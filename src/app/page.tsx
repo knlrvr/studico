@@ -3,8 +3,6 @@
 import { Authenticated, Unauthenticated } from "convex/react";
 import Link from "next/link";
 
-
-
 export default function Home() {
 
   return (

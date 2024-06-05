@@ -21,17 +21,27 @@ export const createProject = mutation({
 })
 
 export const getProjects = query({
-    async handler(ctx) { 
+    args: {
+        orgId: v.optional(v.string()),
+    },
+    async handler(ctx, args) { 
 
         const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier
 
         if(!userId) {
             return [];
         }
-        
-        return await ctx.db.query('projects')
+
+        if(args.orgId) {
+            return await ctx.db.query('projects')
+            .withIndex('by_orgId', (q) => q.eq('orgId', args.orgId
+            )).order('desc').collect()
+        } else {
+            return await ctx.db.query('projects')
             .withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', userId
             )).order('desc').collect()
+        }
+        
     },
 });
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { SignInButton, UserButton } from "@clerk/nextjs";
+import { SignInButton, UserButton, useOrganization } from "@clerk/nextjs";
 import { Authenticated, Unauthenticated, useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { Button } from "@/components/ui/button";
@@ -13,7 +13,11 @@ import CreateProject from "@/components/createProject";
 
 export default function Home() {
 
-  const projects = useQuery(api.projects.getProjects)
+  const organization = useOrganization();
+
+  const projects = useQuery(api.projects.getProjects, {
+    orgId: organization.organization?.id
+  })
 
   return (
     <main className="flex flex-col pt-24 px-4">
