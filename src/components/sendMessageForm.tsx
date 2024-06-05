@@ -22,7 +22,7 @@ import { LoadingButton } from "./loadingButton"
 import { Id } from "../../convex/_generated/dataModel"
 
 const formSchema = z.object({
-  message: z.string().min(2).max(50),
+  message: z.string().min(2).max(500),
   projectId: z.string(),
 })
 

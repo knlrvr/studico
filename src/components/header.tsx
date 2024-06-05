@@ -20,7 +20,7 @@ export default function Header() {
         <div className="fixed p-4 border-b flex justify-between items-center w-full mx-auto bg-background">
 
             <div className="flex items-center gap-4">
-                <Link href="/" className="font-extrabold tracking-widest text-lg">STUDICO</Link>
+                {/* <Link href="/" className="font-extrabold tracking-widest text-lg">STUDICO</Link> */}
                 
                 {/* Pages / Conditional? */}
                 <Breadcrumb>

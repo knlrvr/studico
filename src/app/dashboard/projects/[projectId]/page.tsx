@@ -1,9 +1,9 @@
 'use client'
 
-import { api } from "../../../../convex/_generated/api";
+import { api } from "../../../../../convex/_generated/api";
 import { useQuery } from "convex/react";
 
-import { Id } from "../../../../convex/_generated/dataModel";
+import { Id } from "../../../../../convex/_generated/dataModel";
 import { Loader2 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import ProjectMessages from "@/components/messages";

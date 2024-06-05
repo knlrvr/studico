@@ -13,7 +13,7 @@ import { Doc } from '../../convex/_generated/dataModel'
 
 export default function ProjectCard({ project } : { project: Doc<'projects'> }) {
     return (
-        <Link href={`/projects/${project._id}`}>
+        <Link href={`/dashboard/projects/${project._id}`}>
             <Card>
                 <CardHeader>
                     <CardTitle>{project.title}</CardTitle>

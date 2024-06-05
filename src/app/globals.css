@@ -74,3 +74,11 @@
       @apply bg-background text-foreground;
     }
   }
+
+  .hide-scroll {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .hide-scroll::-webkit-scrollbar { 
+      display: none;  /* Safari and Chrome */
+  }
