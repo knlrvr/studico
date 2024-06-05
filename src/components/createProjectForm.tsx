@@ -10,7 +10,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form"
 
@@ -21,7 +20,7 @@ import { Loader2 } from "lucide-react"
 import { LoadingButton } from "./loadingButton"
 
 const formSchema = z.object({
-  title: z.string().min(2).max(50),
+  title: z.string().min(2).max(50), 
 })
 
 
@@ -39,8 +38,6 @@ export default function CreateProjectForm({
     })
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        // testing (:
-        // await new Promise((resolve) => setTimeout(resolve, 2000))
         await createProject({ title: values.title });
         onSave();
     }

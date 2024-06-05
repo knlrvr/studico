@@ -59,3 +59,43 @@ export const getProject = query({
         return project;
     } 
 })
+
+export const sendMessage = mutation({
+    args: {
+        message: v.string(),
+        projectId: v.id('projects')
+    },
+    async handler(ctx, args) {
+        const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier
+
+        if(!userId) {
+            throw new ConvexError('Not authenticated!')
+        }
+        
+        await ctx.db.insert('messages', {
+            message: args.message,
+            tokenIdentifier: userId,
+            projectId: args.projectId,
+        })
+    },
+})
+
+export const getMessagesForProject = query({
+    args: {
+        projectId: v.id('projects')
+    },
+    async handler(ctx, args) {
+        const project = await ctx.db.query('projects');
+
+        if (!project) {
+            return [];
+        }
+
+        return await ctx.db
+        .query('messages')
+        .withIndex('by_projectId', (q) => 
+            q.eq('projectId', args.projectId)
+        )
+        .collect();
+    }
+})

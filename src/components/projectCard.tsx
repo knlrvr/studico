@@ -29,8 +29,8 @@ export default function ProjectCard({ project } : { project: Doc<'projects'> }) 
                         {/* mimic active users pfp */}
                         <div className="h-7 w-7 rounded-full bg-yellow-400 border-2 border-background"></div>
                         <div className="h-7 w-7 rounded-full bg-blue-600 border-2 border-background"></div>
-                        <div className="h-7 w-7 rounded-full bg-red-500 border-2 border-background"></div>
-                        <div className="h-7 w-7 rounded-full bg-green-600 border-2 border-background"></div>
+                        <div className="h-7 w-7 rounded-full bg-purple-500 border-2 border-background"></div>
+                        <div className="h-7 w-7 rounded-full bg-teal-500 border-2 border-background"></div>
                     </div>
                 </CardFooter>
             </Card>
