@@ -34,3 +34,28 @@ export const getProjects = query({
             )).collect()
     },
 });
+
+export const getProject = query({
+    args: {
+        projectId: v.id('projects'),
+    },
+    async handler(ctx, args) {
+        const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier
+
+        if(!userId) {
+            return null;
+        }
+
+        const project = await ctx.db.get(args.projectId)
+
+        if(!project) {
+            return null;
+        }
+
+        if(project?.tokenIdentifier !== userId) {
+            return null;
+        }
+
+        return project;
+    } 
+})

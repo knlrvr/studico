@@ -22,8 +22,8 @@ export default function CreateProject() {
     return (
         <Dialog onOpenChange={setIsOpen} open={isOpen}>
             <DialogTrigger asChild>
-            <Button>
-                <Plus />
+            <Button className="flex items-center gap-2">
+                <Plus className="w-4 h-4" /> New Project
             </Button>
             </DialogTrigger>
             <DialogContent>
