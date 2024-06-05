@@ -22,7 +22,7 @@ export default function Component() {
             <span>Home</span>
           </Link>
           <Link
-            href="#"
+            href="/dashboard/files"
             className="w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150"
             prefetch={false}
           >
@@ -30,7 +30,7 @@ export default function Component() {
             <span>Files</span>
           </Link>
           <Link
-            href="#"
+            href="/dashboard/notifications"
             className="w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150"
             prefetch={false}
           >
@@ -38,7 +38,7 @@ export default function Component() {
             <span>Notifications</span>
           </Link>
           <Link
-            href="#"
+            href="/dashboard/profile"
             className="w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150"
             prefetch={false}
           >
@@ -47,7 +47,7 @@ export default function Component() {
           </Link>
           
           <Link
-            href="#"
+            href="/dashboard/settings"
             className="w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150"
             prefetch={false}
           >
@@ -77,16 +77,16 @@ export default function Component() {
                 <Link href="/dashboard" className="flex items-center gap-2 text-lg font-medium" prefetch={false}>
                   Home
                 </Link>
-                <Link href="#" className="flex items-center gap-2 text-lg font-medium" prefetch={false}>
+                <Link href="/dashboard/files" className="flex items-center gap-2 text-lg font-medium" prefetch={false}>
                   Files
                 </Link>
-                <Link href="#" className="flex items-center gap-2 text-lg font-medium" prefetch={false}>
+                <Link href="/dashboard/notifications" className="flex items-center gap-2 text-lg font-medium" prefetch={false}>
                   Notifications
                 </Link>
-                <Link href="#" className="flex items-center gap-2 text-lg font-medium" prefetch={false}>
+                <Link href="/dashboard/profile" className="flex items-center gap-2 text-lg font-medium" prefetch={false}>
                   Profile
                 </Link>
-                <Link href="#" className="flex items-center gap-2 text-lg font-medium" prefetch={false}>
+                <Link href="/dashboard/settings" className="flex items-center gap-2 text-lg font-medium" prefetch={false}>
                   Settings
                 </Link>
               </nav>
