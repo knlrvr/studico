@@ -21,6 +21,9 @@ export default function Home() {
 
   return (
     <main className="flex flex-col pt-24 px-4">
+      <Unauthenticated>
+        <SignInButton />
+      </Unauthenticated>
       <Authenticated>
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-neutral-500 text-lg tracking-wide">Projects</h1>

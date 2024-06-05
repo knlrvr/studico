@@ -15,8 +15,11 @@ import {
 
 import { HeaderActions } from "./header-actions";
 import { OrganizationSwitcher } from "@clerk/nextjs";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+
+    let pathname = usePathname();
     return (
         <div className="fixed p-4 border-b flex justify-between items-center w-full mx-auto bg-background">
 
@@ -29,6 +32,13 @@ export default function Header() {
                         <BreadcrumbItem>
                             <OrganizationSwitcher />
                         </BreadcrumbItem>
+
+                        {/* eventually replace with projectId or projectName */}
+                        {pathname.includes('projects') && (
+                        <BreadcrumbItem>
+                            <p>Project</p>
+                        </BreadcrumbItem>
+                        )}
 
                     </BreadcrumbList>
                 </Breadcrumb>
