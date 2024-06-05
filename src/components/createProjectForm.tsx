@@ -18,9 +18,11 @@ import { useMutation } from "convex/react"
 import { api } from "../../convex/_generated/api"
 import { Loader2 } from "lucide-react"
 import { LoadingButton } from "./loadingButton"
+import { useOrganization } from "@clerk/nextjs"
 
 const formSchema = z.object({
   title: z.string().min(2).max(50), 
+  orgId: z.optional(z.string()),
 })
 
 
@@ -34,15 +36,21 @@ export default function CreateProjectForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
             title: "",
+            orgId: "",
         },
     })
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        await createProject({ title: values.title });
+        await createProject({ 
+          title: values.title,
+          orgId: organization.organization?.id, 
+        });
         onSave();
     }
 
     const createProject = useMutation(api.projects.createProject)
+
+    const organization = useOrganization();
 
     return (
         <Form {...form}>

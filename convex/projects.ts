@@ -1,9 +1,11 @@
-import { mutation, query } from './_generated/server'
+import { MutationCtx, QueryCtx, mutation, query } from './_generated/server'
 import { ConvexError, v } from 'convex/values'
+import { Id } from './_generated/dataModel'
 
 export const createProject = mutation({
     args: {
         title: v.string(),
+        orgId: v.optional(v.string()),
     },
     async handler(ctx, args) {
 
@@ -12,11 +14,29 @@ export const createProject = mutation({
         if(!userId) {
             throw new ConvexError('Not authenticated!')
         }
+
+        let projectId: Id<"projects">;
+
+        if (args.orgId) {
+            const isMember = await hasOrgAccess(ctx, args.orgId);
+
+            if (!isMember) {
+                throw new ConvexError(
+                    'You do not have permission to create projects for this organization.'
+                );
+            }
+
+            projectId = await ctx.db.insert('projects', {
+                title: args.title,
+                orgId: args.orgId,
+            });
+        } else { 
+            projectId = await ctx.db.insert('projects', {
+                title: args.title,
+                tokenIdentifier: userId,
+            })
+        }
         
-        await ctx.db.insert('projects', {
-            title: args.title,
-            tokenIdentifier: userId,
-        })
     },
 })
 
@@ -33,6 +53,13 @@ export const getProjects = query({
         }
 
         if(args.orgId) {
+
+            const isMember = await hasOrgAccess(ctx, args.orgId)
+
+            if(!isMember) {
+                return null;
+            }
+
             return await ctx.db.query('projects')
             .withIndex('by_orgId', (q) => q.eq('orgId', args.orgId
             )).order('desc').collect()
@@ -62,8 +89,17 @@ export const getProject = query({
             return null;
         }
 
-        if(project?.tokenIdentifier !== userId) {
-            return null;
+        if (project.orgId) {
+            const isMember = await hasOrgAccess(ctx, project.orgId)
+
+            if (!isMember) {
+                return null;
+            }
+            
+        } else {
+            if(project?.tokenIdentifier !== userId) {
+                return null;
+            }
         }
 
         return project;
@@ -109,3 +145,22 @@ export const getMessagesForProject = query({
         .collect();
     }
 })
+
+export const hasOrgAccess = async (
+    ctx: MutationCtx | QueryCtx, 
+    orgId: string
+) => {
+    const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
+
+    if (!userId) {
+        return false;
+    }
+
+    const membership = await ctx.db
+    .query('memberships')
+    .withIndex('by_orgId_userId', (q) => 
+    q.eq('orgId', orgId).eq('userId', userId))
+    .first();
+
+    return !!membership;
+}
