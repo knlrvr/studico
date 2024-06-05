@@ -9,7 +9,7 @@ import { redirect } from "next/dist/server/api-utils"
 
 export default function Component() {
   return (
-    <div className="flex flex-col min-h-[100dvh] max-w-4xl mx-auto justify-between items-center text-white">
+    <div className="flex flex-col min-h-[100dvh] max-w-4xl mx-auto justify-between items-center">
       
       <div></div>
       
