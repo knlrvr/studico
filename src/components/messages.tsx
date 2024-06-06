@@ -24,7 +24,7 @@ export default function ProjectMessages({
         <div className="flex flex-col justify-end">
             {/* <span className="text-lg"></span> */}
             
-            <div className="flex flex-col h-[calc(100vh-300px)] sm:h-[calc(100vh-250px)] overflow-y-auto hide-scroll ">
+            <div className="flex flex-col h-[calc(100vh-300px)] sm:h-[calc(100vh-250px)] overflow-y-auto hide-scroll justify-end">
                 <div className="flex flex-col space-y-3">                
                     {messages?.map((message: any) => (
                         <div key={message._id} className="flex justify-start items-start gap-4">
