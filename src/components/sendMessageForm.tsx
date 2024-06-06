@@ -20,6 +20,8 @@ import { Loader2 } from "lucide-react"
 import { LoadingButton } from "./loadingButton"
 
 import { Id } from "../../convex/_generated/dataModel"
+import { useUser } from "@clerk/nextjs"
+import { useEffect, useState } from "react"
 
 const formSchema = z.object({
   message: z.string().min(2).max(500),
@@ -34,6 +36,10 @@ export default function SendMessageForm({
     projectId: Id<"projects">
   }
 }) {
+
+    const { user } = useUser();
+
+    const sendMessage = useMutation(api.projects.sendMessage);
   
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -46,11 +52,13 @@ export default function SendMessageForm({
     async function onSubmit(values: z.infer<typeof formSchema>) {
         await sendMessage({ 
             message: values.message, 
+            author: {
+              sentBy: user?.fullName || '',
+              image: user?.imageUrl || '',
+            },
             projectId: params.projectId 
         });
     }
-
-    const sendMessage = useMutation(api.projects.sendMessage)
 
     return (
         <Form {...form}>

@@ -5,7 +5,6 @@ import { Authenticated, Unauthenticated } from "convex/react"
 import { SignInButton } from "@clerk/nextjs"
 import { Button } from "@/components/ui/button"
 import { ArrowUpRight } from "lucide-react"
-import { redirect } from "next/dist/server/api-utils"
 
 export default function Component() {
   return (

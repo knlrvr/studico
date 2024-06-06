@@ -6,6 +6,7 @@ export const createProject = mutation({
     args: {
         title: v.string(),
         orgId: v.optional(v.string()),
+        category: v.optional(v.array(v.string())),
     },
     async handler(ctx, args) {
 
@@ -109,20 +110,29 @@ export const getProject = query({
 export const sendMessage = mutation({
     args: {
         message: v.string(),
+        author: v.object({
+            sentBy: v.string(),
+            image: v.string(),
+        }),
         projectId: v.id('projects')
     },
     async handler(ctx, args) {
-        const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier
+        const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
 
         if(!userId) {
             throw new ConvexError('Not authenticated!')
         }
+
+        const userInfo = await ctx.auth.getUserIdentity();
         
         await ctx.db.insert('messages', {
             message: args.message,
-            tokenIdentifier: userId,
+            author: {
+                sentBy: userInfo?.name ?? '',
+                image: userInfo?.pictureUrl ?? '',
+            },
             projectId: args.projectId,
-        })
+        });
     },
 })
 
@@ -163,4 +173,5 @@ export const hasOrgAccess = async (
     .first();
 
     return !!membership;
-}
+};
+

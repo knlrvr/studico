@@ -10,13 +10,17 @@ export default defineSchema({
         title: v.string(),
         tokenIdentifier: v.optional(v.string()),
         orgId: v.optional(v.string()),
+        category: v.optional(v.array(v.string())),
     }).index('by_tokenIdentifier', ['tokenIdentifier'])
       .index('by_orgId', ['orgId']),
     messages: defineTable({
+        author: v.object({
+          sentBy: v.string(),
+          image: v.string(),
+        }),
         message: v.string(),
-        tokenIdentifier: v.string(),
-        projectId: v.id('projects'),
-    }).index('by_projectId', ['projectId'])
+        projectId: v.id("projects"),
+    }).index("by_projectId", ["projectId"]),
 });
 
 // TO DO: Add vector search on all fields

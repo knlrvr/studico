@@ -31,9 +31,10 @@ export default function ProjectPage({
 
         <Tabs defaultValue="overview" className="w-full">
             <div className="flex flex-col sm:flex-row items-center justify-between mb-8 space-y-4 sm:space-y-0">
-              <h1 className="text-neutral-500 text-lg tracking-wide">
-                {project?.title}
+              <h1 className="text-2xl font-bold tracking-wide text-neutral-500">
+                {project.title}
               </h1>
+
               <TabsList className="w-full flex justify-between sm:w-fit sm:gap-2">
                   <TabsTrigger value="overview">Overview</TabsTrigger>
                   <TabsTrigger value="files">Files</TabsTrigger>

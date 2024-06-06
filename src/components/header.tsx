@@ -35,7 +35,7 @@ export default function Header() {
 
                         {/* eventually replace with projectId or projectName */}
                         {pathname.includes('projects') && (
-                        <BreadcrumbItem>
+                        <BreadcrumbItem className="hidden sm:inline-flex">
                             <p>Project</p>
                         </BreadcrumbItem>
                         )}
