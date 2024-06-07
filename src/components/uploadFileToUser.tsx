@@ -14,28 +14,29 @@ import {
 
 import { Input } from "@/components/ui/input"
 import { LoadingButton } from './loadingButton'
-import { useMutation } from 'convex/react'
+import { useQuery, useMutation } from 'convex/react'
 import { api } from '../../convex/_generated/api'
-import { useState } from 'react'
+import { Id } from '../../convex/_generated/dataModel'
 
 const formSchema = z.object({
   file: z.instanceof(File),
 })
 
-export default function UploadFileForm({
-    onUpload,
-} : {
+export default function UploadFileToUser({ 
+  onUpload,
+  } : {
     onUpload: () => void;
 }) {
 
-    const uploadFile = useMutation(api.files.uploadFile);
-    const generateUploadUrl = useMutation(api.files.generateUploadUrl)
+    const uploadFile = useMutation(api.files.uploadFileToProject);
+    const generateUploadUrl = useMutation(api.files.generateUploadUrl);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
         },
     })
+
     
     async function onSubmit(values: z.infer<typeof formSchema>) {
       const url = await generateUploadUrl();
@@ -49,7 +50,7 @@ export default function UploadFileForm({
       const { storageId } = await result.json();
 
       await uploadFile({
-        storageId: storageId as string,
+        storageId: storageId as Id<'_storage'>,
         name: values.file.name,
         type: values.file.type,
       })
@@ -79,19 +80,6 @@ export default function UploadFileForm({
             </FormItem>
           )}
         />
-
-        {/* <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem className='mt-8'>
-              <FormControl>
-                <Input {...field} type='text' placeholder='File name' />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        /> */}
         
           <LoadingButton 
             isLoading={form.formState.isSubmitting}

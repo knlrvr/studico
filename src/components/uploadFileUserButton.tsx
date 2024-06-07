@@ -2,9 +2,6 @@
 
 import { Button } from "./ui/button"
 
-import { api } from "../../convex/_generated/api"
-import { useMutation } from "convex/react"
-
 import {
     Dialog,
     DialogContent,
@@ -14,17 +11,18 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"  
 import { Upload } from "lucide-react"
-import UploadFileForm from "./uploadFileForm"
 import { useState } from "react"
 
-export default function UploadFileButton() {
+import UploadFileToUser from "./uploadFileToUser"
+
+export default function UploadFileUserButton() {
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     return (
         <Dialog onOpenChange={setIsOpen} open={isOpen}>
             <DialogTrigger asChild>
-                <Button variant='action' className="fixed bottom-4 right-4 rounded-full h-fit p-4">
+                <Button variant='action' className="z-[10] fixed bottom-4 right-4 rounded-full h-fit p-4">
                     <Upload className="w-6 h-6" />
                 </Button>
             </DialogTrigger>
@@ -35,7 +33,7 @@ export default function UploadFileButton() {
                         Keep track of your files for specific projects here.
                     </DialogDescription>
 
-                    <UploadFileForm 
+                    <UploadFileToUser
                         onUpload={() => setIsOpen(false)}
                     />
                 </DialogHeader>

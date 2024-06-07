@@ -14,10 +14,10 @@ export default defineSchema({
     }).index('by_tokenIdentifier', ['tokenIdentifier'])
       .index('by_orgId', ['orgId']),
     files: defineTable({
-      tokenIdentifier: v.optional(v.string()),
       name: v.string(),
       type: v.string(),
-      storageId: v.string(),
+      storageId: v.id('_storage'),
+      tokenIdentifier: v.optional(v.string()),
       projectId: v.optional(v.string()),
     }).index('by_tokenIdentifier', ['tokenIdentifier'])
       .index('by_projectId', ['projectId']),

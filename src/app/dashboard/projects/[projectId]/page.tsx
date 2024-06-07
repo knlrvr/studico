@@ -7,8 +7,8 @@ import { Id } from "../../../../../convex/_generated/dataModel";
 import { Loader2 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import ProjectMessages from "@/components/messages";
-import UploadFileButton from "@/components/uploadFileButton";
-import FilePreview from "@/components/filePreview";
+import ProjectFiles from "@/components/projectFiles";
+import UploadFileProjectButton from "@/components/uploadFileProjectButton";
 
 export default function ProjectPage({
     params
@@ -22,7 +22,9 @@ export default function ProjectPage({
     projectId: params.projectId
   });
 
-  const files = useQuery(api.files.getFiles)
+  const files = useQuery(api.files.getFilesForProject, {
+    projectId: params.projectId,
+  })
 
   if(!project) {
     return <div className="min-h-screen flex justify-center items-center">
@@ -55,19 +57,11 @@ export default function ProjectPage({
             </TabsContent>
             <TabsContent value="files">
               <div className="mb-24">
-                <UploadFileButton />
+                <UploadFileProjectButton projectId={params.projectId} />
 
-                <div className="mt-8 grid gap-4 gap-y-8 grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-                  {files?.map((file) => {
-
-                    return (
-                      <div key={file._id} className="">
-                        <FilePreview name={file.name} type={file.type} date={file._creationTime}/>
-                      </div>
-                    )
-                  })}
+                <div className="mt-8">
+                  <ProjectFiles params={{ projectId: params.projectId }} />
                 </div>
-
               </div>
             </TabsContent>
             <TabsContent value="chat">

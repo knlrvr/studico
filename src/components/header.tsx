@@ -21,7 +21,7 @@ export default function Header() {
 
     let pathname = usePathname();
     return (
-        <div className="fixed p-4 border-b flex justify-between items-center w-full mx-auto bg-background">
+        <div className="z-[10] fixed p-4 border-b flex justify-between items-center w-full mx-auto bg-background">
 
             <div className="flex items-center gap-4 ml-12 sm:ml-56">
                 {/* <Link href="/" className="font-extrabold tracking-widest text-lg">STUDICO</Link> */}

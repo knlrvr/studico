@@ -12,7 +12,7 @@ export default function Component() {
   const pathname = usePathname();
 
   return (
-    <header className="fixed z-[10] sm:border-r bg-background sm:min-h-screen">
+    <header className="fixed z-[20] sm:border-r bg-background sm:min-h-screen">
       <div className="p-4">
         <Link href="#" className="">
           <span className="hidden sm:flex font-extrabold tracking-wider text-xl mt-2 ml-2">Studico</span>
