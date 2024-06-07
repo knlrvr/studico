@@ -20,7 +20,10 @@ export const getFilesForUser = query({
     //     .collect()
     // },
 
-    const files = await ctx.db.query('files').order('desc').collect();
+    const files = await ctx.db
+    .query('files')
+    .withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', userId )) 
+    .collect();
     return Promise.all(
         files.map(async (file) => ({
             ...file,
