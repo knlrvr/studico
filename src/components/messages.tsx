@@ -47,7 +47,7 @@ export default function ProjectMessages({
                 className="flex flex-col h-[calc(100vh-300px)] sm:h-[calc(100vh-250px)] flex-grow-0 overflow-y-auto hide-scroll justify-end"
                 ref={messageContainerRef}
             >
-                <div className="flex flex-col space-y-3 h-full">                
+                <div className="flex flex-col space-y-3 h-full overflow-y-auto hide-scroll">                
                     {messages?.map((message: any) => {
                         function convertTime(ms: number): string {
                             const date = new Date();
