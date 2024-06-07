@@ -13,6 +13,10 @@ export default defineSchema({
         category: v.optional(v.array(v.string())),
     }).index('by_tokenIdentifier', ['tokenIdentifier'])
       .index('by_orgId', ['orgId']),
+    files: defineTable({
+      tokenIdentifier: v.string(),
+      storageId: v.string(),
+    }).index('by_tokenIdentifier', ['tokenIdentifier']),
     messages: defineTable({
         author: v.object({
           sentBy: v.string(),

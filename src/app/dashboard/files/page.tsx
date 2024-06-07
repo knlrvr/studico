@@ -1,5 +1,6 @@
 'use client'
 
+import UploadFileButton from "@/components/uploadFileButton";
 import { Authenticated } from "convex/react";
 
 export default function FilesPage() {
@@ -8,6 +9,7 @@ export default function FilesPage() {
         <Authenticated>
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold tracking-wide text-neutral-500">Files</h1>
+            <UploadFileButton />
           </div>
   
         </Authenticated>

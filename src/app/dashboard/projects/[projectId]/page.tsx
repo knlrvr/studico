@@ -7,6 +7,7 @@ import { Id } from "../../../../../convex/_generated/dataModel";
 import { Loader2 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import ProjectMessages from "@/components/messages";
+import UploadFileButton from "@/components/uploadFileButton";
 
 export default function ProjectPage({
     params
@@ -19,6 +20,8 @@ export default function ProjectPage({
   const project = useQuery(api.projects.getProject, {
     projectId: params.projectId
   });
+
+  const files = useQuery(api.files.getFiles)
 
   if(!project) {
     return <div className="min-h-screen flex justify-center items-center">
@@ -50,7 +53,17 @@ export default function ProjectPage({
               Overview of project, including recent changes, progress, and other history.
             </TabsContent>
             <TabsContent value="files">
-              Files related to project. 
+              <div className="">
+                <UploadFileButton />
+
+                {files?.map((file) => {
+                  return (
+                    <div key={file._id}>
+                      <p>{file.storageId}</p>
+                    </div>
+                  )
+                })}
+              </div>
             </TabsContent>
             <TabsContent value="chat">
               <ProjectMessages params={{ projectId: params.projectId }} />
