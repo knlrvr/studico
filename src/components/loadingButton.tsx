@@ -11,7 +11,7 @@ export function LoadingButton({
     loadingText: string,
 }) {
     return (
-        <Button asChild
+        <Button
             disabled={isLoading}
             type="submit">
               <div className="flex items-center gap-2">
