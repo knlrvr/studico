@@ -29,14 +29,18 @@ export default function Header() {
                 {/* Pages / Conditional? */}
                 <Breadcrumb>
                     <BreadcrumbList>
-                        <BreadcrumbItem>
-                            <OrganizationSwitcher />
-                        </BreadcrumbItem>
 
-                        {/* eventually replace with projectId or projectName */}
+                        {pathname.includes('projects') ? (
+                            <div></div>
+                        ) : (
+                            <BreadcrumbItem>
+                                <OrganizationSwitcher />
+                            </BreadcrumbItem>
+                        )}
+
                         {pathname.includes('projects') && (
                         <BreadcrumbItem className="hidden sm:inline-flex">
-                            <p>Project</p>
+                            <p>Active Project</p>
                         </BreadcrumbItem>
                         )}
 

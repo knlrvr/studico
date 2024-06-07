@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
-import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -16,12 +15,11 @@ import {
 import { Input } from "@/components/ui/input"
 import { useMutation } from "convex/react"
 import { api } from "../../convex/_generated/api"
-import { Loader2 } from "lucide-react"
 import { LoadingButton } from "./loadingButton"
 
 import { Id } from "../../convex/_generated/dataModel"
 import { useUser } from "@clerk/nextjs"
-import { useEffect, useState } from "react"
+import {  useState } from "react"
 
 const formSchema = z.object({
   message: z.string().min(2).max(500),
@@ -38,7 +36,8 @@ export default function SendMessageForm({
 }) {
 
     const { user } = useUser();
-
+    const [message, setMessage] = useState<string>('');
+            
     const sendMessage = useMutation(api.projects.sendMessage);
   
     const form = useForm<z.infer<typeof formSchema>>({
@@ -61,7 +60,9 @@ export default function SendMessageForm({
     }
 
     return (
-        <Form {...form}>
+      <>
+      {/* rhf is PISSING me off, brother */}
+        {/* <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="flex gap-2">
                 <FormField
                     control={form.control}
@@ -80,6 +81,45 @@ export default function SendMessageForm({
                     loadingText="Sending"
                 >Send</LoadingButton>
             </form>
-        </Form>
+        </Form> */}
+
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            sendMessage({
+              message: message,
+              author: {
+                sentBy: user?.fullName || '',
+                image: user?.imageUrl || '',
+              },
+              projectId: params.projectId 
+            })
+            setMessage('');
+          }}  
+          className="flex items-center gap-2"
+        >
+          <div className="
+              grid
+              text-sm
+              [&>textarea]:text-inherit
+              [&>textarea]:resize-none
+              w-full
+              h-[40px]
+          ">
+            <textarea 
+              rows={1}
+              placeholder="Send Message"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              required
+              className="w-full border px-2 py-1.5 rounded-md placeholder:text-neutral-500 text-sm overflow-scroll"
+            />
+          </div>
+          <LoadingButton 
+            isLoading={form.formState.isSubmitting}
+            loadingText="Sending"
+          >Send</LoadingButton>
+        </form>
+      </>
     )
 }
