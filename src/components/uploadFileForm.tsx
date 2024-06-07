@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input"
 import { LoadingButton } from './loadingButton'
 import { useMutation } from 'convex/react'
 import { api } from '../../convex/_generated/api'
+import { useState } from 'react'
 
 const formSchema = z.object({
   file: z.instanceof(File),
@@ -39,7 +40,7 @@ export default function UploadFileForm({
     async function onSubmit(values: z.infer<typeof formSchema>) {
       const url = await generateUploadUrl();
 
-      const result = await fetch(url, {
+      const result = await fetch(url, { 
         method: "POST",
         headers: { "Content-Type": values.file.type },
         body: values.file,
@@ -49,7 +50,11 @@ export default function UploadFileForm({
 
       await uploadFile({
         storageId: storageId as string,
+        name: values.file.name,
+        type: values.file.type,
       })
+
+      onUpload();
     }
 
     return (
@@ -64,7 +69,9 @@ export default function UploadFileForm({
                 <Input {...fieldProps} type='file' 
                   onChange={(event) => {
                     const file = event.target.files?.[0];
-                    onChange(file);
+                    if(file) {
+                      onChange(file);
+                    }
                   }}
                 />
               </FormControl>
@@ -72,6 +79,20 @@ export default function UploadFileForm({
             </FormItem>
           )}
         />
+
+        {/* <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem className='mt-8'>
+              <FormControl>
+                <Input {...field} type='text' placeholder='File name' />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        /> */}
+        
           <LoadingButton 
             isLoading={form.formState.isSubmitting}
             loadingText="Uploading"

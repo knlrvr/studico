@@ -24,9 +24,8 @@ export default function UploadFileButton() {
     return (
         <Dialog onOpenChange={setIsOpen} open={isOpen}>
             <DialogTrigger asChild>
-                <Button className="flex items-center gap-2">
-                    <Upload className="w-4 h-4" />
-                    <span>Upload New File</span>
+                <Button variant='action' className="fixed bottom-4 right-4 rounded-full h-fit p-4">
+                    <Upload className="w-6 h-6" />
                 </Button>
             </DialogTrigger>
             <DialogContent>

@@ -8,6 +8,7 @@ import { Loader2 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import ProjectMessages from "@/components/messages";
 import UploadFileButton from "@/components/uploadFileButton";
+import FilePreview from "@/components/filePreview";
 
 export default function ProjectPage({
     params
@@ -53,16 +54,20 @@ export default function ProjectPage({
               Overview of project, including recent changes, progress, and other history.
             </TabsContent>
             <TabsContent value="files">
-              <div className="">
+              <div className="mb-24">
                 <UploadFileButton />
 
-                {files?.map((file) => {
-                  return (
-                    <div key={file._id}>
-                      <p>{file.storageId}</p>
-                    </div>
-                  )
-                })}
+                <div className="mt-8 grid gap-4 gap-y-8 grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+                  {files?.map((file) => {
+
+                    return (
+                      <div key={file._id} className="">
+                        <FilePreview name={file.name} type={file.type} date={file._creationTime}/>
+                      </div>
+                    )
+                  })}
+                </div>
+
               </div>
             </TabsContent>
             <TabsContent value="chat">

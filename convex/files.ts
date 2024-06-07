@@ -5,7 +5,7 @@ export const generateUploadUrl = mutation(async (ctx) => {
     return await ctx.storage.generateUploadUrl();
 })
 
-export const getFiles = query({
+export const getFiles = query({ 
     async handler(ctx) {
         const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
 
@@ -14,7 +14,7 @@ export const getFiles = query({
         }
 
         return await ctx.db.query('files')
-        .withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', userId ))
+        .withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', userId )) 
         .collect()
     },
 })
@@ -22,6 +22,9 @@ export const getFiles = query({
 export const uploadFile = mutation({
     args: {
         storageId: v.string(),
+        name: v.string(),
+        type: v.string(),
+        projectId: v.optional(v.string()),
     },
     async handler(ctx, args) {
         const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
@@ -32,6 +35,8 @@ export const uploadFile = mutation({
 
         await ctx.db.insert('files', {
             storageId: args.storageId,
+            name: args.name,
+            type: args.type,
             tokenIdentifier: userId,
         })
     }
