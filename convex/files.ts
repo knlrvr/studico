@@ -14,24 +14,27 @@ export const getFilesForUser = query({
         if(!userId) {
             return [];
         }
+        
+        const files = await ctx.db
+            .query('files')
+            .withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', userId )) 
+            .collect();
 
-    //     return await ctx.db.query('files')
-    //     .withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', userId )) 
-    //     .collect()
-    // },
+        // return Promise.all(
+        //     files.map(async (file) => ({
+        //         ...file,
+        //         ...(file.type === 'image/jpeg' || file.type === 'image/png'
+        //             ? { fileUrl: await ctx.storage.getUrl(file.storageId) }
+        //         : {}),
+        //     })),
+        // );
 
-    const files = await ctx.db
-    .query('files')
-    .withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', userId )) 
-    .collect();
-    return Promise.all(
-        files.map(async (file) => ({
-            ...file,
-            ...(file.type === 'image' 
-                ? { url: await ctx.storage.getUrl(file.storageId) }
-            : {}),
-        })),
-    );
+        return Promise.all(
+            files.map(async (file) => ({
+                ...file,
+                fileUrl: await ctx.storage.getUrl(file.storageId)
+            }))
+        );
     }
 })
 
@@ -94,24 +97,30 @@ export const uploadFileToProject = mutation({
     },
 })
 
-
-export const getFilesForProject = query({
+export const getFilesForProject = query({ 
     args: {
         projectId: v.id('projects')
     },
     async handler(ctx, args) {
-        const project = await ctx.db.query('projects');
+        const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
 
-        if (!project) {
+        if(!userId) {
             return [];
         }
+        
+        const files = await ctx.db
+            .query('files')
+            .withIndex('by_projectId', (q) => q
+                .eq('projectId', args.projectId )
+            ) 
+            .order('desc')
+            .collect();
 
-        return await ctx.db
-        .query('files')
-        .withIndex('by_projectId', (q) => 
-            q.eq('projectId', args.projectId)
-        )
-        .order('desc')
-        .collect();
+        return Promise.all(
+            files.map(async (file) => ({
+                ...file,
+                fileUrl: await ctx.storage.getUrl(file.storageId)
+            }))
+        );
     }
 })

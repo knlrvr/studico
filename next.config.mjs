@@ -12,7 +12,11 @@ const nextConfig = {
             },
             {
                 protocol: 'https',
-                hostname: 'kindly-gnat-44.convex.cloud'
+                hostname: 'kindly-gnat-44.convex.cloud',
+            },
+            {
+                protocol: 'https',
+                hostname: 'https://kindly-gnat-44.convex.site'
             }
         ]
     }
