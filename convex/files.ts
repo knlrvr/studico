@@ -124,3 +124,15 @@ export const getFilesForProject = query({
         );
     }
 })
+
+export const deleteFile = mutation({
+    args: {
+        fileId: v.id('files'),
+        storageId: v.id('_storage')
+    },
+    async handler(ctx, args) {
+
+        await ctx.storage.delete(args.storageId);
+        await ctx.db.delete(args.fileId);
+    }
+})

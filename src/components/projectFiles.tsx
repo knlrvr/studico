@@ -16,6 +16,7 @@ import { Id } from "../../convex/_generated/dataModel"
 import { Button } from "./ui/button"
 import Link from "next/link"
 import ImagePreview from "./imagePreview"
+import DeleteFile from "./deleteFile"
   
 export default function ProjectFiles({
     params,
@@ -87,8 +88,10 @@ export default function ProjectFiles({
                             </Button>
 
 
-                            <Trash className="w-5 h-5 text-red-500" />
-                        </TableCell>
+                            <Button variant='ghost'>
+                                <span className="sr-only">Delete</span>
+                                <DeleteFile fileId={file._id} storageId={file.storageId}/>
+                            </Button>                        </TableCell>
                     </TableRow>
                     )
                 })}

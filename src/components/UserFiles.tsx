@@ -15,6 +15,7 @@ import { AudioLines, CloudDownload, File, FileText, Trash } from "lucide-react"
 import ImagePreview from "./imagePreview"
 import { Button } from "./ui/button"
 import Link from "next/link"
+import DeleteFile from "./deleteFile"
   
 export default function UserFiles() {
 
@@ -72,12 +73,15 @@ export default function UserFiles() {
                         <TableCell className="text-right flex items-center justify-end gap-8">
                             <Button variant='ghost'>
                                 <Link href={`${file.fileUrl}`} target="_blank">
+                                    <span className="sr-only">Open</span>
                                     <CloudDownload className="w-5 h-5 text-blue-500" />
                                 </Link>
                             </Button>
 
-
-                            <Trash className="w-5 h-5 text-red-500" />
+                            <Button variant='ghost'>
+                                <span className="sr-only">Delete</span>
+                                <DeleteFile fileId={file._id} storageId={file.storageId}/>
+                            </Button>
                         </TableCell>
                     </TableRow>
                     )
