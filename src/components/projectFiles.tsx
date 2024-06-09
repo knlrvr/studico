@@ -35,7 +35,7 @@ export default function ProjectFiles({
             <TableCaption>All Files</TableCaption>
             <TableHeader>
                 <TableRow>
-                    <TableHead className="w-[100px]">Type</TableHead>
+                    <TableHead className="w-[100px]">Preview</TableHead>
                     <TableHead>Name</TableHead>
                     {/* <TableHead className="collapse sm:visible">Date</TableHead> */}
                     {/* <TableHead>Size</TableHead> */}

@@ -17,7 +17,8 @@ export const getFilesForUser = query({
         
         const files = await ctx.db
             .query('files')
-            .withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', userId )) 
+            .withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', userId ))
+            .order('desc') 
             .collect();
 
         // return Promise.all(

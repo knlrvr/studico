@@ -26,7 +26,7 @@ export default function UserFiles() {
             <TableCaption>All Files</TableCaption>
             <TableHeader>
                 <TableRow>
-                    <TableHead className="w-[100px]">Type</TableHead>
+                    <TableHead className="w-[100px]">Preview</TableHead>
                     <TableHead>Name</TableHead>
 
                     <TableHead className="text-right">Action</TableHead>
