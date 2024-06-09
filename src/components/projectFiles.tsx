@@ -31,15 +31,14 @@ export default function ProjectFiles({
     })
 
     return (
-        <Table>
+        <Table className="w-full">
             <TableCaption>All Files</TableCaption>
             <TableHeader>
                 <TableRow>
-                    <TableHead className="w-[100px]">Preview</TableHead>
-                    <TableHead>Name</TableHead>
-                    {/* <TableHead className="collapse sm:visible">Date</TableHead> */}
-                    {/* <TableHead>Size</TableHead> */}
-                    <TableHead className="text-right">Action</TableHead>
+                    <TableHead className="w-[100px] text-xs">Preview</TableHead>
+                    <TableHead className="text-xs">Name</TableHead>
+                    <TableHead className="text-right text-xs">Download</TableHead>
+                    <TableHead className="text-right text-xs">Delete</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
@@ -70,7 +69,7 @@ export default function ProjectFiles({
                                 <File className="w-8 h-8" />
                             )}  
                         </TableCell>
-                        <TableCell>{file.name}</TableCell>
+                        <TableCell className="font-medium">{file.name}</TableCell>
                         {/* <TableCell className="collapse sm:visible text-neutral-500">
                         {new Date(file._creationTime).toLocaleString(undefined, {
                             year: 'numeric',
@@ -80,18 +79,19 @@ export default function ProjectFiles({
                             minute: '2-digit'
                         })}
                         </TableCell> */}
-                        <TableCell className="text-right flex items-center justify-end gap-8">
+                        <TableCell className="text-right">
                             <Button variant='ghost'>
                                 <Link href={`${file.fileUrl}`} target="_blank">
-                                    <CloudDownload className="w-5 h-5 text-blue-500" />
+                                    <CloudDownload className="w-4 sm:w-5 h-4 sm:h-5 text-blue-500" />
                                 </Link>
                             </Button>
-
-
+                        </TableCell>
+                        <TableCell>
                             <Button variant='ghost'>
                                 <span className="sr-only">Delete</span>
                                 <DeleteFile fileId={file._id} storageId={file.storageId}/>
-                            </Button>                        </TableCell>
+                            </Button>  
+                        </TableCell>
                     </TableRow>
                     )
                 })}
