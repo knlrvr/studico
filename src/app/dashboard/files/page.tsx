@@ -1,10 +1,7 @@
 'use client'
 
-import UploadFileButton from "@/components/uploadFileProjectButton";
 import { Authenticated, useQuery } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
-import FilePreview from "@/components/filePreview";
-import UploadFileButtonTwo from "@/components/uploadFileUserButton";
 import UserFiles from "@/components/UserFiles";
 import UploadFileUserButton from "@/components/uploadFileUserButton";
 
