@@ -86,7 +86,7 @@ export default function ProjectFiles({
                                 </Link>
                             </Button>
                         </TableCell>
-                        <TableCell>
+                        <TableCell className="text-right">
                             <Button variant='ghost'>
                                 <span className="sr-only">Delete</span>
                                 <DeleteFile fileId={file._id} storageId={file.storageId}/>
