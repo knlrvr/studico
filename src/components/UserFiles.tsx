@@ -11,12 +11,21 @@ import {
 } from "@/components/ui/table"
 import { useQuery } from "convex/react"
 import { api } from "../../convex/_generated/api"
-import { AudioLines, CloudDownload, File, FileText, Trash } from "lucide-react"
+import { AudioLines, CloudDownload, Ellipsis, File, FileText, Trash } from "lucide-react"
 import ImagePreview from "./imagePreview"
-import { Button } from "./ui/button"
 import Link from "next/link"
 import DeleteFile from "./deleteFile"
+
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
   
+
 export default function UserFiles() {
 
     const files = useQuery(api.files.getFilesForUser)
@@ -28,8 +37,7 @@ export default function UserFiles() {
                 <TableRow>
                     <TableHead className="w-[100px] text-xs">Preview</TableHead>
                     <TableHead className="text-xs">Name</TableHead>
-                    <TableHead className="text-right text-xs">Download</TableHead>
-                    <TableHead className="text-right text-xs">Delete</TableHead>                    
+                    <TableHead className="text-right text-xs">Actions</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
@@ -61,20 +69,33 @@ export default function UserFiles() {
                             )}  
                         </TableCell>
                         <TableCell className="font-medium">{file.name}</TableCell>
+
+                        {/* this should rly be a component */}
                         <TableCell className="text-right">
-                            <Button variant='ghost'>
-                                <Link href={`${file.fileUrl}`} target="_blank">
-                                    <span className="sr-only">Open</span>
-                                    <CloudDownload className="w-4 sm:w-5 h-4 sm:h-5 text-blue-500" />
-                                </Link>
-                            </Button>
+                            <DropdownMenu>
+                                <DropdownMenuTrigger>
+                                    <Ellipsis className="w-5 h-5" />
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent>
+                                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                                    <DropdownMenuSeparator />
+                                    <DropdownMenuItem>
+                                        <Link
+                                            href={`${file.fileUrl}`} 
+                                            target="_blank" 
+                                            className="w-full flex items-center gap-4"
+                                        >
+                                            <CloudDownload className="w-4 h-4 text-blue-400" />
+                                            <p>Open</p>
+                                        </Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem asChild className="">
+                                        <DeleteFile fileId={file._id} storageId={file.storageId}/>
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
                         </TableCell>
-                        <TableCell className="text-right">
-                            <Button variant='ghost'>
-                                <span className="sr-only">Delete</span>
-                                <DeleteFile fileId={file._id} storageId={file.storageId}/>
-                            </Button>
-                        </TableCell>
+
                     </TableRow>
                     )
                 })}

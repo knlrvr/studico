@@ -30,8 +30,9 @@ export default function DeleteFile({
 
     return (
         <AlertDialog>
-            <AlertDialogTrigger>
-                <Trash className="w-4 sm:w-6 h-5 sm:h-5 text-red-500" /> 
+            <AlertDialogTrigger className="ml-0.5 w-full flex items-center gap-4 p-1.5 text-sm rounded-sm hover:bg-neutral-100 transition-colors duration-100">
+                <Trash className="w-4 h-4 text-red-400" /> 
+                <p>Delete</p>
             </AlertDialogTrigger>
             <AlertDialogContent>
             <AlertDialogHeader>
