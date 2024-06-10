@@ -93,7 +93,7 @@ export default function AllTasks({
                                                 <AvatarImage 
                                                     src={`${task.createdBy?.userImg}`} 
                                                     alt="user image" 
-                                                    className="h-7 ml-auto h-7 rounded-full"    
+                                                    className="h-7 ml-auto w-7 rounded-full"    
                                                 />
                                                 <AvatarFallback></AvatarFallback>
                                             </Avatar>
