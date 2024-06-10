@@ -13,7 +13,7 @@ export function Overview({
 }) {
 
   return (
-    <div className="grid gap-y-8">
+    <div className="grid gap-y-8 mb-6">
         <TaskList params={{ projectId: params.projectId }} />
 
         <RecentProjectFiles params={{ projectId: params.projectId }} />
