@@ -50,22 +50,4 @@ http.route({
   }),
 });
 
-
-// http.route({
-//   path: "/getImage",
-//   method: "GET",
-//   handler: httpAction(async (ctx, request) => {
-//     const { searchParams } = new URL(request.url);
-//     const storageId = searchParams.get("storageId")!;
-//     const blob = await ctx.storage.get(storageId as Id<"_storage">)
-//     if (blob === null) {
-//       return new Response("File not found", {
-//         status: 404,
-//       });
-//     }
-//     return new Response(blob);
-//   }),
-// });
-
-
 export default http;

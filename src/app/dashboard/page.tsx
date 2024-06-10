@@ -1,12 +1,10 @@
 'use client'
 
-import { SignInButton, UserButton, useOrganization } from "@clerk/nextjs";
-import { Authenticated, Unauthenticated, useMutation, useQuery } from "convex/react";
+import { useOrganization } from "@clerk/nextjs";
+import { Authenticated, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import { Button } from "@/components/ui/button";
-import { ModeToggle } from "@/components/theme";
+
 import ProjectCard from "@/components/projectCard";
-import { Plus } from "lucide-react";
 import CreateProject from "@/components/createProject";
 
 
@@ -14,6 +12,7 @@ import CreateProject from "@/components/createProject";
 export default function Home() {
 
   const organization = useOrganization();
+
 
   const projects = useQuery(api.projects.getProjects, {
     orgId: organization.organization?.id

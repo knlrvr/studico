@@ -107,6 +107,9 @@ export const getProject = query({
     } 
 })
 
+
+
+
 export const sendMessage = mutation({
     args: {
         message: v.string(),
@@ -174,4 +177,3 @@ export const hasOrgAccess = async (
 
     return !!membership;
 };
-

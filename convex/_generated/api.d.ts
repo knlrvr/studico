@@ -19,6 +19,7 @@ import type * as files from "../files.js";
 import type * as http from "../http.js";
 import type * as memberships from "../memberships.js";
 import type * as projects from "../projects.js";
+import type * as users from "../users.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -34,6 +35,7 @@ declare const fullApi: ApiFromModules<{
   http: typeof http;
   memberships: typeof memberships;
   projects: typeof projects;
+  users: typeof users;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,

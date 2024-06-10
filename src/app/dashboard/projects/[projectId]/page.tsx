@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import ProjectMessages from "@/components/messages";
 import ProjectFiles from "@/components/projectFiles";
 import UploadFileProjectButton from "@/components/uploadFileProjectButton";
+import { Overview } from "@/components/overview";
 
 export default function ProjectPage({
     params
@@ -53,7 +54,7 @@ export default function ProjectPage({
             </div>
 
             <TabsContent value="overview">
-              Overview of project, including recent changes, progress, and other history.
+              <Overview />
             </TabsContent>
             <TabsContent value="files">
               <div className="mb-24">

@@ -24,14 +24,7 @@ export default function ProjectCard({ project } : { project: Doc<'projects'> }) 
                 </CardDescription>
 
                 <CardFooter>
-                    <div className="flex items-center mt-6 -space-x-2">
-
-                        {/* mimic active users pfp */}
-                        <div className="h-10 w-10 rounded-full bg-yellow-400 border-4 border-background"></div>
-                        <div className="h-10 w-10 rounded-full bg-blue-600 border-4 border-background"></div>
-                        <div className="h-10 w-10 rounded-full bg-purple-500 border-4 border-background"></div>
-                        <div className="h-10 w-10 rounded-full bg-teal-500 border-4 border-background"></div>
-                    </div>
+                    
                 </CardFooter>
             </Card>
         </Link>

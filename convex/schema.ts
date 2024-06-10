@@ -2,17 +2,34 @@ import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
 export default defineSchema({
+    users: defineTable({
+      name: v.string(),
+      img: v.string(),
+      email: v.string(),
+      tokenIdentifier: v.string(),
+      joinedCamps: v.array(v.string()),
+      ownedCamps: v.array(v.string())
+    })
+    .index('by_tokenIdentifier', ['tokenIdentifier']),
     memberships: defineTable({
-        orgId: v.string(),
-        userId: v.string(),
-    }).index('by_orgId_userId', ['orgId', "userId"]) ,
+      orgId: v.string(),
+      userId: v.string(),
+    }).index('by_orgId_userId', ['orgId', "userId"]),
     projects: defineTable({ 
-        title: v.string(),
-        tokenIdentifier: v.optional(v.string()),
-        orgId: v.optional(v.string()),
-        category: v.optional(v.array(v.string())),
+      title: v.string(),
+      tokenIdentifier: v.optional(v.string()),
+      orgId: v.optional(v.string()),
+      category: v.optional(v.array(v.string())),
+      members: v.optional(
+        v.array(v.object({
+          userId: v.string(),
+          userImg: v.string(),
+          userName: v.string(),
+        }))
+      )
     }).index('by_tokenIdentifier', ['tokenIdentifier'])
-      .index('by_orgId', ['orgId']),
+      .index('by_orgId', ['orgId'])
+      .index('by_members', ['members']),
     files: defineTable({
       name: v.string(),
       type: v.string(),
@@ -28,7 +45,8 @@ export default defineSchema({
         }),
         message: v.string(),
         projectId: v.id("projects"),
-    }).index("by_projectId", ["projectId"]),
+    }).index("by_projectId", ["projectId"])
+      // index by token for user messages (soon)
 });
 
 // TO DO: Add vector search on all fields
