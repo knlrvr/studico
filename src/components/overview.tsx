@@ -21,14 +21,15 @@ export function Overview({
         <AllTasks params={{ projectId: params.projectId }} />
       </div>
 
-      <div className="">
-        <RecentProjectFiles params={{ projectId: params.projectId }} />
-      </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <IncompleteTaskList params={{ projectId: params.projectId }} />
         <CompletedTaskList params={{ projectId: params.projectId }} />
       </div>
+
+      <div className="">
+        <RecentProjectFiles params={{ projectId: params.projectId }} />
+      </div>
+
     </div>
   )
 }
