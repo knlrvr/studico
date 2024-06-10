@@ -37,7 +37,9 @@ export default function ProjectFiles({
     })
 
     return (
-        <Table className="w-full">
+        <>
+        {files?.length != undefined && files?.length > 0 ? (
+            <Table className="w-full">
             <TableCaption>All Files</TableCaption>
             <TableHeader>
                 <TableRow>
@@ -105,5 +107,9 @@ export default function ProjectFiles({
 
             </TableBody>
         </Table>
+        ) : (
+            <p className="text-neutral-500 text-sm italic">No files to display! Click the upload button to get started!</p>
+        )}
+        </>
     )
 }

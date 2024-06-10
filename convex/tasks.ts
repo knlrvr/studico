@@ -71,6 +71,41 @@ export const getTasks = query({
     }
 });
 
+export const getIncompletedTasks = query({
+    args: {
+        projectId: v.id('projects'),
+        status: v.string(),
+    },
+    async handler(ctx, args) {
+        const completedTasks = await ctx.db.query('tasks')
+        .withIndex('by_status', (q) => 
+            q.eq('status', args.status)
+        )
+        .order('desc')
+        .collect()
+
+    return completedTasks;
+    }
+})
+
+
+export const getCompletedTasks = query({
+    args: {
+        projectId: v.id('projects'),
+        status: v.string(),
+    },
+    async handler(ctx, args) {
+        const completedTasks = await ctx.db.query('tasks')
+        .withIndex('by_status', (q) => 
+            q.eq('status', args.status)
+        )
+        .order('desc')
+        .collect()
+
+    return completedTasks;
+    }
+})
+
 export const orderTasksByAge = query({
     args: {
         projectId: v.id('projects')
@@ -85,11 +120,37 @@ export const orderTasksByAge = query({
     }
 });
 
+export const completeTask = mutation({
+    args: {
+        taskId: v.id('tasks')
+    },
+    async handler(ctx, args) {
+        const { taskId } = args;
+        const newStatus = await ctx.db
+            .patch(taskId, {
+                status: 'Completed'
+            })
+
+        return newStatus;
+    }
+});
+
+export const reactivateTask = mutation({
+    args: {
+        taskId: v.id('tasks')
+    },
+    async handler(ctx, args) {
+        const { taskId } = args;
+        const newStatus = await ctx.db
+            .patch(taskId, {
+                status: 'Incomplete'
+            })
+
+        return newStatus;
+    }
+});
+
 // possible other mutations ?? we'll see
-
-// export const editTask = mutation({
-
-// });
 
 // export const assignTask = mutation({
 
@@ -99,6 +160,11 @@ export const orderTasksByAge = query({
 
 // });
 
-// export const deleteTask = mutation({
-
-// });
+export const deleteTask = mutation({
+    args: {
+        taskId: v.id('tasks'),
+    },
+    async handler(ctx, args) {
+        await ctx.db.delete(args.taskId);
+    }
+})

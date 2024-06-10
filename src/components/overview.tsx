@@ -1,8 +1,10 @@
 'use client'
 
 import { Id } from "../../convex/_generated/dataModel"
+import AllTasks from "./allTasks"
+import CompletedTaskList from "./completedTaskList"
+import IncompleteTaskList from "./incompleteTaskList"
 import RecentProjectFiles from "./recentProjectFiles"
-import TaskList from "./taskList"
 
 export function Overview({
   params
@@ -13,10 +15,20 @@ export function Overview({
 }) {
 
   return (
-    <div className="grid gap-y-8 mb-6">
-        <TaskList params={{ projectId: params.projectId }} />
+    <div className="grid gap-y-4 gap-x-4 mb-6">
 
+      <div className="">
+        <AllTasks params={{ projectId: params.projectId }} />
+      </div>
+
+      <div className="">
         <RecentProjectFiles params={{ projectId: params.projectId }} />
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <IncompleteTaskList params={{ projectId: params.projectId }} />
+        <CompletedTaskList params={{ projectId: params.projectId }} />
+      </div>
     </div>
   )
 }

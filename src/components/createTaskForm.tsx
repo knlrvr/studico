@@ -76,6 +76,11 @@ export default function CreateTaskForm({
           userId: user?.id as string,
           userImg: user?.imageUrl as string,
           userName: user?.fullName as string ?? user?.firstName as string,
+        },
+        assignedTo: {
+          userId: user?.id as string,
+          userImg: user?.imageUrl as string,
+          userName: user?.fullName as string ?? user?.firstName as string,
         }
       })
     }
@@ -104,7 +109,7 @@ export default function CreateTaskForm({
             <FormItem className='mt-4'>
               <FormLabel>Task Description</FormLabel>
               <FormControl>
-                <Textarea {...field} />
+                <Textarea rows={10} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

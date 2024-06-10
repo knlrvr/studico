@@ -60,7 +60,7 @@ export default function ProjectMessages({
                                 className="w-10 h-10 rounded-full mt-1.5" 
                             />
                             <div className="flex-col">
-                                <div className="flex gap-2 -ml-2">
+                                <div className="flex gap-2">
                                     <span className="text-sm">{message.author.sentBy}</span>
                                     <span className="text-sm text-neutral-500">
                                         {new Date(message._creationTime).toLocaleString(undefined, {
