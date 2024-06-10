@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button"
 import { Bell, Folder, LayoutDashboard, Menu, MessageSquare, Search, Settings, User } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { NotificationFeedPopover, NotificationIconButton } from "@knocklabs/react"
 
 export default function Component() {
 
