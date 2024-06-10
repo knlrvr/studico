@@ -30,7 +30,7 @@ export default function DeleteFile({
 
     return (
         <AlertDialog>
-            <AlertDialogTrigger className="ml-0.5 w-full flex items-center gap-4 p-1.5 text-sm rounded-sm hover:bg-neutral-100 transition-colors duration-100">
+            <AlertDialogTrigger className="w-full flex items-center gap-4 px-2 py-1.5 text-sm rounded-sm hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-100">
                 <Trash className="w-4 h-4 text-red-400" /> 
                 <p>Delete</p>
             </AlertDialogTrigger>

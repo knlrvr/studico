@@ -39,7 +39,7 @@ export const createProject = mutation({
         }
         
     },
-})
+});
 
 export const getProjects = query({
     args: {
@@ -105,7 +105,7 @@ export const getProject = query({
 
         return project;
     } 
-})
+});
 
 
 
@@ -137,7 +137,7 @@ export const sendMessage = mutation({
             projectId: args.projectId,
         });
     },
-})
+});
 
 export const getMessagesForProject = query({
     args: {
@@ -157,7 +157,7 @@ export const getMessagesForProject = query({
         )
         .collect();
     }
-})
+});
 
 export const hasOrgAccess = async (
     ctx: MutationCtx | QueryCtx, 

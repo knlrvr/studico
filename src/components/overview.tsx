@@ -1,16 +1,22 @@
 'use client'
 
-export function Overview() {
+import { Id } from "../../convex/_generated/dataModel"
+import RecentProjectFiles from "./recentProjectFiles"
+import TaskList from "./taskList"
+
+export function Overview({
+  params
+} : {
+    params: {
+        projectId: Id<"projects">
+    }
+}) {
 
   return (
-    <div className="flex flex-col space-y-4">
-        <span className="font-medium">Overview Page Coming soon!</span>
+    <div className="grid gap-y-8">
+        <TaskList params={{ projectId: params.projectId }} />
 
-        <ul>
-            <li>Recent Files</li>
-            <li>In-depth Task list</li>
-            <li>Progress</li>
-        </ul>
+        <RecentProjectFiles params={{ projectId: params.projectId }} />
     </div>
   )
 }

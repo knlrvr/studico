@@ -12,7 +12,7 @@ export default function DashboardLayout({
             <SideNav />
             <Header />
 
-            <div className="w-full sm:pl-56 bg-neutral-50 dark:bg-[#111] min-h-screen">{children}</div>
+            <div className="w-full sm:pl-48 bg-neutral-50 dark:bg-[#111] min-h-screen">{children}</div>
         </div>
     )
 }

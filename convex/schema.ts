@@ -45,8 +45,35 @@ export default defineSchema({
         }),
         message: v.string(),
         projectId: v.id("projects"),
-    }).index("by_projectId", ["projectId"])
+    }).index("by_projectId", ["projectId"]),
       // index by token for user messages (soon)
+    tasks: defineTable({
+      projectId: v.id('projects'),
+      title: v.string(),
+      description: v.optional(v.string()),
+      category: v.string(),
+      priority: v.string(),
+      status: v.string(),
+      createdBy: v.object({
+          userId: v.string(),
+          userImg: v.string(),
+          userName: v.string(),
+      }),
+      assignedTo: v.optional(v.object({
+          userId: v.string(),
+          userImg: v.string(),
+          userName: v.string(),
+      })),
+      completedBy: v.optional(v.object({
+          userId: v.string(),
+          userImg: v.string(),
+          userName: v.string(),
+      }))
+    }).index('by_projectId', ['projectId'])
+      .index('by_title', ['title'])
+      .index('by_status', ['status'])
+      .index('by_priority', ['priority'])
+      .index('by_category', ['category'])
 });
 
 // TO DO: Add vector search on all fields

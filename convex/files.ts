@@ -6,39 +6,6 @@ export const generateUploadUrl = mutation(async (ctx) => {
     return await ctx.storage.generateUploadUrl();
 })
 
-export const getFilesForUser = query({ 
-    args: {},
-    async handler(ctx) {
-        const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
-
-        if(!userId) {
-            return [];
-        }
-        
-        const files = await ctx.db
-            .query('files')
-            .withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', userId ))
-            .order('desc') 
-            .collect();
-
-        // return Promise.all(
-        //     files.map(async (file) => ({
-        //         ...file,
-        //         ...(file.type === 'image/jpeg' || file.type === 'image/png'
-        //             ? { fileUrl: await ctx.storage.getUrl(file.storageId) }
-        //         : {}),
-        //     })),
-        // );
-
-        return Promise.all(
-            files.map(async (file) => ({
-                ...file,
-                fileUrl: await ctx.storage.getUrl(file.storageId)
-            }))
-        );
-    }
-})
-
 export const uploadFile = mutation({
     args: {
         storageId: v.id('_storage'),
@@ -96,7 +63,55 @@ export const uploadFileToProject = mutation({
         }
         
     },
+});
+
+export const getFilesForUser = query({ 
+    args: {},
+    async handler(ctx) {
+        const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
+
+        if(!userId) {
+            return [];
+        }
+        
+        const files = await ctx.db
+            .query('files')
+            .withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', userId ))
+            .order('desc') 
+            .collect();
+
+        return Promise.all(
+            files.map(async (file) => ({
+                ...file,
+                fileUrl: await ctx.storage.getUrl(file.storageId)
+            }))
+        );
+    }
 })
+
+export const getRecentFilesForUser = query({
+    args: {},
+    async handler(ctx) {
+        const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
+
+        if(!userId) {
+            return [];
+        }
+        
+        const recentFiles = await ctx.db
+            .query('files')
+            .withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', userId ))
+            .order('desc') 
+            .take(3);
+
+        return Promise.all(
+            recentFiles.map(async (file) => ({
+                ...file,
+                fileUrl: await ctx.storage.getUrl(file.storageId)
+            }))
+        );
+    }
+});
 
 export const getFilesForProject = query({ 
     args: {
@@ -124,7 +139,35 @@ export const getFilesForProject = query({
             }))
         );
     }
-})
+});
+
+export const getRecentFilesForProject = query({ 
+    args: {
+        projectId: v.id('projects')
+    },
+    async handler(ctx, args) {
+        const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
+
+        if(!userId) {
+            return [];
+        }
+        
+        const recentFiles = await ctx.db
+            .query('files')
+            .withIndex('by_projectId', (q) => q
+                .eq('projectId', args.projectId )
+            ) 
+            .order('desc')
+            .take(3);
+
+        return Promise.all(
+            recentFiles.map(async (file) => ({
+                ...file,
+                fileUrl: await ctx.storage.getUrl(file.storageId)
+            }))
+        );
+    }
+});
 
 export const deleteFile = mutation({
     args: {

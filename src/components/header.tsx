@@ -23,7 +23,7 @@ export default function Header() {
     return (
         <div className="z-[10] fixed p-4 border-b flex justify-between items-center w-full mx-auto bg-background">
 
-            <div className="flex items-center gap-4 ml-12 sm:ml-56">
+            <div className="flex items-center gap-4 ml-12 sm:ml-48">
                 {/* <Link href="/" className="font-extrabold tracking-widest text-lg">STUDICO</Link> */}
                 
                 {/* Pages / Conditional? */}

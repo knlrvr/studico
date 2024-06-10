@@ -14,10 +14,10 @@ export default function Component() {
   return (
     <header className="fixed z-[20] sm:border-r bg-background sm:min-h-screen">
       <div className="p-4">
-        <Link href="#" className="">
+        <Link href="/dashboard" className="">
           <span className="hidden sm:flex font-extrabold tracking-wider text-xl mt-2 ml-2">Studico</span>
         </Link>
-        <nav className="hidden mt-[2.75rem] items-start gap-6 text-sm font-medium sm:flex flex-col w-48">
+        <nav className="hidden mt-[2.75rem] items-start gap-2 text-sm font-medium sm:flex flex-col w-40">
           <Link
             href="/dashboard"
             className={cn(
@@ -38,7 +38,8 @@ export default function Component() {
                 {
                     'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white': pathname.endsWith('/dashboard/files')
                 }
-                )}            prefetch={false}
+                )}            
+                prefetch={false}
           >
             <Folder className="w-5 h-5" />
             <span>Files</span>
@@ -50,7 +51,8 @@ export default function Component() {
                 {
                     'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white' : pathname.endsWith('/dashboard/notifications')
                 }
-                )}            prefetch={false}
+                )}            
+                prefetch={false}
           >
             <Bell className="w-5 h-5" />
             <span>Notifications</span>
@@ -62,7 +64,8 @@ export default function Component() {
                 {
                     'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white': pathname.endsWith('/dashboard/messages')
                 }
-                )}            prefetch={false}
+                )}            
+                prefetch={false}
           >
             <MessageSquare className="w-5 h-5" />
             <span>Messages</span>
@@ -74,7 +77,8 @@ export default function Component() {
                 {
                     'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white': pathname.endsWith('/dashboard/search')
                 }
-                )}            prefetch={false}
+                )}            
+                prefetch={false}
           >
             <Search className="w-5 h-5" />
             <span>Search All</span>
@@ -86,7 +90,8 @@ export default function Component() {
                 {
                     'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white': pathname.endsWith('/dashboard/profile')
                 }
-                )}            prefetch={false}
+                )}            
+                prefetch={false}
           >
             <User className="w-5 h-5" />
             <span>Profile</span>
@@ -98,7 +103,8 @@ export default function Component() {
                 {
                     'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white': pathname.endsWith('/dashboard/settings')
                 }
-                )}            prefetch={false}
+                )}            
+                prefetch={false}
           >
             <Settings className="w-5 h-5" />
             <span>Settings</span>

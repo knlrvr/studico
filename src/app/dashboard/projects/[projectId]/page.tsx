@@ -54,7 +54,7 @@ export default function ProjectPage({
             </div>
 
             <TabsContent value="overview">
-              <Overview />
+              <Overview params={{ projectId: params.projectId }}/>
             </TabsContent>
             <TabsContent value="files">
               <div className="mb-24">
