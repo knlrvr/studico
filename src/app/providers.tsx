@@ -25,9 +25,11 @@ export function Providers({ children }: { children: React.ReactNode }) {
         </ThemeProvider>
     )
 }
-
-
-function OtherProviders({ children }: { children: React.ReactNode}) {
+function OtherProviders({ 
+    children 
+}: { 
+    children: React.ReactNode
+}) {
     const { resolvedTheme } = useTheme();
 
     return (

@@ -104,7 +104,7 @@ export default function UserFiles() {
                     </TableBody>
                 </Table>
         ) : (
-            <p className="text-neutral-500 text-sm italic">No files to display! Click the upload button to get started!</p>
+            <p className="text-neutral-500 text-sm">No files found. Click the upload button to get started!</p>
         )}
         </>
     )

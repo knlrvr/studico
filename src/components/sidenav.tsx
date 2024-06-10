@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Bell, Folder, LayoutDashboard, Menu, MessageSquare, Search, Settings, User } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
+import { NotificationFeedPopover, NotificationIconButton } from "@knocklabs/react"
 
 export default function Component() {
 
@@ -44,7 +45,7 @@ export default function Component() {
             <Folder className="w-5 h-5" />
             <span>Files</span>
           </Link>
-          <Link
+          {/* <Link
             href="/dashboard/notifications"
             className={cn(
                 "p-2 rounded-lg w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150",
@@ -56,8 +57,8 @@ export default function Component() {
           >
             <Bell className="w-5 h-5" />
             <span>Notifications</span>
-          </Link>
-          <Link
+          </Link> */}
+          {/* <Link
             href="/dashboard/messages"
             className={cn(
                 "p-2 rounded-lg w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150",
@@ -69,7 +70,7 @@ export default function Component() {
           >
             <MessageSquare className="w-5 h-5" />
             <span>Messages</span>
-          </Link>
+          </Link> */}
           <Link
             href="/dashboard/search"
             className={cn(
@@ -137,14 +138,14 @@ export default function Component() {
                   <Folder className="w-5 h-5" />
                   <span>Files</span>
                 </Link>
-                <Link href="/dashboard/notifications" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
+                {/* <Link href="/dashboard/notifications" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
                   <Bell className="w-5 h-5" />
                   <span>Notifications</span>
                 </Link>
                 <Link href="/dashboard/messages" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
                   <MessageSquare className="w-5 h-5" />
                   <span>Messages</span>
-                </Link>
+                </Link> */}
                 <Link href="/dashboard/search" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
                   <Search className="w-5 h-5" />
                   <span>Search All</span>

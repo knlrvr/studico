@@ -31,8 +31,6 @@ export const store = mutation({
       img: identity.pictureUrl ?? '',
       email: identity.email ?? '',
       tokenIdentifier: identity.tokenIdentifier,
-      joinedCamps: [''],
-      ownedCamps: ['']
     });
   },
 });

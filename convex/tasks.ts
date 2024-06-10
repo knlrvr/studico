@@ -78,11 +78,11 @@ export const getIncompletedTasks = query({
     },
     async handler(ctx, args) {
         const completedTasks = await ctx.db.query('tasks')
-        .withIndex('by_status', (q) => 
-            q.eq('status', args.status)
-        )
+        .withIndex('by_projectId_status', (q) => 
+                q.eq("projectId", args.projectId).eq("status", args.status)
+            )
         .order('desc')
-        .collect()
+        .collect();
 
     return completedTasks;
     }
@@ -96,11 +96,11 @@ export const getCompletedTasks = query({
     },
     async handler(ctx, args) {
         const completedTasks = await ctx.db.query('tasks')
-        .withIndex('by_status', (q) => 
-            q.eq('status', args.status)
-        )
+        .withIndex('by_projectId_status', (q) => 
+                q.eq("projectId", args.projectId).eq("status", args.status)
+            )
         .order('desc')
-        .collect()
+        .collect();
 
     return completedTasks;
     }

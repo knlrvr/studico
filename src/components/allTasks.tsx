@@ -18,21 +18,11 @@ import {
 } from "@/components/ui/table"
 
 import { Id } from "../../convex/_generated/dataModel"
-import { useMutation, useQuery } from "convex/react"
+import { useQuery } from "convex/react"
 import { api } from "../../convex/_generated/api"
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
 
 import CreateTask from "./createTask"
-import {  Ellipsis } from "lucide-react"
-
-import { 
-    DropdownMenu, 
-    DropdownMenuContent,
-     DropdownMenuItem, 
-     DropdownMenuLabel, 
-     DropdownMenuSeparator, 
-     DropdownMenuTrigger 
-} from "@/components/ui/dropdown-menu"
 
 export default function AllTasks({
     params
@@ -47,10 +37,6 @@ export default function AllTasks({
     const allTasks = useQuery(api.tasks.getTasks, {
         projectId: projectId,
     })
-
-
-    const reactivateTask = useMutation(api.tasks.reactivateTask)
-    const deleteTask = useMutation(api.tasks.deleteTask)
 
     return (
         <Card>
@@ -86,7 +72,13 @@ export default function AllTasks({
                                             </Badge>
                                         </TableCell>
                                         <TableCell className="hidden md:table-cell">
-                                            <Badge className="text-xs" variant='secondary'>
+                                            <Badge 
+                                                className={`text-xs text-background
+                                                    ${task.priority === 'Low' && 'bg-yellow-400'}
+                                                    ${task.priority === 'Medium' && 'bg-orange-400'}
+                                                    ${task.priority === 'High' && 'bg-red-500'}
+                                                `} 
+                                                variant='secondary'>
                                                 {task.priority}
                                             </Badge>
                                         </TableCell>
@@ -112,7 +104,7 @@ export default function AllTasks({
                         </TableBody>
                     </Table>
                 ) : (
-                    <p className="text-neutral-500 text-sm italic">No tasks completed yet!</p>
+                    <p className="text-neutral-500 text-sm">No tasks found. Add one now!</p>
                 )}
             </CardContent>
             <CardFooter className="flex justify-end">
