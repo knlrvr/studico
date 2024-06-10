@@ -19,8 +19,8 @@ import { Id } from "../../convex/_generated/dataModel"
 import { useQuery } from "convex/react"
 import { api } from "../../convex/_generated/api"
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
-import { Button } from "./ui/button"
-import { Plus } from "lucide-react"
+
+import CreateTask from "./createTask"
 
 export default function TaskList({
     params
@@ -93,9 +93,7 @@ export default function TaskList({
                 </Table>
             </CardContent>
             <CardFooter className="flex justify-end">
-                <Button className="rounded-full h-fit p-2">
-                    <Plus className="w-5 h-5" />
-                </Button>
+                <CreateTask params={{ projectId: params.projectId }} />
             </CardFooter>
         </Card>
     )
