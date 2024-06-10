@@ -12,6 +12,9 @@ import Link from "next/link"
 import { Doc } from '../../convex/_generated/dataModel'
 
 export default function ProjectCard({ project } : { project: Doc<'projects'> }) {
+    
+    const date = new Date;
+
     return (
         <Link href={`/dashboard/projects/${project._id}`}>
             <Card>
@@ -19,8 +22,14 @@ export default function ProjectCard({ project } : { project: Doc<'projects'> }) 
                     <CardTitle>{project.title}</CardTitle>
                 </CardHeader>
 
-                <CardDescription className="p-2 px-6">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                <CardDescription className="p-2 px-6 tracking-wider font-medium">
+
+                    {new Date(project._creationTime).toLocaleString(undefined, {
+                        year: 'numeric',
+                        month: 'numeric',
+                        day: 'numeric',
+                    })}               
+
                 </CardDescription>
 
                 <CardFooter>
