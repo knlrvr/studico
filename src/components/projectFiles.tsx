@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table"
 import { useQuery } from "convex/react"
 import { api } from "../../convex/_generated/api"
-import { AudioLines, CloudDownload, Ellipsis, File, FileImage, FileText, Trash } from "lucide-react"
+import { AudioLines, CloudDownload, Ellipsis, File, FileImage, FileText, SquareArrowOutUpRight, Trash } from "lucide-react"
 import { Id } from "../../convex/_generated/dataModel"
 import Link from "next/link"
 import ImagePreview from "./imagePreview"
@@ -82,7 +82,7 @@ export default function ProjectFiles({
                                 <DropdownMenuTrigger>
                                     <Ellipsis className="w-5 h-5" />
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent>
+                                <DropdownMenuContent className="space-y-2">
                                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem>
@@ -91,7 +91,7 @@ export default function ProjectFiles({
                                             target="_blank" 
                                             className="w-full flex items-center gap-4"
                                         >
-                                            <CloudDownload className="w-4 h-4 text-blue-400" />
+                                            <SquareArrowOutUpRight className="w-4 h-4 text-green-400" />
                                             <p>Open</p>
                                         </Link>
                                     </DropdownMenuItem>

@@ -74,9 +74,9 @@ export default function AllTasks({
                                         <TableCell className="hidden md:table-cell">
                                             <Badge 
                                                 className={`text-xs text-background
-                                                    ${task.priority === 'Low' && 'bg-yellow-400'}
+                                                    ${task.priority === 'Low' && 'bg-yellow-300'}
                                                     ${task.priority === 'Medium' && 'bg-orange-400'}
-                                                    ${task.priority === 'High' && 'bg-red-500'}
+                                                    ${task.priority === 'High' && 'bg-red-400'}
                                                 `} 
                                                 variant='secondary'>
                                                 {task.priority}
