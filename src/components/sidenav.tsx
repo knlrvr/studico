@@ -130,13 +130,14 @@ export default function Component() {
               </Link>
               <nav className="grid gap-8 mt-10">
                 <Link href="/dashboard" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
-                  <LayoutDashboard className="w-5 h-5" />
+                  {/* <LayoutDashboard className="w-5 h-5" /> */}
                   <span>Projects</span>
                 </Link>
                 <Link href="/dashboard/files" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
-                  <Folder className="w-5 h-5" />
+                  {/* <Folder className="w-5 h-5" /> */}
                   <span>Files</span>
                 </Link>
+
                 {/* <Link href="/dashboard/notifications" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
                   <Bell className="w-5 h-5" />
                   <span>Notifications</span>
@@ -145,16 +146,17 @@ export default function Component() {
                   <MessageSquare className="w-5 h-5" />
                   <span>Messages</span>
                 </Link> */}
+
                 <Link href="/dashboard/search" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
-                  <Search className="w-5 h-5" />
+                  {/* <Search className="w-5 h-5" /> */}
                   <span>Search All</span>
                 </Link>
                 <Link href="/dashboard/profile" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
-                  <User className="w-5 h-5" />
+                  {/* <User className="w-5 h-5" /> */}
                   <span>Profile</span>
                 </Link>
                 <Link href="/dashboard/settings" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
-                  <Settings className="w-5 h-5" />
+                  {/* <Settings className="w-5 h-5" /> */}
                   <span>Settings</span>
                 </Link>
               </nav>
