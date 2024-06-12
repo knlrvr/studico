@@ -21,27 +21,27 @@ export default function Component() {
           <Link
             href="/dashboard"
             className={cn(
-                "p-2 rounded-lg w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150",
+                "p-2 rounded-lg w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150 hover:bg-purple-200 hover:text-background",
                 {
                     'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white': pathname.endsWith('/dashboard') || pathname.includes('/projects/')
                 }
                 )}
             prefetch={false}
           >
-            <LayoutDashboard className="w-5 h-5" />
+            {/* <LayoutDashboard className="w-5 h-5" /> */}
             <span>Projects</span>
           </Link>
           <Link
             href="/dashboard/files"
             className={cn(
-                "p-2 rounded-lg w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150",
+                "p-2 rounded-lg w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150 hover:bg-purple-200 hover:text-background",
                 {
                     'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white': pathname.endsWith('/dashboard/files')
                 }
                 )}            
                 prefetch={false}
           >
-            <Folder className="w-5 h-5" />
+            {/* <Folder className="w-5 h-5" /> */}
             <span>Files</span>
           </Link>
           {/* <Link
@@ -73,40 +73,40 @@ export default function Component() {
           <Link
             href="/dashboard/search"
             className={cn(
-                "p-2 rounded-lg w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150",
+                "p-2 rounded-lg w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150 hover:bg-purple-200 hover:text-background",
                 {
                     'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white': pathname.endsWith('/dashboard/search')
                 }
                 )}            
                 prefetch={false}
           >
-            <Search className="w-5 h-5" />
+            {/* <Search className="w-5 h-5" /> */}
             <span>Search All</span>
           </Link>
           <Link
             href="/dashboard/profile"
             className={cn(
-                "p-2 rounded-lg w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150",
+                "p-2 rounded-lg w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150 hover:bg-purple-200 hover:text-background",
                 {
                     'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white': pathname.endsWith('/dashboard/profile')
                 }
                 )}            
                 prefetch={false}
           >
-            <User className="w-5 h-5" />
+            {/* <User className="w-5 h-5" /> */}
             <span>Profile</span>
           </Link>
           <Link
             href="/dashboard/settings"
             className={cn(
-                "p-2 rounded-lg w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150",
+                "p-2 rounded-lg w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150 hover:bg-purple-200 hover:text-background",
                 {
                     'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white': pathname.endsWith('/dashboard/settings')
                 }
                 )}            
                 prefetch={false}
           >
-            <Settings className="w-5 h-5" />
+            {/* <Settings className="w-5 h-5" /> */}
             <span>Settings</span>
           </Link>
         </nav>
