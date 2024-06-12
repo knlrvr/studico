@@ -24,6 +24,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"  
+
 export default function ProjectFiles({
     params,
 }: {
@@ -50,7 +51,7 @@ export default function ProjectFiles({
             </TableHeader>
             <TableBody>
             {files?.map((file) => {
-                    return (
+                return (
                     <TableRow key={file._id} className="">
                         <TableCell 
                             className="font-medium text-neutral-500 text-center">

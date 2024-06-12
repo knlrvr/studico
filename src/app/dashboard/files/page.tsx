@@ -12,8 +12,13 @@ export default function FilesPage() {
     return (
         <main className="flex flex-col pt-24 px-4 items-start mb-12">
         <Authenticated>
-          <div className="flex justify-between items-center mb-6">
+          <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold tracking-wide text-neutral-500">All Files</h1>
+          </div>
+          <div className="mb-6">
+            <p className="w-full text-sm text-neutral-500">
+              Upload & manage your personal files. 
+            </p>
           </div>
 
           <UploadFileUserButton />
