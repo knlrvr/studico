@@ -26,7 +26,7 @@ export default function CreateTask({
                     <Plus className="w-5 h-5" />
                 </Button>
             </SheetTrigger>
-            <SheetContent>
+            <SheetContent className="overflow-scroll">
                 <SheetHeader>
                 <SheetTitle>Create Task</SheetTitle>
                 <SheetDescription>
