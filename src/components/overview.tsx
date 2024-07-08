@@ -4,6 +4,7 @@ import { Id } from "../../convex/_generated/dataModel"
 import AllTasks from "./allTasks"
 import CompletedTaskList from "./completedTaskList"
 import IncompleteTaskList from "./incompleteTaskList"
+import { ProgressChart } from "./progressChart"
 import RecentProjectFiles from "./recentProjectFiles"
 
 export function Overview({
@@ -16,6 +17,10 @@ export function Overview({
 
   return (
     <div className="grid gap-y-4 gap-x-4 mb-6">
+
+      <div className="">
+        <ProgressChart params={{ projectId: params.projectId }}/>
+      </div>
 
       <div className="">
         <AllTasks params={{ projectId: params.projectId }} />

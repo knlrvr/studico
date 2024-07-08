@@ -21,7 +21,7 @@ export default function Component() {
           <Link
             href="/dashboard"
             className={cn(
-                "p-2 rounded-lg w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150 hover:bg-purple-200 hover:text-background",
+                "p-2 rounded-lg w-full flex items-center gap-2 transition-colors duration-150 hover:bg-blue-400 hover:text-primary-foreground",
                 {
                     'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white': pathname.endsWith('/dashboard') || pathname.includes('/projects/')
                 }
@@ -34,8 +34,8 @@ export default function Component() {
           <Link
             href="/dashboard/files"
             className={cn(
-                "p-2 rounded-lg w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150 hover:bg-purple-200 hover:text-background",
-                {
+              "p-2 rounded-lg w-full flex items-center gap-2 transition-colors duration-150 hover:bg-blue-400 hover:text-primary-foreground",
+              {
                     'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white': pathname.endsWith('/dashboard/files')
                 }
                 )}            
@@ -73,8 +73,8 @@ export default function Component() {
           <Link
             href="/dashboard/search"
             className={cn(
-                "p-2 rounded-lg w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150 hover:bg-purple-200 hover:text-background",
-                {
+              "p-2 rounded-lg w-full flex items-center gap-2 transition-colors duration-150 hover:bg-blue-400 hover:text-primary-foreground",
+              {
                     'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white': pathname.endsWith('/dashboard/search')
                 }
                 )}            
@@ -86,8 +86,8 @@ export default function Component() {
           <Link
             href="/dashboard/profile"
             className={cn(
-                "p-2 rounded-lg w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150 hover:bg-purple-200 hover:text-background",
-                {
+              "p-2 rounded-lg w-full flex items-center gap-2 transition-colors duration-150 hover:bg-blue-400 hover:text-primary-foreground",
+              {
                     'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white': pathname.endsWith('/dashboard/profile')
                 }
                 )}            
@@ -99,8 +99,8 @@ export default function Component() {
           <Link
             href="/dashboard/settings"
             className={cn(
-                "p-2 rounded-lg w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150 hover:bg-purple-200 hover:text-background",
-                {
+              "p-2 rounded-lg w-full flex items-center gap-2 transition-colors duration-150 hover:bg-blue-400 hover:text-primary-foreground",
+              {
                     'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white': pathname.endsWith('/dashboard/settings')
                 }
                 )}            

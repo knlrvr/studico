@@ -75,6 +75,19 @@
     }
   }
 
+  @layer base {
+    :root {
+      --chart-1: 142, 71%, 45%;
+      --chart-2: 0, 0%, 83%;
+    }
+  
+    .dark {
+      --chart-1: 142, 71%, 45%;
+      --chart-2: 0, 0%, 13%;
+    }
+  }
+  
+
   .hide-scroll {
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
     scrollbar-width: none;  /* Firefox */

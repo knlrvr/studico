@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+
 import {
   Table,
   TableBody,
@@ -53,7 +54,7 @@ export default function AllTasks({
                                 <TableHead className="hidden sm:table-cell">Category</TableHead>
                                 <TableHead className="hidden md:table-cell">Priority</TableHead>
                                 <TableHead className="hidden lg:table-cell">Status</TableHead>
-                                <TableHead className="text-right">Assigned To</TableHead>
+                                <TableHead className="text-right">Created By</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>

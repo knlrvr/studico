@@ -20,7 +20,6 @@ import {
 import { Id } from "../../convex/_generated/dataModel"
 import { useMutation, useQuery } from "convex/react"
 import { api } from "../../convex/_generated/api"
-import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
 
 import {  Ellipsis } from "lucide-react"
 
