@@ -71,6 +71,27 @@ export const getTasks = query({
     }
 });
 
+export const editTask = mutation({
+    args: {
+        taskId: v.id('tasks'),
+        title: v.string(),
+        description: v.optional(v.string()),
+        category: v.string(),
+        priority: v.string(),
+    },
+    async handler(ctx, args) {
+        const { taskId } = args;
+        const newPriority = await ctx.db
+            .patch(taskId, {
+                title: args.title,
+                description: args.description,
+                category: args.category,
+                priority: args.priority,
+            })
+        return newPriority;
+    }
+});
+
 export const getIncompletedTasks = query({
     args: {
         projectId: v.id('projects'),
@@ -147,6 +168,35 @@ export const reactivateTask = mutation({
             })
 
         return newStatus;
+    }
+});
+
+export const editPriority = mutation({
+    args: {
+        taskId: v.id('tasks'),
+        priority: v.string(),
+    },
+    async handler(ctx, args) {
+        const { taskId, priority } = args;
+        const newPriority = await ctx.db
+            .patch(taskId, {
+                priority: args.priority,
+            })
+
+        return newPriority;
+    }
+});
+
+export const getCurrentTask = query({
+    args: {
+        taskId: v.id('tasks')
+    },
+    async handler(ctx, args) {
+        const { taskId } = args;
+        const currentTask = await ctx.db
+            .get(taskId)
+
+        return currentTask;
     }
 });
 

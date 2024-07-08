@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -28,7 +29,6 @@ import { useQuery, useMutation } from 'convex/react'
 import { api } from '../../convex/_generated/api'
 import { Id } from '../../convex/_generated/dataModel'
 import { Textarea } from './ui/textarea'
-import { useUser } from '@clerk/nextjs'
 
 const formSchema = z.object({
   title: z.string(),
@@ -37,15 +37,19 @@ const formSchema = z.object({
   priority: z.string(),
 })
 
-export default function CreateTaskForm({ 
+export default function EditTaskForm({ 
   params,
   } : {
     params: { 
-      projectId: Id<'projects'>
+      taskId: Id<'tasks'>
     }
 }) {
 
-    const createTask = useMutation(api.tasks.createTask)
+    const editTask = useMutation(api.tasks.editTask);
+
+    const currentTask = useQuery(api.tasks.getCurrentTask, { 
+        taskId: params.taskId 
+    })
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -57,37 +61,32 @@ export default function CreateTaskForm({
         },
     })
 
-    const project = useQuery(api.projects.getProject, {
-      projectId: params?.projectId
-    });
+    useEffect(() => {
+        if (currentTask) {
+            form.reset({
+                title: currentTask.title,
+                description: currentTask.description,
+                category: currentTask.category,
+                priority: currentTask.priority,
+            })
+        }
+    }, [currentTask, form])
 
-    const { user } = useUser();
-  
     async function onSubmit(values: z.infer<typeof formSchema>) {
 
-      await createTask({
-        projectId: params.projectId,
+      await editTask({
         title: values.title,
         description: values.description,
         category: values.category,
         priority: values.priority,
-        status: 'Incomplete',
-        createdBy: {
-          userId: user?.id as string,
-          userImg: user?.imageUrl as string,
-          userName: user?.fullName as string ?? user?.firstName as string,
-        },
-        assignedTo: {
-          userId: user?.id as string,
-          userImg: user?.imageUrl as string,
-          userName: user?.fullName as string ?? user?.firstName as string,
-        }
+        taskId: params?.taskId,
       })
     }
 
     return (
       <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        
         <FormField
           control={form.control}
           name="title"
@@ -125,7 +124,7 @@ export default function CreateTaskForm({
               <FormControl>
                 <Select onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Category" />
+                    <SelectValue defaultValue={`${currentTask?.category}`}/>
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="Pre-production">Pre-production</SelectItem>
@@ -151,14 +150,14 @@ export default function CreateTaskForm({
               <FormControl>
                 <Select onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Priority" />
+                    <SelectValue defaultValue={`${currentTask?.priority}`}/>
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Low">None</SelectItem>
+                    <SelectItem value="None">None</SelectItem>
                     <SelectItem value="Low">Low</SelectItem>
                     <SelectItem value="Medium">Medium</SelectItem>
                     <SelectItem value="High">High</SelectItem>
-                    <SelectItem value="Low">Urgent</SelectItem>
+                    <SelectItem value="Urgent">Urgent</SelectItem>
                   </SelectContent>
                 </Select>
               </FormControl>

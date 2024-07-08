@@ -10,6 +10,16 @@ import {
 } from "@/components/ui/card"
 
 import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
+
+import {
   Table,
   TableBody,
   TableCell,
@@ -24,6 +34,9 @@ import { api } from "../../convex/_generated/api"
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
 
 import CreateTask from "./createTask"
+import { ChevronsUpDown } from "lucide-react"
+import { EditPriority } from "./editPriority"
+import EditTask from "./editTask"
 
 export default function AllTasks({
     params
@@ -53,8 +66,9 @@ export default function AllTasks({
                                 <TableHead>Task</TableHead>
                                 <TableHead className="hidden sm:table-cell">Category</TableHead>
                                 <TableHead className="hidden md:table-cell">Priority</TableHead>
-                                <TableHead className="hidden lg:table-cell">Status</TableHead>
+                                <TableHead className="hidden lg:table-cell text-right">Status</TableHead>
                                 <TableHead className="text-right">Created By</TableHead>
+                                <TableHead className="text-right">Edit</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -73,19 +87,24 @@ export default function AllTasks({
                                             </Badge>
                                         </TableCell>
                                         <TableCell className="hidden md:table-cell">
-                                            <Badge 
-                                                className={`text-xs text-background
-                                                    ${task.priority === 'Low' && 'bg-yellow-300'}
-                                                    ${task.priority === 'Medium' && 'bg-orange-400'}
-                                                    ${task.priority === 'High' && 'bg-red-400'}
-                                                `} 
-                                                variant='secondary'>
-                                                {task.priority}
-                                            </Badge>
+                                            <div className="flex items-center space-x-2">
+                                                <Badge 
+                                                    className={`text-xs text-background
+                                                        ${task.priority === 'None' && 'text-green-500'}
+                                                        ${task.priority === 'Low' && 'text-yellow-500'}
+                                                        ${task.priority === 'Medium' && 'text-orange-400'}
+                                                        ${task.priority === 'High' && 'text-red-400'}
+                                                        ${task.priority === 'Urgent' && 'text-red-600'}
+                                                    `} 
+                                                    variant='secondary'>
+                                                    <p className="min-w-12 text-center">{task.priority}</p>
+                                                </Badge>
+                                                <EditPriority params={{ taskId: task._id }} />
+                                            </div>
                                         </TableCell>
-                                        <TableCell className="hidden lg:table-cell">
+                                        <TableCell className="hidden lg:table-cell text-right">
                                             <Badge 
-                                                className={`text-xs text-background ${task.status === 'Incomplete' ? 'bg-red-400' : 'bg-green-400' }`}>
+                                                className={`text-xs text-background ${task.status === 'Incomplete' ? 'bg-red-500' : 'bg-green-500' }`}>
                                                 {task.status}
                                             </Badge>
                                         </TableCell>
@@ -98,6 +117,9 @@ export default function AllTasks({
                                                 />
                                                 <AvatarFallback></AvatarFallback>
                                             </Avatar>
+                                        </TableCell>
+                                        <TableCell className="text-right">
+                                            <EditTask params={{ taskId: task._id }} />
                                         </TableCell>
                                     </TableRow>
                                 )
