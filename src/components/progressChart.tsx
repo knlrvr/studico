@@ -130,7 +130,7 @@ export function ProgressChart({ params }: { params: { projectId: Id<"projects"> 
       </CardContent>
       <CardFooter className="gap-2 text-sm">
         <div className="leading-none text-muted-foreground">
-          Based on your input, you've completed{" "}
+          Based on your input, you&apos;ve completed{" "}
           <span className="inline-block text-primary font-bold">
             {completionPercentage}%
           </span>{" "}
