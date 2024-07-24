@@ -7,8 +7,6 @@ import UploadFileUserButton from "@/components/uploadFileUserButton";
 
 export default function FilesPage() {
 
-  const files = useQuery(api.files.getFilesForUser)
-
     return (
         <main className="flex flex-col pt-24 px-4 items-start mb-12">
         <Authenticated>
