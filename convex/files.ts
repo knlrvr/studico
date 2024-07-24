@@ -66,8 +66,10 @@ export const uploadFileToProject = mutation({
 });
 
 export const getFilesForUser = query({ 
-    args: {},
-    async handler(ctx) {
+    args: {
+        query: v.optional(v.string()),
+    },
+    async handler(ctx, args) {
         const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
 
         if(!userId) {
@@ -76,16 +78,31 @@ export const getFilesForUser = query({
         
         const files = await ctx.db
             .query('files')
-            .withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', userId ))
+            .withIndex('by_tokenIdentifier', (q) => q
+                .eq('tokenIdentifier', userId )
+            )
             .order('desc') 
             .collect();
 
-        return Promise.all(
-            files.map(async (file) => ({
-                ...file,
-                fileUrl: await ctx.storage.getUrl(file.storageId)
-            }))
-        );
+            const query = args.query;
+
+            if (query) {
+                const filteredFiles = files.filter(file => file.name.includes(query as string));
+            
+                return Promise.all(
+                    filteredFiles.map(async (file) => ({
+                        ...file,
+                        fileUrl: await ctx.storage.getUrl(file.storageId)
+                    }))
+                );
+            }
+
+            return Promise.all(
+                files.map(async (file) => ({
+                    ...file,
+                    fileUrl: await ctx.storage.getUrl(file.storageId)
+                }))
+            );
     }
 })
 

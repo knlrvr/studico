@@ -9,13 +9,17 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+
 import { useQuery } from "convex/react"
 import { api } from "../../convex/_generated/api"
-import { AudioLines, CloudDownload, Ellipsis, File, FileImage, FileText, SquareArrowOutUpRight, Trash } from "lucide-react"
+
+import { AudioLines, Ellipsis, File, FileText, SquareArrowOutUpRight} from "lucide-react"
+
 import { Id } from "../../convex/_generated/dataModel"
 import Link from "next/link"
 import ImagePreview from "./imagePreview"
 import DeleteFile from "./deleteFile"
+
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -24,7 +28,8 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"  
-import SearchBar from "./search"
+
+import SearchBar from "./projectSearch"
 import { useState } from "react"
 
 export default function ProjectFiles({
