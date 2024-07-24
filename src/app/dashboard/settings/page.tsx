@@ -12,7 +12,7 @@ export default function SettingsPage() {
             <h1 className="text-2xl font-bold tracking-wide text-neutral-500">Settings</h1>
           </div>
 
-          <div className="flex flex-col items-start space-y-16">
+          <div className="mb-8">
             <UserProfile 
               routing="hash"
               appearance={{
