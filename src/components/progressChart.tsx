@@ -123,8 +123,8 @@ export function ProgressChart({ params }: { params: { projectId: Id<"projects"> 
             </PieChart>
           </ChartContainer>
         ) : (
-          <div className="text-center text-neutral-500 text-sm">
-            No tasks found for this project.
+          <div className="py-4">
+            
           </div>
         )}
       </CardContent>
