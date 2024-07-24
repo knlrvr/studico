@@ -28,7 +28,7 @@ export default function Component() {
                 )}
             prefetch={false}
           >
-            {/* <LayoutDashboard className="w-5 h-5" /> */}
+            <LayoutDashboard className="w-5 h-5" />
             <span>Projects</span>
           </Link>
           <Link
@@ -41,21 +41,8 @@ export default function Component() {
                 )}            
                 prefetch={false}
           >
-            {/* <Folder className="w-5 h-5" /> */}
+            <Folder className="w-5 h-5" />
             <span>Files</span>
-          </Link>
-          <Link
-            href="/dashboard/settings"
-            className={cn(
-              "p-2 rounded-lg w-full flex items-center gap-2 transition-colors duration-150 hover:bg-blue-400 hover:text-primary-foreground",
-              {
-                    'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white': pathname.endsWith('/dashboard/settings')
-                }
-                )}            
-                prefetch={false}
-          >
-            {/* <Settings className="w-5 h-5" /> */}
-            <span>Settings</span>
           </Link>
         </nav>
         <Sheet>
@@ -78,16 +65,12 @@ export default function Component() {
               </Link>
               <nav className="grid gap-8 mt-10">
                 <Link href="/dashboard" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
-                  {/* <LayoutDashboard className="w-5 h-5" /> */}
+                  <LayoutDashboard className="w-5 h-5" />
                   <span>Projects</span>
                 </Link>
                 <Link href="/dashboard/files" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
-                  {/* <Folder className="w-5 h-5" /> */}
+                  <Folder className="w-5 h-5" />
                   <span>Files</span>
-                </Link>
-                <Link href="/dashboard/settings" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
-                  {/* <Settings className="w-5 h-5" /> */}
-                  <span>Settings</span>
                 </Link>
               </nav>
             </div>
