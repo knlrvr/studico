@@ -115,7 +115,8 @@ export const getRecentFilesForUser = query({
 
 export const getFilesForProject = query({ 
     args: {
-        projectId: v.id('projects')
+        projectId: v.id('projects'),
+        query: v.optional(v.string()),
     },
     async handler(ctx, args) {
         const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
@@ -132,12 +133,25 @@ export const getFilesForProject = query({
             .order('desc')
             .collect();
 
-        return Promise.all(
-            files.map(async (file) => ({
-                ...file,
-                fileUrl: await ctx.storage.getUrl(file.storageId)
-            }))
-        );
+            const query = args.query;
+
+            if (query) {
+                const filteredFiles = files.filter(file => file.name.includes(query as string));
+            
+                return Promise.all(
+                    filteredFiles.map(async (file) => ({
+                        ...file,
+                        fileUrl: await ctx.storage.getUrl(file.storageId)
+                    }))
+                );
+            }
+            
+            return Promise.all(
+                files.map(async (file) => ({
+                    ...file,
+                    fileUrl: await ctx.storage.getUrl(file.storageId)
+                }))
+            );
     }
 });
 

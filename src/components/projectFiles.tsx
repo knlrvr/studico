@@ -24,6 +24,8 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"  
+import SearchBar from "./search"
+import { useState } from "react"
 
 export default function ProjectFiles({
     params,
@@ -37,11 +39,25 @@ export default function ProjectFiles({
         projectId: params.projectId, 
     })
 
+    const [query, setQuery] = useState<string>('');
+
+    const filteredFiles = files?.filter(file => file.name.toLowerCase().includes(query.toLowerCase()));
+
     return (
         <>
-        {files?.length != undefined && files?.length > 0 ? (
-            <Table className="w-full">
-            <TableCaption>All Files</TableCaption>
+        <SearchBar query={query} setQuery={setQuery} />
+        
+        {filteredFiles?.length != undefined && filteredFiles?.length > 0 ? (
+            <Table className="w-full mt-6">
+
+
+            <TableCaption>
+                {query ? 
+                `Search Results (${filteredFiles.length})` 
+                : `All Files (${filteredFiles.length})`}
+            </TableCaption>
+
+
             <TableHeader>
                 <TableRow>
                     <TableHead className="w-[100px] text-xs">Preview</TableHead>
@@ -50,7 +66,7 @@ export default function ProjectFiles({
                 </TableRow>
             </TableHeader>
             <TableBody>
-            {files?.map((file) => {
+            {filteredFiles?.map((file) => {
                 return (
                     <TableRow key={file._id} className="">
                         <TableCell 
@@ -109,7 +125,7 @@ export default function ProjectFiles({
             </TableBody>
         </Table>
         ) : (
-            <p className="text-neutral-500 text-sm italic">No files to display! Click the upload button to get started!</p>
+            <p className="text-neutral-500 text-sm italic mt-8">No files to display!</p>
         )}
         </>
     )
