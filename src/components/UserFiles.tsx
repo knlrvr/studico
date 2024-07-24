@@ -33,9 +33,11 @@ import { useState } from "react"
 
 export default function UserFiles() {
 
-    const files = useQuery(api.files.getFilesForUser, {})
-
     const [query, setQuery] = useState<string>('');
+
+    const files = useQuery(api.files.getFilesForUser, {
+        query: '' || undefined,
+    });
 
     const filteredFiles = files?.filter(file => file.name.toLowerCase().includes(query.toLowerCase()));
 
@@ -121,7 +123,7 @@ export default function UserFiles() {
             </TableBody>
         </Table>
         ) : (
-            <p className="text-neutral-500 text-sm italic mt-8">No files to display!</p>
+            <p className="text-neutral-500 flex w-full justify-center mt-8 text-sm">No files found.</p>
         )}
         </>
     )

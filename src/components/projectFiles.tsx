@@ -130,7 +130,7 @@ export default function ProjectFiles({
             </TableBody>
         </Table>
         ) : (
-            <p className="text-neutral-500 text-sm italic mt-8">No files to display!</p>
+            <p className="text-neutral-500 flex w-full justify-center mt-8 text-sm">No files found.</p>
         )}
         </>
     )
