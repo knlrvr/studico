@@ -44,58 +44,6 @@ export default function Component() {
             {/* <Folder className="w-5 h-5" /> */}
             <span>Files</span>
           </Link>
-          {/* <Link
-            href="/dashboard/notifications"
-            className={cn(
-                "p-2 rounded-lg w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150",
-                {
-                    'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white' : pathname.endsWith('/dashboard/notifications')
-                }
-                )}            
-                prefetch={false}
-          >
-            <Bell className="w-5 h-5" />
-            <span>Notifications</span>
-          </Link> */}
-          {/* <Link
-            href="/dashboard/messages"
-            className={cn(
-                "p-2 rounded-lg w-full flex items-center gap-2 hover:text-neutral-300 dark:hover:text-neutral-600 transition-colors duration-150",
-                {
-                    'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white': pathname.endsWith('/dashboard/messages')
-                }
-                )}            
-                prefetch={false}
-          >
-            <MessageSquare className="w-5 h-5" />
-            <span>Messages</span>
-          </Link> */}
-          <Link
-            href="/dashboard/search"
-            className={cn(
-              "p-2 rounded-lg w-full flex items-center gap-2 transition-colors duration-150 hover:bg-blue-400 hover:text-primary-foreground",
-              {
-                    'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white': pathname.endsWith('/dashboard/search')
-                }
-                )}            
-                prefetch={false}
-          >
-            {/* <Search className="w-5 h-5" /> */}
-            <span>Search All</span>
-          </Link>
-          <Link
-            href="/dashboard/profile"
-            className={cn(
-              "p-2 rounded-lg w-full flex items-center gap-2 transition-colors duration-150 hover:bg-blue-400 hover:text-primary-foreground",
-              {
-                    'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white': pathname.endsWith('/dashboard/profile')
-                }
-                )}            
-                prefetch={false}
-          >
-            {/* <User className="w-5 h-5" /> */}
-            <span>Profile</span>
-          </Link>
           <Link
             href="/dashboard/settings"
             className={cn(
@@ -136,24 +84,6 @@ export default function Component() {
                 <Link href="/dashboard/files" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
                   {/* <Folder className="w-5 h-5" /> */}
                   <span>Files</span>
-                </Link>
-
-                {/* <Link href="/dashboard/notifications" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
-                  <Bell className="w-5 h-5" />
-                  <span>Notifications</span>
-                </Link>
-                <Link href="/dashboard/messages" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
-                  <MessageSquare className="w-5 h-5" />
-                  <span>Messages</span>
-                </Link> */}
-
-                <Link href="/dashboard/search" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
-                  {/* <Search className="w-5 h-5" /> */}
-                  <span>Search All</span>
-                </Link>
-                <Link href="/dashboard/profile" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
-                  {/* <User className="w-5 h-5" /> */}
-                  <span>Profile</span>
                 </Link>
                 <Link href="/dashboard/settings" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
                   {/* <Settings className="w-5 h-5" /> */}
