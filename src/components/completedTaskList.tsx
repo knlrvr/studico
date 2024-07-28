@@ -46,7 +46,6 @@ export default function CompletedTaskList({
         projectId: projectId, status: 'Completed'
     })
 
-
     const reactivateTask = useMutation(api.tasks.reactivateTask)
     const deleteTask = useMutation(api.tasks.deleteTask)
 

@@ -10,16 +10,6 @@ import {
 } from "@/components/ui/card"
 
 import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-
-import {
   Table,
   TableBody,
   TableCell,
@@ -34,9 +24,9 @@ import { api } from "../../convex/_generated/api"
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
 
 import CreateTask from "./createTask"
-import { ChevronsUpDown } from "lucide-react"
 import { EditPriority } from "./editPriority"
 import EditTask from "./editTask"
+import { EditStatus } from "./editStatus"
 
 export default function AllTasks({
     params
@@ -66,7 +56,7 @@ export default function AllTasks({
                                 <TableHead>Task</TableHead>
                                 <TableHead className="hidden sm:table-cell">Category</TableHead>
                                 <TableHead className="hidden md:table-cell">Priority</TableHead>
-                                <TableHead className="hidden lg:table-cell text-right">Status</TableHead>
+                                <TableHead className="hidden lg:table-cell">Status</TableHead>
                                 <TableHead className="text-right">Created By</TableHead>
                                 <TableHead className="text-right">Edit</TableHead>
                             </TableRow>
@@ -102,11 +92,14 @@ export default function AllTasks({
                                                 <EditPriority params={{ taskId: task._id }} />
                                             </div>
                                         </TableCell>
-                                        <TableCell className="hidden lg:table-cell text-right">
-                                            <Badge 
-                                                className={`text-xs text-background ${task.status === 'Incomplete' ? 'bg-red-500' : 'bg-green-500' }`}>
-                                                {task.status}
-                                            </Badge>
+                                        <TableCell className="hidden lg:table-cell">
+                                            <div className="flex items-center space-x-2">
+                                                <Badge 
+                                                    className={`text-xs text-background ${task.status === 'Incomplete' ? 'bg-red-500' : 'bg-green-500' }`}>
+                                                    {task.status}
+                                                </Badge>
+                                                <EditStatus status={`${task.status}`} params={{ taskId: task._id }} />
+                                            </div>
                                         </TableCell>
                                         <TableCell className="text-right">
                                             <Avatar>
