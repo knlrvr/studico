@@ -6,12 +6,11 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
-import { Button } from "./ui/button"
-import { PencilLine } from "lucide-react"
+import { PanelRightOpen } from "lucide-react"
 import { Id } from "../../convex/_generated/dataModel"
 import EditTaskForm from "./editTaskForm"
 
-export default function EditTask({
+export default function TaskActions({
     params
 }: {
     params: {
@@ -20,15 +19,15 @@ export default function EditTask({
 }) {
     return (
         <Sheet>
-            <SheetTrigger className="">
-                <span className="sr-only">Edit Task</span>
-                <PencilLine className="w-4 h-4" />
+            <SheetTrigger>
+                <span className="sr-only">Open</span>
+                <PanelRightOpen className="w-4 h-4" />
             </SheetTrigger>
             <SheetContent className="overflow-scroll">
                 <SheetHeader>
-                <SheetTitle>Edit Task</SheetTitle>
+                <SheetTitle>Task Details</SheetTitle>
                 <SheetDescription>
-                    Edit your task here. Click save when you&apos;re done.
+                    View your task here. Click save or close when you&apos;re done.
                 </SheetDescription>
                 </SheetHeader>
                 <EditTaskForm 

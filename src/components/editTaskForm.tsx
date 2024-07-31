@@ -35,6 +35,7 @@ const formSchema = z.object({
   description: z.string(),
   category: z.string(),
   priority: z.string(),
+  status: z.string(),
 })
 
 export default function EditTaskForm({ 
@@ -58,6 +59,7 @@ export default function EditTaskForm({
           description: '',
           category: '',
           priority: '',
+          status: '',
         },
     })
 
@@ -68,6 +70,7 @@ export default function EditTaskForm({
                 description: currentTask.description,
                 category: currentTask.category,
                 priority: currentTask.priority,
+                status: currentTask.status,
             })
         }
     }, [currentTask, form])
@@ -80,6 +83,7 @@ export default function EditTaskForm({
         category: values.category,
         priority: values.priority,
         taskId: params?.taskId,
+        status: values.status,
       })
     }
 
@@ -158,6 +162,28 @@ export default function EditTaskForm({
                     <SelectItem value="Medium">Medium</SelectItem>
                     <SelectItem value="High">High</SelectItem>
                     <SelectItem value="Urgent">Urgent</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="status"
+          render={({ field }) => (
+            <FormItem className='mt-4'>
+              <FormLabel>Task Status</FormLabel>
+              <FormControl>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue defaultValue={`${currentTask?.status}`}/>
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Completed">Completed</SelectItem>
+                    <SelectItem value="Incomplete">Incomplete</SelectItem>
                   </SelectContent>
                 </Select>
               </FormControl>

@@ -78,6 +78,7 @@ export const editTask = mutation({
         description: v.optional(v.string()),
         category: v.string(),
         priority: v.string(),
+        status: v.string(),
     },
     async handler(ctx, args) {
         const { taskId } = args;
@@ -87,6 +88,7 @@ export const editTask = mutation({
                 description: args.description,
                 category: args.category,
                 priority: args.priority,
+                status: args.status,
             })
         return newPriority;
     }

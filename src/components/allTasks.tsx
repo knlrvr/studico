@@ -25,8 +25,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
 
 import CreateTask from "./createTask"
 import { EditPriority } from "./editPriority"
-import EditTask from "./editTask"
 import { EditStatus } from "./editStatus"
+import TaskActions from "./taskActions"
 
 export default function AllTasks({
     params
@@ -58,7 +58,7 @@ export default function AllTasks({
                                 <TableHead className="hidden md:table-cell">Priority</TableHead>
                                 <TableHead className="hidden lg:table-cell">Status</TableHead>
                                 <TableHead className="text-right">Created By</TableHead>
-                                <TableHead className="text-right">Edit</TableHead>
+                                <TableHead className="text-right">Actions</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -112,7 +112,7 @@ export default function AllTasks({
                                             </Avatar>
                                         </TableCell>
                                         <TableCell className="text-right">
-                                            <EditTask params={{ taskId: task._id }} />
+                                            <TaskActions params={{ taskId: task._id }} />
                                         </TableCell>
                                     </TableRow>
                                 )
