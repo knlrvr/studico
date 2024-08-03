@@ -71,18 +71,12 @@ export default defineSchema({
           userName: v.string(),
       }))
     }).index('by_projectId', ['projectId'])
-      .index('by_projectId_status', ['projectId', 'status'])
-
-      // not sure if or how to implement just yet
-      // notifications: defineTable({
-      //   tokenIdentifier: v.optional(v.string()),
-      //   orgId: v.optional(v.string()),
-      //   projectId: v.optional(v.string()),
-      //   type: v.string(),
-      //   lastReadAt: v.number(),
-      // }).index('by_tokenIdentifier', ['tokenIdentifier'])
-      //   .index('by_orgId', ['orgId'])
-      //   .index('by_projectId', ['projectId']),
+      .index('by_projectId_status', ['projectId', 'status']),
+    notifications: defineTable({
+      tokenIdentifier: v.optional(v.string()),
+      orgId: v.optional(v.string()),
+      projectId: v.optional(v.string()),
+      text: v.string(),
+      isRead: v.boolean(),
+    }).index('by_projectId', ['projectId'])
 });
-
-// TO DO: Add vector search on all fields

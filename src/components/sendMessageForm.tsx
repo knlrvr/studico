@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/form"
 
 import { Input } from "@/components/ui/input"
-import { useMutation } from "convex/react"
+import { useMutation, useQuery } from "convex/react"
 import { api } from "../../convex/_generated/api"
 import { LoadingButton } from "./loadingButton"
 
@@ -39,7 +39,12 @@ export default function SendMessageForm({
     const [message, setMessage] = useState<string>('');
             
     const sendMessage = useMutation(api.projects.sendMessage);
-  
+    const messageNotification = useMutation(api.notifications.createNotification);
+
+    const currentProject = useQuery(api.projects.getProject, {
+      projectId: params.projectId,
+    })
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -95,6 +100,11 @@ export default function SendMessageForm({
               projectId: params.projectId 
             })
             setMessage('');
+            messageNotification({
+              projectId: currentProject?._id,
+              text: `${user?.fullName} has sent a new message to ${currentProject?.title}.`
+            })
+
           }}  
           className="flex items-center gap-2"
         >
@@ -115,6 +125,7 @@ export default function SendMessageForm({
               className="w-full border px-2 py-1.5 rounded-md placeholder:text-neutral-500 text-sm overflow-scroll"
             />
           </div>
+
           <LoadingButton 
             isLoading={form.formState.isSubmitting}
             loadingText="Sending"

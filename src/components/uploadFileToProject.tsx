@@ -17,6 +17,7 @@ import { LoadingButton } from './loadingButton'
 import { useQuery, useMutation } from 'convex/react'
 import { api } from '../../convex/_generated/api'
 import { Id } from '../../convex/_generated/dataModel'
+import { useUser } from '@clerk/nextjs'
 
 const formSchema = z.object({
   file: z.instanceof(File),
@@ -34,6 +35,9 @@ export default function UploadFileToProject({
 
     const uploadFile = useMutation(api.files.uploadFileToProject);
     const generateUploadUrl = useMutation(api.files.generateUploadUrl);
+
+    const { user } = useUser();
+    const projectNotification = useMutation(api.notifications.createNotification);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -63,6 +67,10 @@ export default function UploadFileToProject({
         projectId: project?._id,
       })
       onUpload();
+      projectNotification({
+        projectId: project?._id,
+        text: `${user?.fullName} has uploaded a new file to ${project?.title}`
+      })
     }
 
     return (

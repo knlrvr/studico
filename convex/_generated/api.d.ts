@@ -18,6 +18,7 @@ import type * as clerk from "../clerk.js";
 import type * as files from "../files.js";
 import type * as http from "../http.js";
 import type * as memberships from "../memberships.js";
+import type * as notifications from "../notifications.js";
 import type * as projects from "../projects.js";
 import type * as tasks from "../tasks.js";
 import type * as users from "../users.js";
@@ -35,6 +36,7 @@ declare const fullApi: ApiFromModules<{
   files: typeof files;
   http: typeof http;
   memberships: typeof memberships;
+  notifications: typeof notifications;
   projects: typeof projects;
   tasks: typeof tasks;
   users: typeof users;

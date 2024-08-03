@@ -10,6 +10,7 @@ import ProjectMessages from "@/components/messages";
 import ProjectFiles from "@/components/projectFiles";
 import UploadFileProjectButton from "@/components/uploadFileProjectButton";
 import { Overview } from "@/components/overview";
+import { Notifications } from "@/components/notifications";
 
 export default function ProjectPage({
     params
@@ -37,20 +38,28 @@ export default function ProjectPage({
     <main className="flex flex-col pt-24 px-4">
 
         <Tabs defaultValue="overview" className="w-full">
-            <div className="flex flex-col sm:flex-row items-center justify-between mb-8 space-y-4 sm:space-y-0">
-              <h1 className="text-2xl font-bold tracking-wide text-neutral-500">
+            <div className="flex flex-col sm:flex-row justify-between mb-8 space-y-4 sm:space-y-0 relative">
+              
+              <h1 className="text-2xl font-bold tracking-wide text-neutral-500 w-full">
                 {project.title}
               </h1>
 
-              <TabsList className="w-full flex justify-between sm:w-fit sm:gap-2">
-                  <TabsTrigger value="overview">Overview</TabsTrigger>
-                  <TabsTrigger value="files">Files</TabsTrigger>
-                  <TabsTrigger value="chat">
-                    Messages 
-                    {/* make conditional, depends on newMessages !!! ? */}
-                    <span className="ml-2 inline-flex text-xs bg-green-500 rounded-full p-1"></span>
-                  </TabsTrigger>
-              </TabsList>
+              <div className="flex items-center justify-end gap-4 w-full">
+
+                <TabsList className="w-full sm:w-fit flex justify-between sm:gap-2">
+                    <TabsTrigger value="overview">Overview</TabsTrigger>
+                    <TabsTrigger value="files">Files</TabsTrigger>
+                    <TabsTrigger value="chat">
+                      Messages 
+                      {/* make conditional, depends on newMessages !!! ? */}
+                      <span className="ml-2 inline-flex text-xs bg-green-500 rounded-full p-1"></span>
+                    </TabsTrigger>
+                </TabsList>
+
+                <Notifications params={{ projectId: project._id }} />
+
+              </div>
+
             </div>
 
             <TabsContent value="overview">
