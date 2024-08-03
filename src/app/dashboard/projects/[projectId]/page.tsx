@@ -37,6 +37,8 @@ export default function ProjectPage({
   return (
     <main className="flex flex-col pt-24 px-4">
 
+        {/* get ready for an insane amount of prop drilling bc I'm lazy */}
+
         <Tabs defaultValue="overview" className="w-full">
             <div className="flex flex-col sm:flex-row justify-between mb-8 space-y-4 sm:space-y-0 relative">
               
