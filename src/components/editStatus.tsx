@@ -15,22 +15,33 @@ import {
 import { useMutation } from "convex/react"
 import { api } from "../../convex/_generated/api"
 import { Id } from "../../convex/_generated/dataModel"
+import { useUser } from "@clerk/nextjs"
   
   export function EditStatus({
     params,
-    status
+    status,
+    taskName,
+    projectId,
+    projectName
   } : {
     params: {
         taskId: Id<'tasks'>,
     },
     status: string,
+    taskName: string,
+    projectId: string,
+    projectName: string,
   }) {
 
     const taskId = params?.taskId
 
+    const { user } = useUser();
+
     const reactivateTask = useMutation(api.tasks.reactivateTask)
     const completeTask = useMutation(api.tasks.completeTask)
     const deleteTask = useMutation(api.tasks.deleteTask)
+
+    const taskStatusNotification = useMutation(api.notifications.createNotification);
 
     return (
         <DropdownMenu>
@@ -46,7 +57,11 @@ import { Id } from "../../convex/_generated/dataModel"
                     <DropdownMenuItem>
                         <button 
                             onClick={() => {
-                                reactivateTask({taskId: taskId })
+                                reactivateTask({ taskId: taskId });
+                                taskStatusNotification({
+                                    projectId: projectId,
+                                    text: `${user?.fullName} changed the status of '${taskName}' to incomplete.`
+                                })
                             }}
                             className="w-full text-left"
                         >
@@ -58,7 +73,11 @@ import { Id } from "../../convex/_generated/dataModel"
                     <DropdownMenuItem>
                         <button 
                             onClick={() => {
-                                completeTask({taskId: taskId })
+                                completeTask({ taskId: taskId })
+                                taskStatusNotification({
+                                    projectId: projectId,
+                                    text: `${user?.fullName} changed the status of '${taskName}' to complete.`
+                                })
                             }}
                             className="w-full text-left"
                         >
@@ -71,7 +90,11 @@ import { Id } from "../../convex/_generated/dataModel"
                         onClick={() => {
                             deleteTask({
                                 taskId: taskId,
-                        })
+                            })
+                            taskStatusNotification({
+                                projectId: projectId,
+                                text: `${user?.fullName} permanently deleted '${taskName}'.`
+                            })
                     }}
                     className="">
                         Delete

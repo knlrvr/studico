@@ -11,11 +11,13 @@ import { Id } from "../../convex/_generated/dataModel"
 import EditTaskForm from "./editTaskForm"
 
 export default function TaskActions({
-    params
+    params,
+    projectId,
 }: {
     params: {
         taskId: Id<'tasks'>,
-    }
+    },
+    projectId: string,
 }) {
     return (
         <Sheet>
@@ -30,7 +32,7 @@ export default function TaskActions({
                     View your task here. Click save or close when you&apos;re done.
                 </SheetDescription>
                 </SheetHeader>
-                <EditTaskForm 
+                <EditTaskForm projectId={projectId}
                     params={{ taskId: params.taskId }}
                 />
             </SheetContent>

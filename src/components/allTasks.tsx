@@ -38,6 +38,10 @@ export default function AllTasks({
 
     const projectId = params?.projectId;
 
+    const currentProject = useQuery(api.projects.getProject, {
+        projectId: params.projectId,
+    })
+
     const allTasks = useQuery(api.tasks.getTasks, {
         projectId: projectId,
     })
@@ -89,7 +93,7 @@ export default function AllTasks({
                                                     variant='secondary'>
                                                     <p className="min-w-12 text-center">{task.priority}</p>
                                                 </Badge>
-                                                <EditPriority params={{ taskId: task._id }} />
+                                                <EditPriority projectId={projectId} params={{ taskId: task._id }} taskName={task.title}/>
                                             </div>
                                         </TableCell>
                                         <TableCell className="hidden lg:table-cell">
@@ -98,7 +102,15 @@ export default function AllTasks({
                                                     className={`text-xs text-background ${task.status === 'Incomplete' ? 'bg-red-500' : 'bg-green-500' }`}>
                                                     {task.status}
                                                 </Badge>
-                                                <EditStatus status={`${task.status}`} params={{ taskId: task._id }} />
+
+                                                <EditStatus 
+                                                    status={`${task.status}`} 
+                                                    params={{ taskId: task._id }} 
+                                                    taskName={task.title}
+                                                    projectId={currentProject?._id as string} 
+                                                    projectName={currentProject?.title as string}
+                                                />
+
                                             </div>
                                         </TableCell>
                                         <TableCell className="text-right">
@@ -112,7 +124,7 @@ export default function AllTasks({
                                             </Avatar>
                                         </TableCell>
                                         <TableCell className="text-right">
-                                            <TaskActions params={{ taskId: task._id }} />
+                                            <TaskActions projectId={projectId} params={{ taskId: task._id }} />
                                         </TableCell>
                                     </TableRow>
                                 )

@@ -33,6 +33,7 @@ import {
      DropdownMenuSeparator, 
      DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu"
+import { useUser } from "@clerk/nextjs"
 
 export default function IncompleteTaskList({
     params
@@ -44,12 +45,16 @@ export default function IncompleteTaskList({
 
     const projectId = params?.projectId;
 
+    const { user } = useUser();
+
     const completedTasks = useQuery(api.tasks.getIncompletedTasks, {
         projectId: projectId, status: 'Incomplete'
     })
 
     const completeTask = useMutation(api.tasks.completeTask)
     const deleteTask = useMutation(api.tasks.deleteTask)
+
+    const taskNotification = useMutation(api.notifications.createNotification)
 
     return (
         <Card>
@@ -95,6 +100,10 @@ export default function IncompleteTaskList({
                                                         onClick={() => {
                                                             completeTask({
                                                                 taskId: task._id
+                                                            });
+                                                            taskNotification({
+                                                                projectId: projectId,
+                                                                text: `${user?.fullName} has completed '${task.title}'`
                                                             })
                                                         }}
                                                         className="">
@@ -106,6 +115,10 @@ export default function IncompleteTaskList({
                                                         onClick={() => {
                                                             deleteTask({
                                                                 taskId: task._id
+                                                            });
+                                                            taskNotification({
+                                                                projectId: projectId,
+                                                                text: `${user?.fullName} has permanently deleted '${task.title}'`
                                                             })
                                                         }}
                                                         className="">

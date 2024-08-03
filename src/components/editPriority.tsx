@@ -15,18 +15,26 @@ import {
 import { useMutation } from "convex/react"
 import { api } from "../../convex/_generated/api"
 import { Id } from "../../convex/_generated/dataModel"
+import { useUser } from "@clerk/nextjs"
   
   export function EditPriority({
-    params
+    params,
+    projectId,
+    taskName
   } : {
     params: {
         taskId: Id<'tasks'>,
-    }
+    },
+    projectId: string,
+    taskName: string,
   }) {
 
     const taskId = params?.taskId
 
-    const editPriority = useMutation(api.tasks.editPriority)
+    const editPriority = useMutation(api.tasks.editPriority);
+    const taskPriorityNotification = useMutation(api.notifications.createNotification);
+
+    const { user } = useUser();
 
     return (
         <DropdownMenu>
@@ -42,6 +50,10 @@ import { Id } from "../../convex/_generated/dataModel"
                     <button 
                         onClick={() => {
                             editPriority({taskId: taskId, priority: 'None' })
+                            taskPriorityNotification({
+                                projectId: projectId,
+                                text: `${user?.fullName} changed the priority of '${taskName}' to None.`
+                            })
                         }}
                         className="w-full text-left"
                     >
@@ -51,7 +63,11 @@ import { Id } from "../../convex/_generated/dataModel"
                 <DropdownMenuItem>
                     <button 
                         onClick={() => {
-                            editPriority({taskId: params?.taskId, priority: 'Low' })
+                            editPriority({taskId: params?.taskId, priority: 'Low' });
+                            taskPriorityNotification({
+                                projectId: projectId,
+                                text: `${user?.fullName} changed the priority of '${taskName}' to Low.`
+                            })
                         }}
                         className="w-full text-left"
                     >
@@ -61,7 +77,11 @@ import { Id } from "../../convex/_generated/dataModel"
                 <DropdownMenuItem>
                     <button 
                         onClick={() => {
-                            editPriority({taskId: params?.taskId, priority: 'Medium' })
+                            editPriority({taskId: params?.taskId, priority: 'Medium' });
+                            taskPriorityNotification({
+                                projectId: projectId,
+                                text: `${user?.fullName} changed the priority of '${taskName}' to Medium.`
+                            })
                         }}
                         className="w-full text-left"
                     >
@@ -71,7 +91,11 @@ import { Id } from "../../convex/_generated/dataModel"
                 <DropdownMenuItem>
                     <button 
                             onClick={() => {
-                                editPriority({taskId: params?.taskId, priority: 'High' })
+                                editPriority({taskId: params?.taskId, priority: 'High' });
+                                taskPriorityNotification({
+                                    projectId: projectId,
+                                    text: `${user?.fullName} changed the priority of '${taskName}' to High.`
+                                })
                             }}
                             className="w-full text-left"
                         >
@@ -81,7 +105,11 @@ import { Id } from "../../convex/_generated/dataModel"
                 <DropdownMenuItem>
                     <button 
                             onClick={() => {
-                                editPriority({taskId: params?.taskId, priority: 'Urgent' })
+                                editPriority({taskId: params?.taskId, priority: 'Urgent' });
+                                taskPriorityNotification({
+                                    projectId: projectId,
+                                    text: `${user?.fullName} changed the priority of '${taskName}' to Urgent.`
+                                })
                             }}
                             className="w-full text-left"
                         >

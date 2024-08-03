@@ -29,6 +29,7 @@ import { useQuery, useMutation } from 'convex/react'
 import { api } from '../../convex/_generated/api'
 import { Id } from '../../convex/_generated/dataModel'
 import { Textarea } from './ui/textarea'
+import { useUser } from '@clerk/nextjs'
 
 const formSchema = z.object({
   title: z.string(),
@@ -40,17 +41,23 @@ const formSchema = z.object({
 
 export default function EditTaskForm({ 
   params,
+  projectId,
   } : {
     params: { 
       taskId: Id<'tasks'>
-    }
+    },
+    projectId: string,
 }) {
+
+    const { user } = useUser();
 
     const editTask = useMutation(api.tasks.editTask);
 
     const currentTask = useQuery(api.tasks.getCurrentTask, { 
         taskId: params.taskId 
     })
+
+    const taskNotification = useMutation(api.notifications.createNotification)
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -84,6 +91,10 @@ export default function EditTaskForm({
         priority: values.priority,
         taskId: params?.taskId,
         status: values.status,
+      });
+      taskNotification({
+        projectId: projectId,
+        text: `${user?.fullName} has made changes to '${currentTask?.title}'`
       })
     }
 
