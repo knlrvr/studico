@@ -45,7 +45,9 @@ export default function CreateTaskForm({
     }
 }) {
 
-    const createTask = useMutation(api.tasks.createTask)
+    const createTask = useMutation(api.tasks.createTask);
+    const taskNotification = useMutation(api.notifications.createNotification);
+
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -82,6 +84,11 @@ export default function CreateTaskForm({
           userImg: user?.imageUrl as string,
           userName: user?.fullName as string ?? user?.firstName as string,
         }
+      })
+
+      taskNotification({
+        projectId: params.projectId,
+        text: `${user?.fullName} created a new task in ${project?.title}`
       })
     }
 
