@@ -102,6 +102,7 @@ export default function SendMessageForm({
             setMessage('');
             messageNotification({
               projectId: currentProject?._id,
+              type: 'message',
               text: `${user?.fullName} has sent a new message to ${currentProject?.title}.`
             })
 

@@ -57,6 +57,7 @@ export const createNotification = mutation({
     args: {
         tokenIdentifier: v.optional(v.string()),
         projectId: v.optional(v.string()),
+        type: v.string(),
         text: v.string(),
     },
     handler: async (ctx, args) => {
@@ -70,6 +71,7 @@ export const createNotification = mutation({
         return await ctx.db.insert('notifications', {
             tokenIdentifier: args.tokenIdentifier,
             projectId: args.projectId,
+            type: args.type,
             text: args.text,
             isRead: false,
         })

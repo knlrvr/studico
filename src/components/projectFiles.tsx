@@ -13,7 +13,7 @@ import {
 import { useQuery } from "convex/react"
 import { api } from "../../convex/_generated/api"
 
-import { AudioLines, Ellipsis, File, FileText, SquareArrowOutUpRight} from "lucide-react"
+import { AudioLines, Ellipsis, File, FileText} from "lucide-react"
 
 import { Id } from "../../convex/_generated/dataModel"
 import Link from "next/link"
@@ -40,9 +40,13 @@ export default function ProjectFiles({
     }
 }) {
 
+    const currentProject = useQuery(api.projects.getProject, {
+        projectId: params.projectId
+    })
+
     const files = useQuery(api.files.getFilesForProject, { 
         projectId: params.projectId, 
-    })
+    });
 
     const [query, setQuery] = useState<string>('');
 
@@ -104,6 +108,32 @@ export default function ProjectFiles({
                                 <DropdownMenuTrigger>
                                     <Ellipsis className="w-5 h-5" />
                                 </DropdownMenuTrigger>
+                                <DropdownMenuContent>
+                                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                                    <DropdownMenuSeparator />
+                                    <DropdownMenuItem>
+                                        <Link
+                                            href={`${file.fileUrl}`} 
+                                            target="_blank" 
+                                            className="w-full"
+                                        >
+                                            Open
+                                        </Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem asChild>
+                                        <DeleteFile 
+                                            fileId={file._id} 
+                                            storageId={file.storageId}
+                                            projectId={currentProject?._id as string}
+                                            projectName={currentProject?.title as string}
+                                        />
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                            {/* <DropdownMenu>
+                                <DropdownMenuTrigger>
+                                    <Ellipsis className="w-5 h-5" />
+                                </DropdownMenuTrigger>
                                 <DropdownMenuContent className="space-y-2">
                                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
                                     <DropdownMenuSeparator />
@@ -111,17 +141,21 @@ export default function ProjectFiles({
                                         <Link
                                             href={`${file.fileUrl}`} 
                                             target="_blank" 
-                                            className="w-full flex items-center gap-4"
+                                            className="w-full -m-1 px-1"
                                         >
-                                            <SquareArrowOutUpRight className="w-4 h-4 text-green-400" />
-                                            <p>Open</p>
+                                            Open
                                         </Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem asChild className="">
-                                        <DeleteFile fileId={file._id} storageId={file.storageId}/>
+                                        <DeleteFile 
+                                            fileId={file._id} 
+                                            storageId={file.storageId}
+                                            projectId={currentProject?._id as string}
+                                            projectName={currentProject?.title as string}
+                                        />
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
-                            </DropdownMenu>
+                            </DropdownMenu> */}
                         </TableCell>
                     </TableRow>
                     )

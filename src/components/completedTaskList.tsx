@@ -101,6 +101,7 @@ export default function CompletedTaskList({
                                                             })
                                                             taskNotification({
                                                                 projectId: projectId,
+                                                                type: 'status',
                                                                 text: `${user?.fullName} has reactivated '${task.title}'`
                                                             })
                                                         }}
@@ -116,6 +117,7 @@ export default function CompletedTaskList({
                                                             });
                                                             taskNotification({
                                                                 projectId: projectId,
+                                                                type: 'delete',
                                                                 text: `${user?.fullName} has permanently deleted '${task.title}'`
                                                             })
                                                         }}

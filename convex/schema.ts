@@ -76,6 +76,7 @@ export default defineSchema({
       tokenIdentifier: v.optional(v.string()),
       orgId: v.optional(v.string()),
       projectId: v.optional(v.string()),
+      type: v.string(),
       text: v.string(),
       isRead: v.boolean(),
     }).index('by_projectId', ['projectId'])

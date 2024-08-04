@@ -69,6 +69,7 @@ export default function UploadFileToProject({
       onUpload();
       projectNotification({
         projectId: project?._id,
+        type: 'upload',
         text: `${user?.fullName} has uploaded a new file to ${project?.title}`
       })
     }

@@ -12,27 +12,32 @@ import {
     AlertDialogTrigger,
   } from "@/components/ui/alert-dialog"
 import { useMutation } from "convex/react"
-  
 
-import { Trash } from "lucide-react"
 import { api } from "../../convex/_generated/api"
 import { Id } from "../../convex/_generated/dataModel"
+import { useUser } from "@clerk/nextjs"
 
 export default function DeleteFile({
     fileId,
     storageId,
+    projectId,
+    projectName,
 } : {
     fileId: Id<"files">,
     storageId: Id<"_storage">,
+    projectId: string,
+    projectName: string,
 }) {
 
     const deleteFile = useMutation(api.files.deleteFile)
+    const fileNotification = useMutation(api.notifications.createNotification)
+
+    const { user } = useUser();
 
     return (
         <AlertDialog>
-            <AlertDialogTrigger className="w-full flex items-center gap-4 px-2 py-1.5 text-sm rounded-sm hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-100">
-                <Trash className="w-4 h-4 text-red-400" /> 
-                <p>Delete</p>
+            <AlertDialogTrigger className="w-full flex items-center px-2 py-1 text-sm rounded-sm hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-100">
+                Delete
             </AlertDialogTrigger>
             <AlertDialogContent>
             <AlertDialogHeader>
@@ -52,6 +57,11 @@ export default function DeleteFile({
                             storageId,
                             fileId,
                         });
+                        fileNotification({
+                            projectId: projectId,
+                            type: 'delete',
+                            text: `${user?.fullName} deleted a file in ${projectName}`
+                        })
                     }}
                 >
                     Delete File

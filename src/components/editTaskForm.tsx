@@ -94,6 +94,7 @@ export default function EditTaskForm({
       });
       taskNotification({
         projectId: projectId,
+        type: 'fullEdit',
         text: `${user?.fullName} has made changes to '${currentTask?.title}'`
       })
     }

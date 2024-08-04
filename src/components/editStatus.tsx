@@ -60,7 +60,8 @@ import { useUser } from "@clerk/nextjs"
                                 reactivateTask({ taskId: taskId });
                                 taskStatusNotification({
                                     projectId: projectId,
-                                    text: `${user?.fullName} changed the status of '${taskName}' to incomplete.`
+                                    type: 'status',
+                                    text: `${user?.fullName} changed the status of '${taskName}' to incomplete`
                                 })
                             }}
                             className="w-full text-left"
@@ -76,7 +77,8 @@ import { useUser } from "@clerk/nextjs"
                                 completeTask({ taskId: taskId })
                                 taskStatusNotification({
                                     projectId: projectId,
-                                    text: `${user?.fullName} changed the status of '${taskName}' to complete.`
+                                    type: 'status',
+                                    text: `${user?.fullName} changed the status of '${taskName}' to complete`
                                 })
                             }}
                             className="w-full text-left"
@@ -93,7 +95,8 @@ import { useUser } from "@clerk/nextjs"
                             })
                             taskStatusNotification({
                                 projectId: projectId,
-                                text: `${user?.fullName} permanently deleted '${taskName}'.`
+                                type: 'delete',
+                                text: `${user?.fullName} permanently deleted '${taskName}'`
                             })
                     }}
                     className="">

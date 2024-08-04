@@ -88,6 +88,7 @@ export default function CreateTaskForm({
 
       taskNotification({
         projectId: params.projectId,
+        type: 'create',
         text: `${user?.fullName} created a new task in ${project?.title}`
       })
     }

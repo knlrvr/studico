@@ -52,7 +52,8 @@ import { useUser } from "@clerk/nextjs"
                             editPriority({taskId: taskId, priority: 'None' })
                             taskPriorityNotification({
                                 projectId: projectId,
-                                text: `${user?.fullName} changed the priority of '${taskName}' to None.`
+                                type: 'priority',
+                                text: `${user?.fullName} changed the priority of '${taskName}' to none`
                             })
                         }}
                         className="w-full text-left"
@@ -66,7 +67,8 @@ import { useUser } from "@clerk/nextjs"
                             editPriority({taskId: params?.taskId, priority: 'Low' });
                             taskPriorityNotification({
                                 projectId: projectId,
-                                text: `${user?.fullName} changed the priority of '${taskName}' to Low.`
+                                type: 'priority',
+                                text: `${user?.fullName} changed the priority of '${taskName}' to low`
                             })
                         }}
                         className="w-full text-left"
@@ -80,7 +82,8 @@ import { useUser } from "@clerk/nextjs"
                             editPriority({taskId: params?.taskId, priority: 'Medium' });
                             taskPriorityNotification({
                                 projectId: projectId,
-                                text: `${user?.fullName} changed the priority of '${taskName}' to Medium.`
+                                type: 'priority',
+                                text: `${user?.fullName} changed the priority of '${taskName}' to medium`
                             })
                         }}
                         className="w-full text-left"
@@ -94,7 +97,8 @@ import { useUser } from "@clerk/nextjs"
                                 editPriority({taskId: params?.taskId, priority: 'High' });
                                 taskPriorityNotification({
                                     projectId: projectId,
-                                    text: `${user?.fullName} changed the priority of '${taskName}' to High.`
+                                    type: 'priority',
+                                    text: `${user?.fullName} changed the priority of '${taskName}' to high`
                                 })
                             }}
                             className="w-full text-left"
@@ -108,7 +112,8 @@ import { useUser } from "@clerk/nextjs"
                                 editPriority({taskId: params?.taskId, priority: 'Urgent' });
                                 taskPriorityNotification({
                                     projectId: projectId,
-                                    text: `${user?.fullName} changed the priority of '${taskName}' to Urgent.`
+                                    type: 'priority',
+                                    text: `${user?.fullName} changed the priority of '${taskName}' to urgent`
                                 })
                             }}
                             className="w-full text-left"
