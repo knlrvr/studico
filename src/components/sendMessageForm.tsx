@@ -103,7 +103,7 @@ export default function SendMessageForm({
             messageNotification({
               projectId: currentProject?._id,
               type: 'message',
-              text: `${user?.fullName} has sent a new message to ${currentProject?.title}.`
+              text: `${user?.fullName} has sent a new message to ${currentProject?.title}`
             })
 
           }}  

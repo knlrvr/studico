@@ -108,7 +108,7 @@ export default function ProjectFiles({
                                 <DropdownMenuTrigger>
                                     <Ellipsis className="w-5 h-5" />
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent>
+                                <DropdownMenuContent className="space-y-1">
                                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem>

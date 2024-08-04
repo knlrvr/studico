@@ -1,5 +1,6 @@
 import { v } from "convex/values";
 import { MutationCtx, QueryCtx, mutation, query } from "./_generated/server";
+import { paginationOptsValidator } from "convex/server";
 
 export const getNotifications = query({
     args: {
@@ -21,6 +22,44 @@ export const getNotifications = query({
             .collect()
     },
 });
+
+export const getLimitedNotifications = query({
+    args: {
+        projectId: v.optional(v.string()),
+
+    },
+    async handler(ctx, args) { 
+
+        const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier
+
+        if(!userId) {
+            return [];
+        }
+
+        return await ctx.db
+            .query('notifications')
+            .withIndex('by_projectId', (q) => q.eq('projectId', args.projectId))
+            .order('desc')
+            .take(10)
+    },    
+});
+
+// to replace getLimitedNotifications (above) -
+export const paginatedNotifications = query({
+    args: {
+        projectId: v.optional(v.string()),
+        paginationOpts: paginationOptsValidator
+    },
+    handler: async (ctx, args) => {
+        const results = await ctx.db
+            .query('notifications')
+            .withIndex('by_projectId', (q) => q.eq('projectId', args.projectId))
+            .order('desc')
+            .paginate(args.paginationOpts);
+
+        return results;
+    }
+})
 
 export const markNotifAsRead = mutation({
     args: {

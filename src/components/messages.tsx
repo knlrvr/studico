@@ -6,6 +6,7 @@ import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import Image from "next/image";
 import { useRef, useEffect, useState } from 'react';
+import { messageTime } from "@/lib/utils";
 
 export default function ProjectMessages({
     params
@@ -63,13 +64,7 @@ export default function ProjectMessages({
                                 <div className="flex gap-2">
                                     <span className="text-sm">{message.author.sentBy}</span>
                                     <span className="text-sm text-neutral-500">
-                                        {new Date(message._creationTime).toLocaleString(undefined, {
-                                            year: 'numeric',
-                                            month: 'numeric',
-                                            day: 'numeric',
-                                            hour: '2-digit',
-                                            minute: '2-digit'
-                                        })}
+                                        {messageTime(message._creationTime)}
                                     </span>
                                 </div>
                                 <p className="">{message.message}</p>

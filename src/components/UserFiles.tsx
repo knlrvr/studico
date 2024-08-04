@@ -97,27 +97,26 @@ export default function UserFiles() {
                                 <DropdownMenuTrigger>
                                     <Ellipsis className="w-5 h-5" />
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent className="space-y-2">
+                                <DropdownMenuContent className="space-y-1">
                                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem>
                                         <Link
                                             href={`${file.fileUrl}`} 
                                             target="_blank" 
-                                            className="w-full flex items-center gap-4"
+                                            className="w-full"
                                         >
-                                            <SquareArrowOutUpRight className="w-4 h-4 text-green-400" />
-                                            <p>Open</p>
+                                            Open
                                         </Link>
                                     </DropdownMenuItem>
-                                    <DropdownMenuItem asChild className="">
+                                    <DropdownMenuItem asChild>
                                         <DeleteUserFile
                                             fileId={file._id} 
                                             storageId={file.storageId}
                                         />
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
-                            </DropdownMenu>
+                            </DropdownMenu>                            
                         </TableCell>
                     </TableRow>
                     )

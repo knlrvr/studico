@@ -89,12 +89,13 @@ export function Notifications({
                                             <p className="text-sm">{notification.text}</p>
                                             <span className="text-xs text-neutral-500">{timeAgo(notification._creationTime)}</span>
                                         </div>
-                                        <Button
+                                        {/* do we rly need this? */}
+                                        {/* <Button
                                             variant='ghost' size='icon' className="w-5 h-4 mt-1"
                                             onClick={() => markAsRead({ id: notification._id })}
                                         >
                                             <Checkbox />
-                                        </Button>
+                                        </Button> */}
                                     </div>
                                 ))
                             }

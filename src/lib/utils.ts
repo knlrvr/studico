@@ -28,3 +28,25 @@ export function timeAgo(milliseconds: number) {
   return 'just now';
 }
 
+// date
+export function timeStamp(unixtime: number): string {
+  const date = new Date(unixtime);
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  return `${day}-${month}-${year}`; 
+}
+
+// date + time - seconds
+export function messageTime(unixtime: number): string {
+  const date = new Date(unixtime);
+
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are 0-indexed
+  const day = date.getDate().toString().padStart(2, '0');
+
+  const hours = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+
+  return `${day}-${month}-${year}, ${hours}:${minutes}`; // Format: YYYY-MM-DD HH:MM
+}

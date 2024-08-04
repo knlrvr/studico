@@ -21,10 +21,8 @@ export default function CreateTask({
     return (
         <Sheet>
             <SheetTrigger>
-                <Button className="rounded-full h-fit p-2">
-                    <span className="sr-only">Create A Task</span>
-                    <Plus className="w-5 h-5" />
-                </Button>
+                <span className="sr-only">Create A Task</span>
+                <Plus className="w-6 h-6 rounded-full bg-primary text-background" />
             </SheetTrigger>
             <SheetContent className="overflow-scroll">
                 <SheetHeader>
