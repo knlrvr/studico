@@ -17,7 +17,7 @@ import { api } from "../../convex/_generated/api"
 import { Id } from "../../convex/_generated/dataModel"
 import { useUser } from "@clerk/nextjs"
 
-export default function DeleteFile({
+export default function DeleteProjectFile({
     fileId,
     storageId,
     projectId,
@@ -72,4 +72,3 @@ export default function DeleteFile({
 
     )
 }
-

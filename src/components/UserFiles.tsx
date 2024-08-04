@@ -17,7 +17,6 @@ import { AudioLines, Ellipsis, File, FileText, SquareArrowOutUpRight } from "luc
 
 import ImagePreview from "./imagePreview"
 import Link from "next/link"
-import DeleteFile from "./deleteFile"
 
 import {
     DropdownMenu,
@@ -30,6 +29,7 @@ import {
 
 import UserSearchBar from "./userSearch"
 import { useState } from "react"
+import DeleteUserFile from "./deleteUserFile"
 
 export default function UserFiles() {
 
@@ -111,7 +111,10 @@ export default function UserFiles() {
                                         </Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem asChild className="">
-                                        <DeleteFile fileId={file._id} storageId={file.storageId}/>
+                                        <DeleteUserFile
+                                            fileId={file._id} 
+                                            storageId={file.storageId}
+                                        />
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>

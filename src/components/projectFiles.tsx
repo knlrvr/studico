@@ -18,7 +18,6 @@ import { AudioLines, Ellipsis, File, FileText} from "lucide-react"
 import { Id } from "../../convex/_generated/dataModel"
 import Link from "next/link"
 import ImagePreview from "./imagePreview"
-import DeleteFile from "./deleteFile"
 
 import {
     DropdownMenu,
@@ -31,6 +30,7 @@ import {
 
 import SearchBar from "./projectSearch"
 import { useState } from "react"
+import DeleteProjectFile from "./deleteProjectFile"
 
 export default function ProjectFiles({
     params,
@@ -121,7 +121,7 @@ export default function ProjectFiles({
                                         </Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem asChild>
-                                        <DeleteFile 
+                                        <DeleteProjectFile
                                             fileId={file._id} 
                                             storageId={file.storageId}
                                             projectId={currentProject?._id as string}
@@ -130,32 +130,6 @@ export default function ProjectFiles({
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>
-                            {/* <DropdownMenu>
-                                <DropdownMenuTrigger>
-                                    <Ellipsis className="w-5 h-5" />
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent className="space-y-2">
-                                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                                    <DropdownMenuSeparator />
-                                    <DropdownMenuItem>
-                                        <Link
-                                            href={`${file.fileUrl}`} 
-                                            target="_blank" 
-                                            className="w-full -m-1 px-1"
-                                        >
-                                            Open
-                                        </Link>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem asChild className="">
-                                        <DeleteFile 
-                                            fileId={file._id} 
-                                            storageId={file.storageId}
-                                            projectId={currentProject?._id as string}
-                                            projectName={currentProject?.title as string}
-                                        />
-                                    </DropdownMenuItem>
-                                </DropdownMenuContent>
-                            </DropdownMenu> */}
                         </TableCell>
                     </TableRow>
                     )
