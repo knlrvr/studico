@@ -52,7 +52,7 @@ import { useToast } from "./ui/use-toast"
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <Button 
-                className="bg-red-500 hover:bg-red-600"
+                className=""
                 onClick={() => {
                     deleteProject({
                         projectId: currentProject?._id as Id<'projects'>
