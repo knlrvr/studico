@@ -59,6 +59,7 @@ export default function SendMessageForm({
             author: {
               sentBy: user?.fullName || '',
               image: user?.imageUrl || '',
+              tokenIdentifier: user?.id || '',
             },
             projectId: params.projectId 
         });
@@ -96,6 +97,7 @@ export default function SendMessageForm({
               author: {
                 sentBy: user?.fullName || '',
                 image: user?.imageUrl || '',
+                tokenIdentifier: user?.id || '',
               },
               projectId: params.projectId 
             })

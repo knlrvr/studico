@@ -42,6 +42,7 @@ export default defineSchema({
         author: v.object({
           sentBy: v.string(),
           image: v.string(),
+          tokenIdentifier: v.string(),
         }),
         message: v.string(),
         projectId: v.optional(v.id("projects")),

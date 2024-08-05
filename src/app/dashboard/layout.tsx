@@ -1,6 +1,5 @@
 import Header from "@/components/header";
 import SideNav from "@/components/sidenav";
-import Link from "next/link";
 
 export default function DashboardLayout({
     children,

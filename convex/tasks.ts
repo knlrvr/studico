@@ -202,16 +202,6 @@ export const getCurrentTask = query({
     }
 });
 
-// possible other mutations ?? we'll see
-
-// export const assignTask = mutation({
-
-// });
-
-// export const completeTask = mutation({
-
-// });
-
 export const deleteTask = mutation({
     args: {
         taskId: v.id('tasks'),

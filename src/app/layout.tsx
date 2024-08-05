@@ -3,6 +3,7 @@ import { Inter as FontSans } from "next/font/google"
 import "./globals.css";
 import { Providers } from "./providers";
 import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/toaster";
 
 // import "@knocklabs/react-notification-feed/dist/index.css";
 
@@ -29,6 +30,7 @@ export default function RootLayout({
       )}>
         <Providers>
           {children}
+          <Toaster />
         </Providers>
       </body>
     </html>

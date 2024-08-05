@@ -3,6 +3,7 @@
 import { Id } from "../../convex/_generated/dataModel"
 import AllTasks from "./allTasks"
 import CompletedTaskList from "./completedTaskList"
+import { DeleteProject } from "./deleteProject"
 import History from "./history"
 import IncompleteTaskList from "./incompleteTaskList"
 import { ProgressChart } from "./progressChart"
@@ -37,7 +38,11 @@ export function Overview({
       </div>
 
       <div className="">
-        <History params={{ projectId: params.projectId }}/>
+        <History params={{ projectId: params.projectId }} />
+      </div>
+
+      <div className="mt-6">
+        <DeleteProject params={{ projectId: params.projectId }} />
       </div>
 
     </div>

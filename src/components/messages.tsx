@@ -7,6 +7,8 @@ import { api } from "../../convex/_generated/api";
 import Image from "next/image";
 import { useRef, useEffect, useState } from 'react';
 import { messageTime } from "@/lib/utils";
+import { DeleteMessage } from "./deleteMessage";
+import { useUser } from "@clerk/nextjs";
 
 export default function ProjectMessages({
     params
@@ -19,6 +21,8 @@ export default function ProjectMessages({
     const messages = useQuery(api.projects.getMessagesForProject, { projectId });
     const [isUserScrolling, setIsUserScrolling] = useState(false);
     const messageContainerRef = useRef<HTMLDivElement>(null);
+
+    const { user } = useUser();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -52,23 +56,31 @@ export default function ProjectMessages({
             >
                 <div className="flex flex-col space-y-3 h-full">
                     {messages?.map((message: any) => (
-                        <div key={message._id} className="flex justify-start items-start gap-4">
-                            <Image 
-                                src={message.author.image}
-                                alt={`${message.author.name}'s picture`}
-                                width={1000}
-                                height={1000}
-                                className="w-10 h-10 rounded-full mt-1.5" 
-                            />
-                            <div className="flex-col">
-                                <div className="flex gap-2">
-                                    <span className="text-sm">{message.author.sentBy}</span>
-                                    <span className="text-sm text-neutral-500">
-                                        {messageTime(message._creationTime)}
-                                    </span>
+                        <div key={message._id} className="flex justify-between">
+                            <div className="flex justify-start items-start gap-4">
+                                <Image 
+                                    src={message.author.image}
+                                    alt={`${message.author.name}'s picture`}
+                                    width={1000}
+                                    height={1000}
+                                    className="w-10 h-10 rounded-full mt-1.5" 
+                                />
+                                <div className="flex-col">
+                                    <div className="flex gap-2">
+                                        <span className="text-sm">{message.author.sentBy}</span>
+                                        <span className="text-sm text-neutral-500">
+                                            {messageTime(message._creationTime)}
+                                        </span>
+                                    </div>
+                                    <p className="">{message.message}</p>
                                 </div>
-                                <p className="">{message.message}</p>
                             </div>
+
+                            {message.author.tokenIdentifier.includes(user?.id) && (
+                                <div className="mt-0.5">
+                                    <DeleteMessage id={message._id} />
+                                </div>
+                            )}
                         </div>
                     ))}
                 </div>

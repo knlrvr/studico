@@ -107,15 +107,13 @@ export const getProject = query({
     } 
 });
 
-
-
-
 export const sendMessage = mutation({
     args: {
         message: v.string(),
         author: v.object({
             sentBy: v.string(),
             image: v.string(),
+            tokenIdentifier: v.string(),
         }),
         projectId: v.id('projects')
     },
@@ -133,6 +131,7 @@ export const sendMessage = mutation({
             author: {
                 sentBy: userInfo?.name ?? '',
                 image: userInfo?.pictureUrl ?? '',
+                tokenIdentifier: userId,
             },
             projectId: args.projectId,
         });
@@ -159,6 +158,15 @@ export const getMessagesForProject = query({
     }
 });
 
+export const deleteMessage = mutation({
+    args: {
+        messageId: v.id('messages'),
+    },
+    async handler(ctx, args) {
+        await ctx.db.delete(args.messageId)
+    }
+})
+
 export const hasOrgAccess = async (
     ctx: MutationCtx | QueryCtx, 
     orgId: string
@@ -177,3 +185,12 @@ export const hasOrgAccess = async (
 
     return !!membership;
 };
+
+export const deleteProject = mutation({
+    args: {
+        projectId: v.id('projects'),
+    },
+    async handler(ctx, args) {
+        await ctx.db.delete(args.projectId)
+    },
+});

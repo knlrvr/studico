@@ -15,6 +15,7 @@ import { useMutation } from "convex/react"
 
 import { api } from "../../convex/_generated/api"
 import { Id } from "../../convex/_generated/dataModel"
+import { useToast } from "./ui/use-toast"
 
 export default function DeleteUserFile({
     fileId,
@@ -25,6 +26,8 @@ export default function DeleteUserFile({
 }) {
 
     const deleteFile = useMutation(api.files.deleteFile)
+
+    const { toast } = useToast();
 
     return (
         <AlertDialog>
@@ -48,6 +51,9 @@ export default function DeleteUserFile({
                         deleteFile({
                             storageId,
                             fileId,
+                        });
+                        toast({
+                            description: 'File successfully deleted.'
                         })
                     }}
                 >

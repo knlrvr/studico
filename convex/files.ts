@@ -207,7 +207,6 @@ export const deleteFile = mutation({
         storageId: v.id('_storage')
     },
     async handler(ctx, args) {
-
         await ctx.storage.delete(args.storageId);
         await ctx.db.delete(args.fileId);
     }

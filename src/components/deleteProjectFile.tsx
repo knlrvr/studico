@@ -16,6 +16,7 @@ import { useMutation } from "convex/react"
 import { api } from "../../convex/_generated/api"
 import { Id } from "../../convex/_generated/dataModel"
 import { useUser } from "@clerk/nextjs"
+import { useToast } from "./ui/use-toast"
 
 export default function DeleteProjectFile({
     fileId,
@@ -33,6 +34,7 @@ export default function DeleteProjectFile({
     const fileNotification = useMutation(api.notifications.createNotification)
 
     const { user } = useUser();
+    const { toast } = useToast();
 
     return (
         <AlertDialog>
@@ -61,6 +63,9 @@ export default function DeleteProjectFile({
                             projectId: projectId,
                             type: 'delete',
                             text: `${user?.fullName} deleted a file in ${projectName}`
+                        });
+                        toast({
+                            description: 'File successfully deleted.'
                         })
                     }}
                 >
