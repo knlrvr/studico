@@ -41,6 +41,10 @@ export default function UserFiles() {
 
     const filteredFiles = files?.filter(file => file.name.toLowerCase().includes(query.toLowerCase()));
 
+    const copyLink = (copiedText: string): void => {
+        navigator.clipboard.writeText(copiedText);
+    }
+
     return (
         <>
         {filteredFiles?.length != undefined && filteredFiles?.length > 0 && (
@@ -80,7 +84,9 @@ export default function UserFiles() {
                                 {file.type === 'image/webp' && (
                                     <ImagePreview src={file?.fileUrl as string } />
                                 )}
-
+                                {file.type === 'image/svg+xml' && (
+                                    <ImagePreview src={file?.fileUrl as string } />
+                                )}
 
                                 {file.type === 'audio/aiff' && (
                                     <AudioLines className="w-16 h-16" />
@@ -115,6 +121,15 @@ export default function UserFiles() {
                                         >
                                             Open
                                         </Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem>
+                                        <button
+                                            onClick={() => {
+                                                copyLink(file.fileUrl as string)
+                                            }}
+                                        >
+                                            Copy Link
+                                        </button>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem asChild>
                                         <DeleteUserFile

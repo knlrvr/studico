@@ -14,10 +14,10 @@ export default function Component() {
   return (
     <header className="fixed z-[20] sm:border-r bg-background sm:min-h-screen">
       <div className="p-4">
-        <Link href="/dashboard" className="">
-          <span className="hidden sm:flex font-extrabold tracking-wider text-xl mt-2 ml-2">Studico</span>
+        <Link href="/dashboard" className="w-fit">
+          <span className="hidden sm:inline-block font-extrabold tracking-wider text-xl bg-violet-400 w-fit p-2 rounded-md text-background">Studico</span>
         </Link>
-        <nav className="hidden mt-[2.75rem] items-start gap-2 text-sm font-medium sm:flex flex-col w-40">
+        <nav className="hidden mt-10 items-start gap-2 text-sm font-medium sm:flex flex-col w-40">
           <Link
             href="/dashboard"
             className={cn(
@@ -54,14 +54,8 @@ export default function Component() {
           </SheetTrigger>
           <SheetContent side="left" className="md:hidden" suppressHydrationWarning>
             <div className="grid gap-4 p-6">
-              <Link href="/dashboard" className="flex items-center gap-2"
-
-                // i hate this
-                // onClick={() => {
-                //     document.querySelector('[data-[state=open]]')?.dispatchEvent(new Event("click"));
-                // }}
-              >
-                <span className="text-lg font-extrabold tracking-wide">Studico</span>
+              <Link href="/dashboard" className="w-fit">
+                <span className="font-extrabold tracking-wider text-xl bg-violet-400 w-fit p-2 rounded-md text-background">Studico</span>
               </Link>
               <nav className="grid gap-8 mt-10">
                 <Link href="/dashboard" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>

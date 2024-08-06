@@ -7,7 +7,8 @@ import {
 import { 
     AudioLines, 
     File, 
-    FileText 
+    FileText, 
+    Images
 } from "lucide-react"
   
 import { useQuery } from "convex/react"
@@ -54,6 +55,9 @@ export default function RecentProjectFiles({
                                         <ImagePreview src={file?.fileUrl as string } />
                                     )}
                                     {file.type === 'image/webp' && (
+                                        <ImagePreview src={file?.fileUrl as string } />
+                                    )}
+                                    {file.type === 'image/svg+xml' && (
                                         <ImagePreview src={file?.fileUrl as string } />
                                     )}
 

@@ -16,6 +16,7 @@ import { api } from "../../convex/_generated/api"
 
 import { useRouter } from "next/navigation"
 import { useToast } from "./ui/use-toast"
+import { TrashIcon } from "lucide-react"
   
   export function DeleteProject({
     params
@@ -36,8 +37,9 @@ import { useToast } from "./ui/use-toast"
     return (
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button className="text-xs mx-1 bg-red-500 hover:bg-red-600">
-            Delete Project
+          <Button className="flex flex-col items-start gap-4 h-fit w-36 bg-red-500 hover:bg-red-600 text-xs">
+            <TrashIcon className="w-4 h-4" />
+            <p className="tracking-wide">Delete Project</p>
           </Button>
         </AlertDialogTrigger>
         <AlertDialogContent>

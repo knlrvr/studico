@@ -44,6 +44,9 @@ export default function RecentUserFiles({}) {
                                     {file.type === 'image/webp' && (
                                         <ImagePreview src={file?.fileUrl as string } />
                                     )}
+                                    {file.type === 'image/svg+xml' && (
+                                        <ImagePreview src={file?.fileUrl as string } />
+                                    )}
 
 
                                     {file.type === 'audio/aiff' && (

@@ -13,7 +13,7 @@ import {
 import { useQuery } from "convex/react"
 import { api } from "../../convex/_generated/api"
 
-import { AudioLines, Ellipsis, File, FileText} from "lucide-react"
+import { AudioLines, Ellipsis, File, FileText, Images} from "lucide-react"
 
 import { Id } from "../../convex/_generated/dataModel"
 import Link from "next/link"
@@ -95,7 +95,9 @@ export default function ProjectFiles({
                                 {file.type === 'image/webp' && (
                                     <ImagePreview src={file?.fileUrl as string } />
                                 )}
-
+                                {file.type === 'image/svg+xml' && (
+                                    <ImagePreview src={file?.fileUrl as string } />
+                                )}
 
                                 {file.type === 'audio/aiff' && (
                                     <AudioLines className="w-16 h-16" />
