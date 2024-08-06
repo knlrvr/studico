@@ -85,7 +85,7 @@ export default function History({
                             <TableHeader>
                                 <TableRow>
                                     <TableHead colSpan={4} className="">Event</TableHead>
-                                    <TableHead className="text-right text-xs">dd/mm/yyyy</TableHead>
+                                    <TableHead className="text-right text-xs hidden md:table-cell">dd/mm/yyyy</TableHead>
                                     <TableHead className="text-right text-xs">Delete</TableHead>
                                 </TableRow>
                             </TableHeader>
@@ -120,7 +120,7 @@ export default function History({
                                                 <p>{notification.text}</p>
                                             </div>
                                         </TableCell>
-                                        <TableCell className="text-right text-xs text-neutral-500">{timeStamp(notification._creationTime)}</TableCell>
+                                        <TableCell className="text-right text-xs text-neutral-500 hidden md:table-cell">{timeStamp(notification._creationTime)}</TableCell>
                                         <TableCell className="text-right">
                                             <Checkbox id="delete" className='mr-4' 
                                                 onClick={() => {
