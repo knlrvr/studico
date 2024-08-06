@@ -115,6 +115,7 @@ export const sendMessage = mutation({
             image: v.string(),
             tokenIdentifier: v.string(),
         }),
+        isEdited: v.boolean(),
         projectId: v.id('projects')
     },
     async handler(ctx, args) {
@@ -128,6 +129,7 @@ export const sendMessage = mutation({
         
         await ctx.db.insert('messages', {
             message: args.message,
+            isEdited: false,
             author: {
                 sentBy: userInfo?.name ?? '',
                 image: userInfo?.pictureUrl ?? '',
@@ -157,6 +159,25 @@ export const getMessagesForProject = query({
         .collect();
     }
 });
+
+export const editMessage = mutation({
+    args: {
+        messageId: v.id('messages'),
+        message: v.string(),
+        isEdited: v.boolean(),
+    },
+    async handler(ctx, args) {
+        const { messageId } = args;
+
+        const editedMessage = await ctx.db
+            .patch(messageId, {
+                message: args.message,
+                isEdited: true,
+            })
+
+        return editedMessage;
+    }
+})
 
 export const deleteMessage = mutation({
     args: {

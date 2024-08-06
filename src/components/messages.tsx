@@ -7,8 +7,8 @@ import { api } from "../../convex/_generated/api";
 import Image from "next/image";
 import { useRef, useEffect, useState } from 'react';
 import { messageTime } from "@/lib/utils";
-import { DeleteMessage } from "./deleteMessage";
 import { useUser } from "@clerk/nextjs";
+import { MessageActions } from "./messageActions";
 
 export default function ProjectMessages({
     params
@@ -21,6 +21,7 @@ export default function ProjectMessages({
     const messages = useQuery(api.projects.getMessagesForProject, { projectId });
     const [isUserScrolling, setIsUserScrolling] = useState(false);
     const messageContainerRef = useRef<HTMLDivElement>(null);
+
 
     const { user } = useUser();
 
@@ -43,6 +44,7 @@ export default function ProjectMessages({
 
     useEffect(() => {
         if (messageContainerRef.current && !isUserScrolling) {
+
             // Scroll to bottom when new messages arrive
             messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
         }
@@ -78,7 +80,7 @@ export default function ProjectMessages({
 
                             {message.author.tokenIdentifier.includes(user?.id) && (
                                 <div className="mt-0.5">
-                                    <DeleteMessage id={message._id} />
+                                    <MessageActions id={message._id} />
                                 </div>
                             )}
                         </div>

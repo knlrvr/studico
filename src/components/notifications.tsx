@@ -25,7 +25,6 @@ export function Notifications({
         projectId: currentProject,
     });
 
-    const markAsRead = useMutation(api.notifications.markNotifAsRead);
     const markAllAsRead = useMutation(api.notifications.markAllNotifsAsRead);
 
     const unreadNotifications = notifications?.filter(notification => !notification.isRead);

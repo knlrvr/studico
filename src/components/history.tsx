@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { Id } from "../../convex/_generated/dataModel";
 import { usePaginatedQuery } from "convex/react";
 
@@ -23,10 +23,9 @@ import {
 import {
     Pagination,
     PaginationContent,
-    PaginationItem,
-    PaginationNext,
-    PaginationPrevious,
 } from "@/components/ui/pagination";
+
+import { Checkbox } from "@/components/ui/checkbox"
 
 import { api } from "../../convex/_generated/api";
 import { timeStamp } from "@/lib/utils";
@@ -71,6 +70,8 @@ export default function History({
 
     const displayedNotifications = results.slice(page * pageSize, (page + 1) * pageSize);
 
+    const deleteNotification = useMutation(api.notifications.deleteNotification);
+
     return (
         <Card className="flex flex-col">
             <CardHeader className="pb-0">
@@ -85,6 +86,7 @@ export default function History({
                                 <TableRow>
                                     <TableHead colSpan={4} className="">Event</TableHead>
                                     <TableHead className="text-right text-xs">dd/mm/yyyy</TableHead>
+                                    <TableHead className="text-right text-xs">Delete</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody className=''>
@@ -119,6 +121,15 @@ export default function History({
                                             </div>
                                         </TableCell>
                                         <TableCell className="text-right text-xs text-neutral-500">{timeStamp(notification._creationTime)}</TableCell>
+                                        <TableCell className="text-right">
+                                            <Checkbox id="delete" className='mr-4' 
+                                                onClick={() => {
+                                                    deleteNotification({
+                                                        notificationId: notification._id,
+                                                    })
+                                                }}
+                                            />
+                                        </TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>

@@ -45,6 +45,7 @@ export default defineSchema({
           tokenIdentifier: v.string(),
         }),
         message: v.string(),
+        isEdited: v.boolean(),
         projectId: v.optional(v.id("projects")),
         tokenIdentifier: v.optional(v.string()),
     }).index("by_projectId", ["projectId"]),

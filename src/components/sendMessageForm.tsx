@@ -4,15 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form"
-
-import { Input } from "@/components/ui/input"
 import { useMutation, useQuery } from "convex/react"
 import { api } from "../../convex/_generated/api"
 import { LoadingButton } from "./loadingButton"
@@ -24,6 +15,7 @@ import {  useState } from "react"
 const formSchema = z.object({
   message: z.string().min(2).max(500),
   projectId: z.string(),
+  isEdited: z.boolean(),
 })
 
 
@@ -61,6 +53,7 @@ export default function SendMessageForm({
               image: user?.imageUrl || '',
               tokenIdentifier: user?.id || '',
             },
+            isEdited: false,
             projectId: params.projectId 
         });
     }
@@ -99,6 +92,7 @@ export default function SendMessageForm({
                 image: user?.imageUrl || '',
                 tokenIdentifier: user?.id || '',
               },
+              isEdited: false,
               projectId: params.projectId 
             })
             setMessage('');

@@ -10,11 +10,10 @@ import {
 import { useMutation } from "convex/react"
 import { api } from "../../convex/_generated/api"
 import { Ellipsis } from "lucide-react"
-import { Button } from "./ui/button"
 import { Id } from "../../convex/_generated/dataModel"
 import { useToast } from "./ui/use-toast"
   
-  export function DeleteMessage({
+  export function MessageActions({
     id
   } : {
     id: string,
@@ -44,8 +43,12 @@ import { useToast } from "./ui/use-toast"
                         Delete Message
                     </button>
                 </DropdownMenuItem>
+                <DropdownMenuItem disabled >
+                    <button className="text-neutral-500">
+                        Edit Message
+                    </button>
+                </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     )
-  }
-  
+}

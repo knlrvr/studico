@@ -135,3 +135,12 @@ export const hasOrgAccess = async (
 
     return !!membership;
 };
+
+export const deleteNotification = mutation({
+    args: {
+        notificationId: v.id('notifications'),
+    },
+    async handler(ctx, args) {
+        await ctx.db.delete(args.notificationId)
+    }
+})
