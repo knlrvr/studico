@@ -11,6 +11,7 @@ import ProjectFiles from "@/components/projectFiles";
 import UploadFileProjectButton from "@/components/uploadFileProjectButton";
 import { Overview } from "@/components/overview";
 import { Notifications } from "@/components/notifications";
+import RecentProjectFiles from "@/components/recentProjectFiles";
 
 export default function ProjectPage({
     params
@@ -42,7 +43,7 @@ export default function ProjectPage({
         <Tabs defaultValue="overview" className="w-full">
             <div className="flex flex-col sm:flex-row justify-between mb-8 space-y-4 sm:space-y-0 relative">
               
-              <h1 className="text-2xl font-bold tracking-wide text-neutral-500 w-full">
+              <h1 className="text-2xl font-bold tracking-wide text-primary w-full">
                 {project.title}
               </h1>
 
@@ -70,6 +71,7 @@ export default function ProjectPage({
             <TabsContent value="files">
               <div className="mb-24">
                 <UploadFileProjectButton projectId={params.projectId} />
+                <RecentProjectFiles params={{ projectId: params.projectId }} />
 
                 <div className="mt-8">
                   <ProjectFiles params={{ projectId: params.projectId }} />

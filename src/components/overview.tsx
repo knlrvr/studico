@@ -7,7 +7,7 @@ import { DeleteProject } from "./deleteProject"
 import History from "./history"
 import IncompleteTaskList from "./incompleteTaskList"
 import { ProgressChart } from "./progressChart"
-import RecentProjectFiles from "./recentProjectFiles"
+import RecentProjectFilesPreview from "./recentProjectFilesPreview"
 
 export function Overview({
   params
@@ -34,7 +34,7 @@ export function Overview({
       </div>
 
       <div className="">
-        <RecentProjectFiles params={{ projectId: params.projectId }} />
+        <RecentProjectFilesPreview params={{ projectId: params.projectId }} />
       </div>
 
       <div className="">

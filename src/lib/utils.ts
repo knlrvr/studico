@@ -50,3 +50,13 @@ export function messageTime(unixtime: number): string {
 
   return `${day}-${month}-${year}, ${hours}:${minutes}`; // Format: YYYY-MM-DD HH:MM
 }
+
+export function formatFileName(fileName: string): string {
+  if (fileName.length <= 8) {
+      return fileName;
+  }
+  const start = fileName.slice(0, 3);
+  const end = fileName.slice(-4);
+
+  return `${start}...${end}`;
+}

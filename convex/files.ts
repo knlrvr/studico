@@ -190,7 +190,7 @@ export const getRecentFilesForProject = query({
                 .eq('projectId', args.projectId )
             ) 
             .order('desc')
-            .take(3);
+            .take(5);
 
         return Promise.all(
             recentFiles.map(async (file) => ({

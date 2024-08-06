@@ -51,7 +51,7 @@ export default function SearchBar({
 
     return (
       <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-center w-full space-x-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-center w-full space-x-4 pt-4">
         <Search className='w-4 h-4' />
 
         <FormField
