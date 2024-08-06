@@ -41,7 +41,7 @@ export default function ProjectPage({
         {/* get ready for an insane amount of prop drilling bc I'm lazy */}
 
         <Tabs defaultValue="overview" className="w-full">
-            <div className="flex flex-col sm:flex-row justify-between mb-8 space-y-4 sm:space-y-0 relative">
+            <div className="flex flex-col sm:flex-row justify-between items-center mb-8 space-y-4 sm:space-y-0 relative">
               
               <h1 className="text-2xl font-bold tracking-wide text-primary w-full">
                 {project.title}

@@ -10,7 +10,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"  
-import { Upload } from "lucide-react"
+import { ArrowUpFromLine } from "lucide-react"
 import { useState } from "react"
 
 import UploadFileToUser from "./uploadFileToUser"
@@ -22,8 +22,9 @@ export default function UploadFileUserButton() {
     return (
         <Dialog onOpenChange={setIsOpen} open={isOpen}>
             <DialogTrigger asChild>
-                <Button variant='action' className="z-[10] fixed bottom-4 right-4 rounded-full h-fit p-4">
-                    <Upload className="w-6 h-6" />
+            <Button variant='outline' className="flex flex-col items-start gap-4 h-fit w-36">
+                    <ArrowUpFromLine className="w-5 h-5" />
+                    <p className="text-xs tracking-wide">Upload</p>
                 </Button>
             </DialogTrigger>
             <DialogContent>

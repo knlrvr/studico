@@ -21,7 +21,7 @@ export default function Home() {
     <main className="flex flex-col pt-24 px-4">
       <Authenticated>
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold tracking-wide text-neutral-500">Projects</h1>
+          <h1 className="text-2xl font-bold tracking-wide">Projects</h1>
           <CreateProject />
         </div>
         <div className="mb-6">

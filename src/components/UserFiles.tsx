@@ -69,27 +69,32 @@ export default function UserFiles() {
                     <TableRow key={file._id} className="">
                         <TableCell 
                             className="font-medium text-neutral-500 text-center">
-                            {file.type === "image/jpeg" && (
-                                <ImagePreview src={file?.fileUrl as string } />
-                            )}
-                            {file.type === 'image/png' && (
-                                <ImagePreview src={file?.fileUrl as string} />
-                            )}
-                            {file.type === 'audio/aiff' && (
-                                <AudioLines className="w-8 h-8" />
-                            )}
-                            {file.type === 'audio/mpeg' && (
-                                <AudioLines className="w-8 h-8" />
-                            )}
-                            {file.type === 'application/pdf' && (
-                                <FileText className="w-8 h-8" />
-                            )}
-                            {file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' && (
-                                <File className="w-8 h-8" />
-                            )}
-                            {file.type === 'text/plain' && (
-                                <File className="w-8 h-8" />
-                            )}  
+                                {file.type === "image/jpeg" && (
+                                    <ImagePreview src={file?.fileUrl as string } />
+                                )}
+                                {file.type === 'image/png' && (
+                                    <ImagePreview src={file?.fileUrl as string } />
+                                )}
+                                {file.type === 'image/webp' && (
+                                    <ImagePreview src={file?.fileUrl as string } />
+                                )}
+
+
+                                {file.type === 'audio/aiff' && (
+                                    <AudioLines className="w-16 h-16" />
+                                )}
+                                {file.type === 'audio/mpeg' && (
+                                    <AudioLines className="w-16 h-16" />
+                                )}
+                                {file.type === 'application/pdf' && (
+                                    <FileText className="w-16 h-16" />
+                                )}
+                                {file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' && (
+                                    <File className="w-16 h-16" />
+                                )}
+                                {file.type === 'text/plain' && (
+                                    <File className="w-16 h-16" />
+                                )}
                         </TableCell>
                         <TableCell className="font-medium">{file.name}</TableCell>
                         <TableCell className="text-right">

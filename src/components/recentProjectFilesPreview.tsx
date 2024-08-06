@@ -51,7 +51,7 @@ export default function RecentProjectFilesPreview({
       </CardHeader>
       <CardFooter className="w-full">
 
-        {files?.length != undefined && files?.length > 0 ? (
+        {files?.length != undefined && files?.length > 0 && (
           <Table className="w-full">
             <TableCaption>Recent Files</TableCaption>
               <TableHeader>
@@ -99,8 +99,6 @@ export default function RecentProjectFilesPreview({
               })}
             </TableBody>
           </Table>
-        ) : (
-          <p className="text-neutral-500 text-sm italic">No recent files to display! Navigate to the files tab to upload one now!</p>
         )}
       </CardFooter>
     </Card>
