@@ -43,7 +43,9 @@ export default function UserFiles() {
 
     return (
         <>
-        <UserSearchBar query={query} setQuery={setQuery} />
+        {filteredFiles?.length != undefined && filteredFiles?.length > 0 && (
+            <UserSearchBar query={query} setQuery={setQuery} />
+        )}
 
         {filteredFiles?.length != undefined && filteredFiles?.length > 0 ? (
             <Table className="w-full mt-6">
@@ -130,7 +132,7 @@ export default function UserFiles() {
             </TableBody>
         </Table>
         ) : (
-            <p className="text-neutral-500 flex w-full justify-center mt-8 text-sm">No files found.</p>
+            <p className="text-neutral-500 flex w-full justify-center mt-8 text-sm">No files found. Upload one now!</p>
         )}
         </>
     )

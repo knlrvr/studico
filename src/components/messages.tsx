@@ -53,19 +53,19 @@ export default function ProjectMessages({
     return (
         <div className="flex flex-col justify-end h-full">
             <div 
-                className="flex flex-col h-[calc(100vh-300px)] sm:h-[calc(100vh-250px)] overflow-y-auto"
+                className="flex flex-col h-[calc(100vh-275px)] sm:h-[calc(100vh-230px)] overflow-y-auto"
                 ref={messageContainerRef}
             >
-                <div className="flex flex-col space-y-3 h-full">
+                <div className="flex flex-col space-y-3 h-full hide-scroll">
                     {messages?.map((message: any) => (
-                        <div key={message._id} className="flex justify-between">
-                            <div className="flex justify-start items-start gap-4">
+                        <div key={message._id} className="flex justify-between last:pb-8">
+                            <div className="flex justify-start items-start gap-3">
                                 <Image 
                                     src={message.author.image}
                                     alt={`${message.author.name}'s picture`}
                                     width={1000}
                                     height={1000}
-                                    className="w-10 h-10 rounded-full mt-1.5" 
+                                    className="w-8 h-8 rounded-full mt-1" 
                                 />
                                 <div className="flex-col">
                                     <div className="flex gap-2">
@@ -74,7 +74,7 @@ export default function ProjectMessages({
                                             {messageTime(message._creationTime)}
                                         </span>
                                     </div>
-                                    <p className="">{message.message}</p>
+                                    <p className="text-sm mt-1">{message.message}</p>
                                 </div>
                             </div>
 
@@ -88,7 +88,7 @@ export default function ProjectMessages({
                 </div>
             </div>
 
-            <div className="my-6">
+            <div className="mb-4">
                 <SendMessageForm params={{ projectId }} />
             </div>
         </div>
