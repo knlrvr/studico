@@ -52,6 +52,10 @@ export default function ProjectFiles({
 
     const filteredFiles = files?.filter(file => file.name.toLowerCase().includes(query.toLowerCase()));
 
+    const copyLink = (copiedText: string): void => {
+        navigator.clipboard.writeText(copiedText);
+    }
+
     return (
         <>
         <SearchBar query={query} setQuery={setQuery} />
@@ -124,6 +128,15 @@ export default function ProjectFiles({
                                         >
                                             Open
                                         </Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem>
+                                        <button
+                                            onClick={() => {
+                                                copyLink(file.fileUrl as string)
+                                            }}
+                                        >
+                                            Copy Link
+                                        </button>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem asChild>
                                         <DeleteProjectFile

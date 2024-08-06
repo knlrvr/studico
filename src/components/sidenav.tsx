@@ -21,9 +21,9 @@ export default function Component() {
           <Link
             href="/dashboard"
             className={cn(
-                "p-2 rounded-lg w-full flex items-center gap-2 transition-colors duration-150 hover:bg-blue-400 hover:text-primary-foreground",
+                "p-2 rounded-lg w-full flex items-center gap-2 transition-colors duration-150 hover:bg-neutral-100 dark:hover:text-background",
                 {
-                    'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white': pathname.endsWith('/dashboard') || pathname.includes('/projects/')
+                    'bg-neutral-200 hover:bg-neutral-200 dark:bg-[#222] dark:hover:text-white': pathname.endsWith('/dashboard') || pathname.includes('/projects/')
                 }
                 )}
             prefetch={false}
@@ -34,9 +34,9 @@ export default function Component() {
           <Link
             href="/dashboard/files"
             className={cn(
-              "p-2 rounded-lg w-full flex items-center gap-2 transition-colors duration-150 hover:bg-blue-400 hover:text-primary-foreground",
+              "p-2 rounded-lg w-full flex items-center gap-2 transition-colors duration-150 hover:bg-neutral-100 dark:hover:text-background",
               {
-                    'bg-neutral-200 dark:bg-[#222] hover:text-black dark:hover:text-white': pathname.endsWith('/dashboard/files')
+                    'bg-neutral-200 hover:bg-neutral-200 dark:bg-[#222] cursor-default dark:hover:text-white': pathname.endsWith('/dashboard/files')
                 }
                 )}            
                 prefetch={false}

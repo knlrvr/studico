@@ -27,7 +27,7 @@ export default function UploadFileProjectButton({ projectId }: { projectId: Id<'
     return (
         <Dialog onOpenChange={setIsOpen} open={isOpen}>
             <DialogTrigger asChild>
-                <Button variant='outline' className="flex flex-col items-start gap-4 h-fit w-36">
+                <Button className="flex flex-col items-start gap-4 h-fit w-36">
                     <ArrowUpFromLine className="w-5 h-5" />
                     <p className="text-xs tracking-wide">Upload</p>
                 </Button>

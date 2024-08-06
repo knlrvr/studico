@@ -38,7 +38,7 @@ export default function RecentProjectFiles({
             {files?.length !== undefined && files?.length > 0 && (
                 <>
                 <span className="text-sm">Recently uploaded files &mdash;</span>
-                <div className="mt-4 mb-8 grid gap-4 grid-cols-3 sm:grid-cols-4 md:grid-cols-5">
+                <div className="mt-4 mb-8 grid gap-4 grid-cols-3 sm:grid-cols-4 md:grid-cols-5 max-w-2xl">
                     {files?.map((file) => (
                         <>
                         <Link key={file._id} href={file.fileUrl as string} target="_blank">
