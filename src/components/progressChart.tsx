@@ -111,7 +111,7 @@ export function ProgressChart({ params }: { params: { projectId: Id<"projects"> 
                             y={(viewBox.cy || 0) + 24}
                             className="fill-muted-foreground"
                           >
-                            Total Tasks
+                            Total
                           </tspan>
                         </text>
                       );
