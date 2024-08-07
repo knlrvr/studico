@@ -1,15 +1,11 @@
 'use client'
 
 import { ModeToggle } from "./theme";
-
-import Link from "next/link";
-
 import {
     Breadcrumb,
     BreadcrumbItem,
     BreadcrumbLink,
     BreadcrumbList,
-    BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 
@@ -20,28 +16,23 @@ import { usePathname } from "next/navigation";
 export default function Header() {
 
     let pathname = usePathname();
+
     return (
         <div className="z-[10] fixed p-4 border-b flex justify-between items-center w-full mx-auto bg-background">
 
             <div className="flex items-center gap-4 ml-12 sm:ml-48">
-                {/* <Link href="/" className="font-extrabold tracking-widest text-lg">STUDICO</Link> */}
-                
-                {/* Pages / Conditional? */}
                 <Breadcrumb>
                     <BreadcrumbList>
 
-                        {pathname.includes('projects') ? (
-                            <div></div>
+                        {pathname.includes('projects/') ? (
+                            <>
+                                <BreadcrumbLink href='/dashboard' className="hidden sm:inline-flex">Projects</BreadcrumbLink>
+                                <BreadcrumbSeparator className="hidden sm:inline-flex" />
+                            </>
                         ) : (
                             <BreadcrumbItem>
                                 <OrganizationSwitcher />
                             </BreadcrumbItem>
-                        )}
-
-                        {pathname.includes('projects') && (
-                        <BreadcrumbItem className="hidden sm:inline-flex">
-                            <p>Active Project</p>
-                        </BreadcrumbItem>
                         )}
 
                     </BreadcrumbList>

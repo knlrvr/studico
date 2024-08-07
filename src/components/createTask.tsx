@@ -9,15 +9,9 @@ import {
 import { Button } from "./ui/button"
 import { Plus } from "lucide-react"
 import CreateTaskForm from "./createTaskForm"
-import { Id } from "../../convex/_generated/dataModel"
 
-export default function CreateTask({
-    params
-}: {
-    params: {
-        projectId: Id<'projects'>
-    }
-}) {
+export default function CreateTask() {
+
     return (
         <Sheet>
             <SheetTrigger>
@@ -33,9 +27,7 @@ export default function CreateTask({
                     Create a new task here. Click save when you&apos;re done.
                 </SheetDescription>
                 </SheetHeader>
-                <CreateTaskForm 
-                    params={{ projectId: params.projectId }}
-                />
+                <CreateTaskForm />
             </SheetContent>
         </Sheet>
     )

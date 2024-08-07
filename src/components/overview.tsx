@@ -1,6 +1,5 @@
 'use client'
 
-import { Id } from "../../convex/_generated/dataModel"
 import AllTasks from "./allTasks"
 import CompletedTaskList from "./completedTaskList"
 import { DeleteProject } from "./deleteProject"
@@ -9,40 +8,34 @@ import IncompleteTaskList from "./incompleteTaskList"
 import { ProgressChart } from "./progressChart"
 import RecentProjectFilesPreview from "./recentProjectFilesPreview"
 
-export function Overview({
-  params
-} : {
-    params: {
-        projectId: Id<"projects">
-    }
-}) {
-
+export function Overview() {
+  
   return (
     <div className="grid gap-y-4 gap-x-4 mb-6">
 
       <div className="">
-        <ProgressChart params={{ projectId: params.projectId }}/>
+        <ProgressChart />
       </div>
 
       <div className="">
-        <AllTasks params={{ projectId: params.projectId }} />
+        <AllTasks />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <IncompleteTaskList params={{ projectId: params.projectId }} />
-        <CompletedTaskList params={{ projectId: params.projectId }} />
+        <IncompleteTaskList />
+        <CompletedTaskList />
       </div>
 
       <div className="">
-        <RecentProjectFilesPreview params={{ projectId: params.projectId }} />
+        <RecentProjectFilesPreview />
       </div>
 
       <div className="">
-        <History params={{ projectId: params.projectId }} />
+        <History />
       </div>
 
       <div className="mt-6">
-        <DeleteProject params={{ projectId: params.projectId }} />
+        <DeleteProject />
       </div>
 
     </div>

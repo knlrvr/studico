@@ -2,9 +2,6 @@
 
 import { Button } from "./ui/button"
 
-import { api } from "../../convex/_generated/api"
-import { useMutation, useQuery } from "convex/react"
-
 import {
     Dialog,
     DialogContent,
@@ -15,14 +12,14 @@ import {
 } from "@/components/ui/dialog"  
 import { ArrowUpFromLine } from "lucide-react"
 import { useState } from "react"
-import { Id } from "../../convex/_generated/dataModel"
 import UploadFileToProject from "./uploadFileToProject"
+import { useProjectId } from "@/app/dashboard/projects/context"
 
-export default function UploadFileProjectButton({ projectId }: { projectId: Id<'projects'> }) {
+export default function UploadFileProjectButton() {
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    const project = { projectId: projectId }
+    const projectId = useProjectId();
 
     return (
         <Dialog onOpenChange={setIsOpen} open={isOpen}>

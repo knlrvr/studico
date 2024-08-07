@@ -17,18 +17,15 @@ import { api } from "../../convex/_generated/api"
 import { useRouter } from "next/navigation"
 import { useToast } from "./ui/use-toast"
 import { TrashIcon } from "lucide-react"
+import { useProjectId } from "@/app/dashboard/projects/context"
   
-  export function DeleteProject({
-    params
-  } : {
-    params: {
-        projectId: Id<'projects'>
-    }
-  }) {
+export function DeleteProject() {
+
+    const projectId = useProjectId();
 
     const deleteProject = useMutation(api.projects.deleteProject)
     const currentProject = useQuery(api.projects.getProject, {
-        projectId: params.projectId,
+        projectId: projectId,
     });
 
     const router = useRouter();

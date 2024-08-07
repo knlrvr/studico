@@ -26,9 +26,9 @@ import { Input } from "@/components/ui/input"
 import { LoadingButton } from './loadingButton'
 import { useQuery, useMutation } from 'convex/react'
 import { api } from '../../convex/_generated/api'
-import { Id } from '../../convex/_generated/dataModel'
 import { Textarea } from './ui/textarea'
 import { useUser } from '@clerk/nextjs'
+import { useProjectId } from '@/app/dashboard/projects/context'
 
 const formSchema = z.object({
   title: z.string(),
@@ -37,13 +37,9 @@ const formSchema = z.object({
   priority: z.string(),
 })
 
-export default function CreateTaskForm({ 
-  params,
-  } : {
-    params: { 
-      projectId: Id<'projects'>
-    }
-}) {
+export default function CreateTaskForm() {
+
+    const projectId = useProjectId();
 
     const createTask = useMutation(api.tasks.createTask);
     const taskNotification = useMutation(api.notifications.createNotification);
@@ -60,7 +56,7 @@ export default function CreateTaskForm({
     })
 
     const project = useQuery(api.projects.getProject, {
-      projectId: params?.projectId
+      projectId: projectId
     });
 
     const { user } = useUser();
@@ -68,7 +64,7 @@ export default function CreateTaskForm({
     async function onSubmit(values: z.infer<typeof formSchema>) {
 
       await createTask({
-        projectId: params.projectId,
+        projectId: projectId,
         title: values.title,
         description: values.description,
         category: values.category,
@@ -87,7 +83,7 @@ export default function CreateTaskForm({
       })
 
       taskNotification({
-        projectId: params.projectId,
+        projectId: projectId,
         type: 'create',
         text: `${user?.fullName} created a new task in ${project?.title}`
       })

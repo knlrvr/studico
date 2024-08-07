@@ -1,7 +1,6 @@
 'use client'
 
 import SendMessageForm from "./sendMessageForm";
-import { Id } from "../../convex/_generated/dataModel";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import Image from "next/image";
@@ -9,15 +8,10 @@ import { useRef, useEffect, useState } from 'react';
 import { messageTime } from "@/lib/utils";
 import { useUser } from "@clerk/nextjs";
 import { MessageActions } from "./messageActions";
+import { useProjectId } from "@/app/dashboard/projects/context";
 
-export default function ProjectMessages({
-    params
-} : {
-    params: {
-        projectId: Id<"projects">,
-    }
-}) {
-    const projectId = params?.projectId;
+export default function ProjectMessages() {
+    const projectId = useProjectId();
     const messages = useQuery(api.projects.getMessagesForProject, { projectId });
     const [isUserScrolling, setIsUserScrolling] = useState(false);
     const messageContainerRef = useRef<HTMLDivElement>(null);

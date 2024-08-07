@@ -31,21 +31,18 @@ import {
 import SearchBar from "./projectSearch"
 import { useState } from "react"
 import DeleteProjectFile from "./deleteProjectFile"
+import { useProjectId } from "@/app/dashboard/projects/context"
 
-export default function ProjectFiles({
-    params,
-}: {
-    params: {
-        projectId: Id<'projects'>
-    }
-}) {
+export default function ProjectFiles() {
+
+    const projectId = useProjectId();
 
     const currentProject = useQuery(api.projects.getProject, {
-        projectId: params.projectId
+        projectId: projectId,
     })
 
     const files = useQuery(api.files.getFilesForProject, { 
-        projectId: params.projectId, 
+        projectId: projectId, 
     });
 
     const [query, setQuery] = useState<string>('');

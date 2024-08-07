@@ -31,21 +31,19 @@ import { api } from "../../convex/_generated/api";
 import { timeStamp } from "@/lib/utils";
 import { BarChart, ChevronLeft, ChevronRight, ChevronsRightLeft, File, MailIcon, PenLineIcon, Plus, TrashIcon } from "lucide-react";
 import { Button } from "./ui/button";
+import { useProjectId } from '@/app/dashboard/projects/context';
 
-export default function History({ 
-    params 
-} : { 
-    params: {
-        projectId: Id<'projects'>,
-    }
-}) {
+export default function History() {
+
+    const projectId = useProjectId();
+
     const pageSize = 5;
     const [page, setPage] = useState(0);
     const [totalItems, setTotalItems] = useState(0);
 
     const { results, status, loadMore } = usePaginatedQuery(
         api.notifications.paginatedNotifications, 
-        { projectId: params.projectId },
+        { projectId: projectId },
         { initialNumItems: pageSize }
     );
 

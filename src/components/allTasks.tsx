@@ -18,7 +18,6 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-import { Id } from "../../convex/_generated/dataModel"
 import { useQuery } from "convex/react"
 import { api } from "../../convex/_generated/api"
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
@@ -27,19 +26,14 @@ import CreateTask from "./createTask"
 import { EditPriority } from "./editPriority"
 import { EditStatus } from "./editStatus"
 import TaskActions from "./taskActions"
+import { useProjectId } from "@/app/dashboard/projects/context"
 
-export default function AllTasks({
-    params
-  } : {
-      params: {
-          projectId: Id<"projects">,
-      }
-  }) {
+export default function AllTasks() {
 
-    const projectId = params?.projectId;
+    const projectId = useProjectId();
 
     const currentProject = useQuery(api.projects.getProject, {
-        projectId: params.projectId,
+        projectId: projectId,
     })
 
     const allTasks = useQuery(api.tasks.getTasks, {
@@ -136,7 +130,7 @@ export default function AllTasks({
                 )}
             </CardContent>
             <CardFooter className="flex justify-end">
-                <CreateTask params={{ projectId: params.projectId }} />
+                <CreateTask />
             </CardFooter>
         </Card>
     )

@@ -52,7 +52,7 @@ export default function Component() {
               <span className="sr-only">Toggle navigation menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="md:hidden" suppressHydrationWarning>
+          <SheetContent side="left" className="md:hidden z-[99]" suppressHydrationWarning>
             <div className="grid gap-4 p-6">
               <Link href="/dashboard" className="w-fit">
                 <span className="font-extrabold tracking-wider text-xl bg-violet-400 w-fit p-2 rounded-md text-background">Studico</span>

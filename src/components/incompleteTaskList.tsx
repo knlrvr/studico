@@ -34,16 +34,11 @@ import {
      DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu"
 import { useUser } from "@clerk/nextjs"
+import { useProjectId } from "@/app/dashboard/projects/context"
 
-export default function IncompleteTaskList({
-    params
-  } : {
-      params: {
-          projectId: Id<"projects">,
-      }
-  }) {
+export default function IncompleteTaskList() {
 
-    const projectId = params?.projectId;
+    const projectId = useProjectId();
 
     const { user } = useUser();
 

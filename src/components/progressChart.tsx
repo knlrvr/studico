@@ -23,6 +23,7 @@ import React from "react";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api"; 
 import { Id } from "../../convex/_generated/dataModel";
+import { useProjectId } from "@/app/dashboard/projects/context";
 
 const chartConfig = {
   tasks: {
@@ -38,8 +39,9 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function ProgressChart({ params }: { params: { projectId: Id<"projects"> } }) {
-  const projectId = params?.projectId;
+export function ProgressChart() {
+
+  const projectId = useProjectId();
 
   // get completed and incomplete tasks
   const completedTasksData = useQuery(api.tasks.getCompletedTasks, { projectId: projectId, status: 'Completed'  });

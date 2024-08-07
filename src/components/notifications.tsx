@@ -8,18 +8,12 @@ import { Button } from "./ui/button"
 import { BarChart, Bell, ChevronsRightLeft, File, MailIcon, PenLineIcon, Plus, TrashIcon } from "lucide-react"
 
 import { ScrollArea } from "./ui/scroll-area"
-import { Checkbox } from "./ui/checkbox"
 import { timeAgo } from "@/lib/utils"
+import { useProjectId } from "@/app/dashboard/projects/context"
 
-export function Notifications({
-    params
-} : {
-    params: {
-        projectId: Id<"projects">,
-    }
-}) {
+export function Notifications() {
 
-    const currentProject = params.projectId;
+    const currentProject = useProjectId();
 
     const notifications = useQuery(api.notifications.getNotifications, {
         projectId: currentProject,

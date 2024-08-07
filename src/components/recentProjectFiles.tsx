@@ -7,26 +7,19 @@ import {
 import { 
     AudioLines, 
     File, 
-    FileText, 
-    Images
+    FileText
 } from "lucide-react"
   
 import { useQuery } from "convex/react"
 import { api } from "../../convex/_generated/api"
-import { Id } from "../../convex/_generated/dataModel"
 import ImagePreview from "./imagePreview"
 import { formatFileName } from "@/lib/utils"
 import Link from "next/link"
+import { useProjectId } from "@/app/dashboard/projects/context"
   
-export default function RecentProjectFiles({
-    params
-} : {
-    params: {
-        projectId: Id<"projects">,
-    }
-}) {
+export default function RecentProjectFiles() {
   
-    const projectId = params?.projectId;
+    const projectId = useProjectId();
   
     const files = useQuery(api.files.getRecentFilesForProject, {
       projectId,
