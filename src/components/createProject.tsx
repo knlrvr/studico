@@ -20,9 +20,10 @@ export default function CreateProject() {
     return (
         <Dialog onOpenChange={setIsOpen} open={isOpen}>
             <DialogTrigger asChild>
-            <Button className="flex items-center gap-2">
-                <Plus className="w-4 h-4" /> New Project
-            </Button>
+                <Button className="flex flex-col items-start gap-4 h-fit w-36 text-xs">
+                    <Plus className="w-5 h-5" />
+                    <p className="tracking-wide">Create Project</p>
+                </Button>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader className="space-y-8">

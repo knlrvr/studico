@@ -25,7 +25,7 @@ export default function RecentUserFiles({}) {
   
             {files?.length !== undefined && files?.length > 0 && (
                 <>
-                <span className="text-sm">Recently uploaded files &mdash;</span>
+                <span className="text-sm text-muted-foreground">Recently uploaded files &mdash;</span>
                 <div className="mt-4 mb-12 grid gap-4 grid-cols-3 sm:grid-cols-4 md:grid-cols-5">
                     {files?.map((file) => (
                         <>

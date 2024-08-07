@@ -20,14 +20,14 @@ export default function Home() {
   return (
     <main className="flex flex-col pt-24 px-4">
       <Authenticated>
-        <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold tracking-wide">Projects</h1>
+        <div className="flex justify-between items-center mb-8">
+          <div className="flex flex-col">
+            <h1 className="text-2xl font-bold tracking-wide">Projects</h1>
+            <p className="w-1/2 text-sm text-neutral-500">
+              Create & view projects to manage for your organization or personal account. 
+            </p>
+          </div>
           <CreateProject />
-        </div>
-        <div className="mb-6">
-          <p className="w-1/2 text-sm text-neutral-500">
-            Create & view projects to manage for your organization or personal account. 
-          </p>
         </div>
 
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mb-6">

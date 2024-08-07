@@ -147,7 +147,7 @@ export default function UserFiles() {
             </TableBody>
         </Table>
         ) : (
-            <p className="text-neutral-500 flex w-full justify-center mt-8 text-sm">No files found. Upload one now!</p>
+            <p className="text-neutral-500 flex w-full justify-start text-sm">No files found. Upload one now!</p>
         )}
         </>
     )

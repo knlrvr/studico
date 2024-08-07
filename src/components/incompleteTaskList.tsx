@@ -131,7 +131,7 @@ export default function IncompleteTaskList() {
                         </TableBody>
                     </Table>
                 ) : (
-                    <p className="text-neutral-500 text-sm">You&apos;re all caught up.</p>
+                    <p className="text-muted-foreground text-sm">You&apos;re all caught up.</p>
                 )}
             </CardContent>
         </Card>

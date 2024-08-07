@@ -47,14 +47,11 @@ export default function ProjectPage({
 
               <div className="flex items-center justify-between gap-4 w-full">
 
-                <TabsList className="w-full sm:w-fit flex justify-between sm:gap-2">
+                <TabsList className="w-fit flex justify-between sm:gap-2">
                     <TabsTrigger value="overview">Overview</TabsTrigger>
                     <TabsTrigger value="files">Files</TabsTrigger>
                     <TabsTrigger value="chat">
                       Messages 
-
-                      {/* make conditional, depends on newMessages !!! ? */}
-                      <span className="ml-2 inline-flex text-xs bg-green-500 rounded-full p-1"></span>
                     </TabsTrigger>
                 </TabsList>
 

@@ -30,7 +30,7 @@ export function Notifications() {
                 <Button variant='ghost' size='icon' className="relative">
                     <Bell className="w-4 h-4" />
                     {hasNewNotifications && (
-                        <div className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-background pr-[0.1rem]">
+                        <div className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-violet-400 text-xs text-background pr-[0.1rem]">
                             {unreadNotifications.length}
                         </div>
                     )}

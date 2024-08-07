@@ -126,7 +126,7 @@ export default function AllTasks() {
                         </TableBody>
                     </Table>
                 ) : (
-                    <p className="text-neutral-500 text-sm">No tasks found. Add one now!</p>
+                    <p className="text-muted-foreground text-sm">No tasks found. Add one now!</p>
                 )}
             </CardContent>
             <CardFooter className="flex justify-end">

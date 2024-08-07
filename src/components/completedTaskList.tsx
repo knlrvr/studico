@@ -129,7 +129,7 @@ export default function CompletedTaskList() {
                         </TableBody>
                     </Table>
                 ) : (
-                    <p className="text-neutral-500 text-sm">No tasks completed yet.</p>
+                    <p className="text-muted-foreground text-sm">No tasks completed yet.</p>
                 )}
             </CardContent>
         </Card>
