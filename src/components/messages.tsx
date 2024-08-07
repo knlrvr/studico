@@ -47,7 +47,7 @@ export default function ProjectMessages() {
     return (
         <div className="flex flex-col justify-end h-full">
             <div 
-                className="flex flex-col h-[calc(100vh-275px)] sm:h-[calc(100vh-230px)] overflow-y-auto"
+                className="flex flex-col h-[calc(100vh-250px)] sm:h-[calc(100vh-240px)] overflow-y-auto"
                 ref={messageContainerRef}
             >
                 <div className="flex flex-col space-y-3 h-full hide-scroll">

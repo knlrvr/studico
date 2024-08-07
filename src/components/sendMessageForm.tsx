@@ -119,7 +119,7 @@ export default function SendMessageForm({
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               required
-              className="w-full border px-2 py-1.5 rounded-md placeholder:text-neutral-500 text-sm overflow-scroll"
+              className="hide-scroll w-full border px-2 py-1.5 rounded-md placeholder:text-neutral-500 text-sm overflow-scroll"
             />
           </div>
 
