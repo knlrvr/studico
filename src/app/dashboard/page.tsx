@@ -8,18 +8,10 @@ import ProjectCard from "@/components/projectCard";
 import CreateProject from "@/components/createProject";
 import Invites from "@/components/invites";
 
-
-
 export default function Home() {
 
   const organization = useOrganization();
   const { user } = useUser();
-
-  const members = [{
-    userId: user?.id as string,
-    userImg: user?.imageUrl as string,
-    userName: user?.fullName as string,
-  }];
 
   const projects = useQuery(api.projects.getProjects, {
     orgId: organization.organization?.id,

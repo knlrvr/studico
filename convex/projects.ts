@@ -2,17 +2,16 @@ import { MutationCtx, QueryCtx, mutation, query } from './_generated/server'
 import { ConvexError, v } from 'convex/values'
 import { Id } from './_generated/dataModel'
 
-interface Project {
-    _id: string;
-    orgId?: string;
-    tokenIdentifier?: string;
-    members?: Array<{
-        userId: string;
-        userImg: string;
-        userName: string;
-    }>;
-    // Add other fields as necessary
-}
+// interface Project {
+//     _id: string;
+//     orgId?: string;
+//     tokenIdentifier?: string;
+//     members?: Array<{
+//         userId: string;
+//         userImg: string;
+//         userName: string;
+//     }>;
+// }
 
 export const createProject = mutation({
     args: {
@@ -86,7 +85,7 @@ export const getProjects = query({
             return []; // Return an empty array if the user is not authenticated
         }
 
-        let projects: Project[] = [];
+        let projects: any[] = [];
 
         // Case 1: Fetch projects by organization ID
         if (args.orgId) {
