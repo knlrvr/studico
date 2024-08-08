@@ -1,6 +1,5 @@
 import {
     Card,
-    CardContent,
     CardDescription,
     CardFooter,
     CardHeader,
@@ -13,8 +12,6 @@ import { Doc } from '../../convex/_generated/dataModel'
 
 export default function ProjectCard({ project } : { project: Doc<'projects'> }) {
     
-    const date = new Date;
-
     return (
         <Link href={`/dashboard/projects/${project._id}`}>
             <Card>

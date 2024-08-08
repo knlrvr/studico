@@ -5,6 +5,7 @@ import CompletedTaskList from "./completedTaskList"
 import { DeleteProject } from "./deleteProject"
 import History from "./history"
 import IncompleteTaskList from "./incompleteTaskList"
+import Members from "./members"
 import { ProgressChart } from "./progressChart"
 import RecentProjectFilesPreview from "./recentProjectFilesPreview"
 
@@ -34,9 +35,13 @@ export function Overview() {
         <History />
       </div>
 
-      <div className="mt-6">
-        <DeleteProject />
+      <div className="">
+        <Members />
       </div>
+
+      {/* <div className="mt-6">
+        <DeleteProject />
+      </div> */}
 
     </div>
   )

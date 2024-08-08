@@ -37,6 +37,7 @@ import { useToast } from "./ui/use-toast"
                             messageId: id as Id<'messages'>,
                         });
                         toast({
+                            variant: 'destructive',
                             description: "Message successfully deleted.",
                         });
                     }}>

@@ -17,6 +17,7 @@ import type {
 import type * as clerk from "../clerk.js";
 import type * as files from "../files.js";
 import type * as http from "../http.js";
+import type * as invites from "../invites.js";
 import type * as memberships from "../memberships.js";
 import type * as notifications from "../notifications.js";
 import type * as projects from "../projects.js";
@@ -35,6 +36,7 @@ declare const fullApi: ApiFromModules<{
   clerk: typeof clerk;
   files: typeof files;
   http: typeof http;
+  invites: typeof invites;
   memberships: typeof memberships;
   notifications: typeof notifications;
   projects: typeof projects;

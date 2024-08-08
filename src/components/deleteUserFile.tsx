@@ -53,6 +53,7 @@ export default function DeleteUserFile({
                             fileId,
                         });
                         toast({
+                            variant: 'destructive',
                             description: 'File successfully deleted.'
                         })
                     }}

@@ -17,7 +17,6 @@ export default defineSchema({
       title: v.string(),
       tokenIdentifier: v.optional(v.string()),
       orgId: v.optional(v.string()),
-      // notifications: v.optional(v.number()),
       category: v.optional(v.array(v.string())),
       members: v.optional(
         v.array(v.object({
@@ -25,10 +24,18 @@ export default defineSchema({
           userImg: v.string(),
           userName: v.string(),
         }))
-      )
+      ),
     }).index('by_tokenIdentifier', ['tokenIdentifier'])
       .index('by_orgId', ['orgId'])
       .index('by_members', ['members']),
+    invites: defineTable({
+      projectId: v.id('projects'),
+      projectName: v.string(),
+      inviteeEmail: v.string(),
+      inviterId: v.string(),
+      inviterName: v.string(),
+      status: v.string(),
+    }).index('by_inviteeEmail', ['inviteeEmail']),
     files: defineTable({
       name: v.string(),
       type: v.string(),

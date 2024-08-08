@@ -44,32 +44,51 @@ export const createProject = mutation({
 export const getProjects = query({
     args: {
         orgId: v.optional(v.string()),
+        members: v.optional(
+            v.array(v.object({
+                userId: v.string(),
+                userImg: v.string(),
+                userName: v.string(),
+            }))
+        ),
     },
-    async handler(ctx, args) { 
+    async handler(ctx, args) {
+        // Get the current user's ID
+        const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
 
-        const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier
-
-        if(!userId) {
-            return [];
+        if (!userId) {
+            return []; 
         }
 
-        if(args.orgId) {
+        let projects = [];
 
-            const isMember = await hasOrgAccess(ctx, args.orgId)
-
-            if(!isMember) {
-                return null;
+        if (args.orgId) {
+            const isMember = await hasOrgAccess(ctx, args.orgId);
+            if (!isMember) {
+                return null; // No access to this organization
             }
-
-            return await ctx.db.query('projects')
-            .withIndex('by_orgId', (q) => q.eq('orgId', args.orgId
-            )).order('desc').collect()
+            projects = await ctx.db.query('projects')
+                .withIndex('by_orgId', (q) => q.eq('orgId', args.orgId))
+                .order('desc')
+                .collect();
         } else {
-            return await ctx.db.query('projects')
-            .withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', userId
-            )).order('desc').collect()
+            projects = await ctx.db.query('projects')
+                .order('desc')
+                .collect();
+
+            projects = projects.filter(project => 
+                project.members?.some(member => member.userId === userId)
+            );
         }
-        
+
+        if (projects.length === 0) {
+            projects = await ctx.db.query('projects')
+                .withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', userId))
+                .order('desc')
+                .collect();
+        }
+
+        return projects;
     },
 });
 
@@ -78,34 +97,36 @@ export const getProject = query({
         projectId: v.id('projects'),
     },
     async handler(ctx, args) {
-        const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier
+        const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
 
-        if(!userId) {
+        if (!userId) {
             return null;
         }
 
-        const project = await ctx.db.get(args.projectId)
+        const project = await ctx.db.get(args.projectId);
 
-        if(!project) {
-            return null;
+        if (!project) {
+            return null; 
         }
 
         if (project.orgId) {
-            const isMember = await hasOrgAccess(ctx, project.orgId)
-
+            const isMember = await hasOrgAccess(ctx, project.orgId);
             if (!isMember) {
-                return null;
+                return null; 
             }
-            
         } else {
-            if(project?.tokenIdentifier !== userId) {
-                return null;
+            if (project.tokenIdentifier !== userId) {
+                const isMember = project.members?.some(member => member.userId === userId);
+                if (!isMember) {
+                    return null; 
+                }
             }
         }
 
-        return project;
-    } 
+        return project; 
+    }
 });
+
 
 export const sendMessage = mutation({
     args: {
@@ -206,6 +227,25 @@ export const hasOrgAccess = async (
 
     return !!membership;
 };
+
+export const isMemberOfProject = async (
+    ctx: MutationCtx | QueryCtx,
+    projectId: Id<"projects">
+) => {
+    const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
+
+    if (!userId) {
+        return false;
+    }
+
+    const project = await ctx.db.get(projectId);
+
+    if (!project || !project.members) {
+        return false;
+    }
+
+    return project.members.some(member => member.userId === userId);
+}
 
 export const deleteProject = mutation({
     args: {

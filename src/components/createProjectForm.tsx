@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
-import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -16,7 +15,6 @@ import {
 import { Input } from "@/components/ui/input"
 import { useMutation } from "convex/react"
 import { api } from "../../convex/_generated/api"
-import { Loader2 } from "lucide-react"
 import { LoadingButton } from "./loadingButton"
 import { useOrganization } from "@clerk/nextjs"
 
@@ -49,7 +47,6 @@ export default function CreateProjectForm({
     }
 
     const createProject = useMutation(api.projects.createProject)
-
     const organization = useOrganization();
 
     return (
@@ -67,10 +64,12 @@ export default function CreateProjectForm({
               </FormItem>
             )}
           />
-          <LoadingButton 
-            isLoading={form.formState.isSubmitting}
-            loadingText="Saving"
-          >Save</LoadingButton>
+          <div className="flex justify-end">
+            <LoadingButton 
+              isLoading={form.formState.isSubmitting}
+              loadingText="Saving"
+            >Save</LoadingButton>
+          </div>
 
         </form>
       </Form>

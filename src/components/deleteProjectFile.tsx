@@ -65,6 +65,7 @@ export default function DeleteProjectFile({
                             text: `${user?.fullName} deleted a file in ${projectName}`
                         });
                         toast({
+                            variant: 'destructive',
                             description: 'File successfully deleted.'
                         })
                     }}

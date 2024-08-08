@@ -17,7 +17,7 @@ export default function Component() {
         <Link href="/dashboard" className="w-fit">
           <span className="hidden sm:inline-block font-extrabold tracking-wider text-xl bg-primary w-fit p-2 rounded-md text-background">Studico</span>
         </Link>
-        <nav className="hidden mt-10 items-start gap-2 text-sm font-medium sm:flex flex-col w-40">
+        <nav className="hidden mt-9 items-start gap-2 text-sm font-medium sm:flex flex-col w-40">
           <Link
             href="/dashboard"
             className={cn(
