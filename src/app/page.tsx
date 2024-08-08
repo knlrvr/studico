@@ -2,11 +2,14 @@
 
 import Link from "next/link"
 import { Authenticated, Unauthenticated } from "convex/react"
-import { SignInButton } from "@clerk/nextjs"
+import { SignInButton, useClerk } from "@clerk/nextjs"
 import { Button } from "@/components/ui/button"
 import { ArrowUpRight } from "lucide-react"
 
-export default function Component() {
+export default function Home() {
+
+  const { user } = useClerk();
+
   return (
     <div className="flex flex-col min-h-[100dvh] max-w-4xl mx-auto justify-between items-center">
       
@@ -30,20 +33,22 @@ export default function Component() {
               </div>
 
               <div className="flex justify-between sm:justify-start gap-16">
-                <Unauthenticated>
+                
+                {!user && (
                   <Button asChild>
                     <SignInButton forceRedirectUrl={'/dashboard'}/>
                   </Button>
-                </Unauthenticated>
-                <Authenticated>
+                )}
+                {user && (
                   <Button>
                     <Link href="/dashboard">Go to dashboard</Link>
                   </Button>
-                </Authenticated>
+                )}
+
                 <Button asChild
                   className="flex items-center gap-2"
                   variant='outline'>
-                    <Link href='https://twitter.com/knlrvr' target="_blank">
+                    <Link href='https://github.com/knlrvr' target="_blank">
                       <span>Learn More</span>
                       <ArrowUpRight className="w-4 h-4" />
                     </Link>

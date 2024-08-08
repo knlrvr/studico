@@ -7,7 +7,6 @@ export default defineSchema({
       img: v.string(),
       email: v.string(),
       tokenIdentifier: v.string(),
-      // notifcations: v.optional(v.number()),
     })
     .index('by_tokenIdentifier', ['tokenIdentifier']),
     memberships: defineTable({

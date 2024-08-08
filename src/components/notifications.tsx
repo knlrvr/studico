@@ -48,7 +48,7 @@ export function Notifications() {
                                 unreadNotifications?.map((notification) => (
                                     <div
                                         key={notification._id}
-                                        className="flex justify-between items-start gap-2"
+                                        className="flex justify-start items-start gap-2"
                                     >
                                         <div className="w-fit h-fit mt-1 text-neutral-500">
                                             {notification.type === 'status' && (

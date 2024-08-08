@@ -18,7 +18,6 @@ export default function useStoreUserEffect() {
   // Call the `storeUser` mutation function to store
   // the current user in the `users` table and return the `Id` value.
   useEffect(() => {
-
     // If the user is not logged in don't do anything
     if (!isAuthenticated) {
       return;
