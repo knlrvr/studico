@@ -2,6 +2,18 @@ import { MutationCtx, QueryCtx, mutation, query } from './_generated/server'
 import { ConvexError, v } from 'convex/values'
 import { Id } from './_generated/dataModel'
 
+interface Project {
+    _id: string;
+    orgId?: string;
+    tokenIdentifier?: string;
+    members?: Array<{
+        userId: string;
+        userImg: string;
+        userName: string;
+    }>;
+    // Add other fields as necessary
+}
+
 export const createProject = mutation({
     args: {
         title: v.string(),
@@ -10,9 +22,9 @@ export const createProject = mutation({
     },
     async handler(ctx, args) {
 
-        const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier
+        const user = (await ctx.auth.getUserIdentity());
 
-        if(!userId) {
+        if(!user) {
             throw new ConvexError('Not authenticated!')
         }
 
@@ -30,11 +42,25 @@ export const createProject = mutation({
             projectId = await ctx.db.insert('projects', {
                 title: args.title,
                 orgId: args.orgId,
+                members: [
+                    {
+                        userId: user?.tokenIdentifier as string,
+                        userImg: user?.pictureUrl as string,
+                        userName: user?.name as string,
+                    }
+                ],
             });
         } else { 
             projectId = await ctx.db.insert('projects', {
                 title: args.title,
-                tokenIdentifier: userId,
+                tokenIdentifier: user?.tokenIdentifier,
+                members: [
+                    {
+                        userId: user?.tokenIdentifier as string,
+                        userImg: user?.pictureUrl as string,
+                        userName: user?.name as string,
+                    }
+                ],
             })
         }
         
@@ -57,40 +83,51 @@ export const getProjects = query({
         const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
 
         if (!userId) {
-            return []; 
+            return []; // Return an empty array if the user is not authenticated
         }
 
-        let projects = [];
+        let projects: Project[] = [];
 
+        // Case 1: Fetch projects by organization ID
         if (args.orgId) {
             const isMember = await hasOrgAccess(ctx, args.orgId);
-            if (!isMember) {
-                return null; // No access to this organization
+            if (isMember) {
+                const orgProjects = await ctx.db.query('projects')
+                    .withIndex('by_orgId', (q) => q.eq('orgId', args.orgId))
+                    .order('desc')
+                    .collect();
+                projects = projects.concat(orgProjects);
             }
-            projects = await ctx.db.query('projects')
-                .withIndex('by_orgId', (q) => q.eq('orgId', args.orgId))
-                .order('desc')
-                .collect();
-        } else {
-            projects = await ctx.db.query('projects')
-                .order('desc')
-                .collect();
-
-            projects = projects.filter(project => 
-                project.members?.some(member => member.userId === userId)
-            );
         }
 
-        if (projects.length === 0) {
-            projects = await ctx.db.query('projects')
-                .withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', userId))
-                .order('desc')
-                .collect();
-        }
+        // Case 2: Fetch projects where the user is a member
+        const memberProjects = await ctx.db.query('projects')
+            .order('desc')
+            .collect();
+
+        const filteredMemberProjects = memberProjects.filter(project =>
+            project.members?.some(member => member.userId === userId)
+        );
+
+        projects = projects.concat(filteredMemberProjects);
+
+        // Case 3: Fetch projects by ownership (tokenIdentifier)
+        const ownedProjects = await ctx.db.query('projects')
+            .withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', userId))
+            .order('desc')
+            .collect();
+
+        projects = projects.concat(ownedProjects);
+
+        // Remove duplicates (if any)
+        projects = projects.filter((project, index, self) =>
+            index === self.findIndex((p) => p._id === project._id)
+        );
 
         return projects;
     },
 });
+
 
 export const getProject = query({
     args: {

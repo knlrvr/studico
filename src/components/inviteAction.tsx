@@ -7,7 +7,11 @@ import { Check, X } from "lucide-react";
 import { Button } from "./ui/button";
 import { Id } from "../../convex/_generated/dataModel";
 
-export default function InviteAction() {
+export default function InviteAction({
+    onSubmit
+}: {
+    onSubmit: () => void;
+}) {
 
     const { user } = useUser();
     const userEmail = user?.primaryEmailAddress?.emailAddress;
@@ -32,13 +36,14 @@ export default function InviteAction() {
                     <p className="font-medium">{invite.projectName}</p>
                     <div className="flex gap-8">
                         <Button variant='ghost'
+                            className="bg-green-500 bg-opacity-20"
                             onClick={() => {
                                 handleAcceptInvite(invite._id)
                             }}
                         ><Check className="w-4 h-4" />
                         </Button>
                         <Button variant='ghost'
-
+                            className="bg-red-500 bg-opacity-20"
                         ><X className="w-4 h-4 text-muted-foreground" />
                         </Button>
                     </div>

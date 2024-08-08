@@ -13,6 +13,7 @@ import { api } from "../../convex/_generated/api";
 import { UserRoundPlus } from "lucide-react";
 import { Button } from "./ui/button";
 import InviteAction from "./inviteAction";
+import { useState } from "react";
 
 export default function Invites() {
 
@@ -25,6 +26,8 @@ export default function Invites() {
 
     const totalInvites = userInvites?.filter(invite => invite.status === 'pending');
     const hasNewInvites = !!totalInvites?.length;
+
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
     return (
         <Dialog>
@@ -45,7 +48,7 @@ export default function Invites() {
                     If you&apos;ve been invited to collaborate on a project, the invitation will display below.
                 </DialogDescription>
                 </DialogHeader>
-                <InviteAction />
+                <InviteAction onSubmit={() => setIsOpen(false)} />
             </DialogContent>
         </Dialog>
     )
