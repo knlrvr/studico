@@ -9,19 +9,17 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import SendInviteForm from "./sendInvite"  
+import SendInvite from "./sendInvite";
 import { useState } from "react";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { useProjectId } from "@/app/dashboard/projects/context";
-import { useUser } from "@clerk/nextjs";
 
 export default function Members() {
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const projectId = useProjectId();
-    const {user} = useUser();
 
     const getProjectMembers = useQuery(api.projects.getProject, { projectId: projectId })
 
@@ -46,7 +44,7 @@ export default function Members() {
 
             </CardContent>
             <CardFooter className="flex justify-end">
-                <SendInviteForm onSave={() => setIsOpen(false)} />
+                <SendInvite />
             </CardFooter>
         </Card>
     )
