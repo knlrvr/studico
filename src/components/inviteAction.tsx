@@ -22,10 +22,16 @@ export default function InviteAction({
 
     const pendingInvites = userInvites?.filter(invite => invite.status === 'pending')
 
-    const acceptInvite = useMutation(api.invites.acceptProjectInvite)
+    const acceptInvite = useMutation(api.invites.acceptProjectInvite);
+    const deleteInvite = useMutation(api.invites.deleteProjectInvite);
+
+    // accept before delete
     const handleAcceptInvite = async (inviteId: Id<'invites'>) => {
-        await acceptInvite({ inviteId })
+        await acceptInvite({ inviteId });
+        await deleteInvite({ inviteId });
     }
+
+    const declineInvite = useMutation(api.invites.declineProjectInvite);
 
     return (
         <div className="flex flex-col space-y-4">
@@ -38,12 +44,16 @@ export default function InviteAction({
                         <Button variant='ghost'
                             className="bg-green-500 bg-opacity-20"
                             onClick={() => {
-                                handleAcceptInvite(invite._id)
+                                handleAcceptInvite(invite._id);
+                                
                             }}
                         ><Check className="w-4 h-4" />
                         </Button>
                         <Button variant='ghost'
                             className="bg-red-500 bg-opacity-20"
+                            onClick={() => {
+                                declineInvite({ inviteId: invite._id })
+                            }}
                         ><X className="w-4 h-4 text-muted-foreground" />
                         </Button>
                     </div>

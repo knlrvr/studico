@@ -31,7 +31,6 @@ export const sendProjectInvite = mutation({
             throw new ConvexError('You do not have permission to invite members to this project.');
         }
 
-        // Store the invite in the 'invites' table
         await ctx.db.insert('invites', {
             projectId: args.projectId,
             projectName: args.projectName,
@@ -68,7 +67,6 @@ export const acceptProjectInvite = mutation({
             throw new ConvexError('Not authenticated!');
         }
 
-        // Get the invite
         const invite = await ctx.db.get(args.inviteId);
 
         if (!invite) {
@@ -79,14 +77,12 @@ export const acceptProjectInvite = mutation({
             throw new ConvexError('Invite is no longer valid');
         }
 
-        // Get the project
         const project = await ctx.db.get(invite.projectId);
 
         if (!project) {
             throw new ConvexError('Project not found');
         }
 
-        // Retrieve the user's information from the users table
         const user = await ctx.db.query('users')
             .withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', userId))
             .first();
@@ -95,7 +91,6 @@ export const acceptProjectInvite = mutation({
             throw new ConvexError('User not found');
         }
 
-        // Add the user to the project's members
         const members = project.members || [];
         const userIsAlreadyMember = members.some((member) => member.userId === userId);
 
@@ -111,12 +106,33 @@ export const acceptProjectInvite = mutation({
             members: members,
         });
 
-        // Update the invite status to accepted
         await ctx.db.patch(args.inviteId, {
             status: 'accepted',
         });
     }
 });
+
+// 
+// decline & delete are the same, but separating them by use case helps me (:
+// 
+
+export const declineProjectInvite = mutation({
+    args: {
+        inviteId: v.id('invites')
+    },
+    async handler(ctx, args) {
+        await ctx.db.delete(args.inviteId)
+    }
+})
+
+export const deleteProjectInvite = mutation({
+    args: {         
+        inviteId: v.id('invites')
+    },
+    async handler(ctx, args) {
+        await ctx.db.delete(args.inviteId);
+    }
+})
 
 export const hasOrgAccess = async (
     ctx: MutationCtx | QueryCtx, 
@@ -136,3 +152,39 @@ export const hasOrgAccess = async (
 
     return !!membership;
 };
+
+export const leaveProject = mutation({
+    args: {
+      projectId: v.id('projects'),
+    },
+    async handler(ctx, args) {
+      const userIdentity = await ctx.auth.getUserIdentity();
+      const userId = userIdentity?.tokenIdentifier;
+  
+      if (!userId) {
+        throw new ConvexError('Not authenticated!');
+      }
+  
+      const project = await ctx.db.get(args.projectId);
+  
+      if (!project) {
+        throw new ConvexError('Project not found');
+      }
+  
+      const members = project.members || [];
+      const memberIndex = members.findIndex((member) => member.userId === userId);
+  
+      if (memberIndex === -1) {
+        throw new ConvexError('You are not a member of this project');
+      }
+  
+      members.splice(memberIndex, 1);
+  
+      await ctx.db.patch(args.projectId, {
+        members: members,
+      });
+  
+    // track members that leave for x time? idk
+
+    }
+  });

@@ -4,7 +4,7 @@ import { api } from "../../../../../convex/_generated/api";
 import { useQuery } from "convex/react";
 
 import { Id } from "../../../../../convex/_generated/dataModel";
-import { Loader2 } from "lucide-react";
+import { Loader2, Settings } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import ProjectMessages from "@/components/messages";
 import ProjectFiles from "@/components/projectFiles";
@@ -13,6 +13,7 @@ import { Overview } from "@/components/overview";
 import { Notifications } from "@/components/notifications";
 import RecentProjectFiles from "@/components/recentProjectFiles";
 import { ProjectProvider } from "../context";
+import Link from "next/link";
 
 export default function ProjectPage({
     params
@@ -55,7 +56,10 @@ export default function ProjectPage({
                     </TabsTrigger>
                 </TabsList>
 
-                <Notifications />
+                <div className="flex items-center gap-4">
+                  <Notifications />
+                  {/* add project settings page link here */}
+                </div>
 
               </div>
 

@@ -26,7 +26,7 @@ export default function Home() {
               <h1 className="text-2xl font-bold tracking-wide">Projects</h1>
               <Invites />
             </div>
-            <p className="w-1/2 text-sm text-neutral-500">
+            <p className="w-1/2 sm:w-2/3 text-sm text-neutral-500">
               Create & view projects to manage for your organization or personal account. 
             </p>
           </div>

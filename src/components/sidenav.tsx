@@ -55,7 +55,7 @@ export default function Component() {
           <SheetContent side="left" className="md:hidden z-[99]" suppressHydrationWarning>
             <div className="grid gap-4 p-6">
               <Link href="/dashboard" className="w-fit">
-                <span className="font-extrabold tracking-wider text-xl bg-violet-400 w-fit p-2 rounded-md text-background">Studico</span>
+                <span className="font-extrabold tracking-wider text-xl bg-primary w-fit p-2 rounded-md text-background">Studico</span>
               </Link>
               <nav className="grid gap-8 mt-10">
                 <Link href="/dashboard" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>

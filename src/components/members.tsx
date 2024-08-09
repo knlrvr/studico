@@ -9,7 +9,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import SendInvite from "./sendInvite";
+import CollabAction from "./collabAction";
 import { useState } from "react";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
@@ -43,8 +43,8 @@ export default function Members() {
                 ))}
 
             </CardContent>
-            <CardFooter className="flex justify-end">
-                <SendInvite />
+            <CardFooter className="w-full flex justify-end">
+                <CollabAction />
             </CardFooter>
         </Card>
     )

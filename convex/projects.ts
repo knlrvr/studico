@@ -82,7 +82,7 @@ export const getProjects = query({
         const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
 
         if (!userId) {
-            return []; // Return an empty array if the user is not authenticated
+            return []; 
         }
 
         let projects: any[] = [];

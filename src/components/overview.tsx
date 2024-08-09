@@ -39,9 +39,9 @@ export function Overview() {
         <Members />
       </div>
 
-      {/* <div className="mt-6">
+      <div className="mt-6">
         <DeleteProject />
-      </div> */}
+      </div>
 
     </div>
   )

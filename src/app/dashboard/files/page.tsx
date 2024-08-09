@@ -1,7 +1,6 @@
 'use client'
 
-import { Authenticated, useQuery } from "convex/react";
-import { api } from "../../../../convex/_generated/api";
+import { Authenticated } from "convex/react";
 import UserFiles from "@/components/UserFiles";
 import UploadFileUserButton from "@/components/uploadFileUserButton";
 import RecentUserFiles from "@/components/recentUserFiles";
@@ -11,11 +10,11 @@ export default function FilesPage() {
     return (
         <main className="flex flex-col pt-24 px-4 items-start">
         <Authenticated>
-          <div className="flex justify-between items-center w-full">
+          <div className="flex justify-between items-center w-full mt-1">
             <div className="flex flex-col">
-              <h1 className="text-2xl font-bold tracking-wide">Projects</h1>
-              <p className="w-1/2 text-sm text-neutral-500">
-                Create & view projects to manage for your organization or personal account. 
+              <h1 className="text-2xl font-bold tracking-wide">Files</h1>
+              <p className="w-1/2 sm:w-2/3 text-sm text-neutral-500">
+                Upload & manage your personal files. 
               </p>
             </div>
             <UploadFileUserButton />
