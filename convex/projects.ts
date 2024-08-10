@@ -78,52 +78,25 @@ export const getProjects = query({
         ),
     },
     async handler(ctx, args) {
-        // Get the current user's ID
         const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
 
         if (!userId) {
             return []; 
         }
 
-        let projects: any[] = [];
+        const allProjects = await ctx.db.query('projects').order('desc').collect();
 
-        // Case 1: Fetch projects by organization ID
         if (args.orgId) {
-            const isMember = await hasOrgAccess(ctx, args.orgId);
-            if (isMember) {
-                const orgProjects = await ctx.db.query('projects')
-                    .withIndex('by_orgId', (q) => q.eq('orgId', args.orgId))
-                    .order('desc')
-                    .collect();
-                projects = projects.concat(orgProjects);
-            }
+            return allProjects.filter(project => project.orgId === args.orgId);
+        } else {
+            const userProjects = allProjects.filter(project =>
+                (project.members?.some(member => member.userId === userId) ||
+                project.tokenIdentifier === userId) &&
+                !project.orgId
+            );
+
+            return userProjects;
         }
-
-        // Case 2: Fetch projects where the user is a member
-        const memberProjects = await ctx.db.query('projects')
-            .order('desc')
-            .collect();
-
-        const filteredMemberProjects = memberProjects.filter(project =>
-            project.members?.some(member => member.userId === userId)
-        );
-
-        projects = projects.concat(filteredMemberProjects);
-
-        // Case 3: Fetch projects by ownership (tokenIdentifier)
-        const ownedProjects = await ctx.db.query('projects')
-            .withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', userId))
-            .order('desc')
-            .collect();
-
-        projects = projects.concat(ownedProjects);
-
-        // Remove duplicates (if any)
-        projects = projects.filter((project, index, self) =>
-            index === self.findIndex((p) => p._id === project._id)
-        );
-
-        return projects;
     },
 });
 
