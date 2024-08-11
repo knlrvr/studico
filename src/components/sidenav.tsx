@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
-import { Bell, Folder, LayoutDashboard, Menu, MessageSquare, Search, Settings, User } from "lucide-react"
+import { Bell, Box, Folder, LayoutDashboard, Menu, MessageSquare, Search, Settings, User } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
@@ -28,7 +28,7 @@ export default function Component() {
                 )}
             prefetch={false}
           >
-            <LayoutDashboard className="w-5 h-5" />
+            <Box className="w-5 h-5" />
             <span>Projects</span>
           </Link>
           <Link
@@ -59,8 +59,8 @@ export default function Component() {
               </Link>
               <nav className="grid gap-8 mt-10">
                 <Link href="/dashboard" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
-                  <LayoutDashboard className="w-5 h-5" />
-                  <span>Projects</span>
+                  <Box className="w-5 h-5" />
+                  <span>Projects</span> 
                 </Link>
                 <Link href="/dashboard/files" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
                   <Folder className="w-5 h-5" />

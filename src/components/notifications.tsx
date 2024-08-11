@@ -41,7 +41,7 @@ export function Notifications() {
                     <div className="">
                         <h4 className="font-medium leading-none text-neutral-500">Notifications</h4>
                     </div>
-                    <ScrollArea>
+                    <ScrollArea className="h-[325px]">
                         <div className="space-y-2">
                             {!hasNewNotifications && <p className="text-neutral-500 text-sm">No new notifications to display</p>}
                             {notifications?.length !== undefined && notifications?.length > 0 && 

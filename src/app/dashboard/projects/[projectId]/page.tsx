@@ -14,6 +14,7 @@ import { Notifications } from "@/components/notifications";
 import RecentProjectFiles from "@/components/recentProjectFiles";
 import { ProjectProvider } from "../context";
 import Link from "next/link";
+import SettingsContent from "@/components/settings";
 
 export default function ProjectPage({
     params
@@ -54,6 +55,9 @@ export default function ProjectPage({
                     <TabsTrigger value="chat">
                       Messages 
                     </TabsTrigger>
+                    <TabsTrigger value='settings'>
+                      <Settings className="w-4 h-4" />
+                    </TabsTrigger>
                 </TabsList>
 
                 <div className="flex items-center gap-4">
@@ -84,6 +88,10 @@ export default function ProjectPage({
 
             <TabsContent value="chat">
               <ProjectMessages />
+            </TabsContent>
+
+            <TabsContent value='settings'>
+              <SettingsContent />
             </TabsContent>
 
 

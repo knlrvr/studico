@@ -49,7 +49,7 @@ export function DeleteProject() {
                 <AlertDialogDescription>
                   This action cannot be undone. This will permanently delete your
                   project and all of it&apos;s associated data. Please only continue if you&apos;re 
-                  absolutely sure. 
+                  absolutely sure that you want to delete this project. 
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
