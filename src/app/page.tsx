@@ -48,7 +48,7 @@ export default function Home() {
                 <Button asChild
                   className="flex items-center gap-2"
                   variant='outline'>
-                    <Link href='https://github.com/knlrvr' target="_blank">
+                    <Link href='https://github.com/knlrvr/studico' target="_blank">
                       <span>Learn More</span>
                       <ArrowUpRight className="w-4 h-4" />
                     </Link>
