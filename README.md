@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h2 align="center">Studico</h2>
 
-## Getting Started
+![studico-brand](https://github.com/user-attachments/assets/589bde42-a8b2-4065-8f1e-5aaf079b95a0)
 
-First, run the development server:
+## Table of Contents
+- [About](#about)
+- [Releases](#releases)
+- [View](#view)
+- [Built With](#build)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<a name="about"></a>
+## About
+Studico is a web-based music production assistance suite that empowers users to create, collaborate, and share their music. Studico offers a robust tracking system for various aspects of music production - including tasks, file upload and storage, and messaging. Studico is meant for small to medium-sized teams, and allows them to have everything they need in one place.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<a name="releases"></a>
+## Releases
+![v1.0.0](https://img.shields.io/badge/version-1.0.0-38bdf8) ![date](https://img.shields.io/badge/Aug_18_2024-informational) ![description](https://img.shields.io/badge/Official_Release-grey)     
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Users may sign in via Google or create an account. Auth is handled completely by [Clerk](https://clerk.com/). Once signed in, users can create a project where they'll be able to track progress via task creation/completion, upload & manage their files, and communicate with collaborators directly within each project. Progress is monitored via task completion, so it's entirely dependent on user input. Users can invite collaborators to each project, or if a user is collaborating with a group on multiple projects, they can create an organization. 
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+<a name="view"></a>
+## View
+The live site can be found [here](https://studico.vercel.app). 
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<a name="build"></a>
+## Built With
+[![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/) [![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://react.dev/) [![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/) [![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/docs/installation) [![Convex](https://img.shields.io/badge/Convex-dc2626?style=for-the-badge&logoColor=white)](https://www.convex.dev/) [![Clerk](https://img.shields.io/badge/Clerk-8A2BE2?style=for-the-badge&logoColor=white)](https://clerk.com/)
