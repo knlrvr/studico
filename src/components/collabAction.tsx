@@ -50,7 +50,7 @@ export default function CollabAction() {
         <>
         {projectOwner?.tokenIdentifier?.includes(user?.id as string) && (
             <Dialog onOpenChange={setIsOpen} open={isOpen}>
-                <DialogTrigger className="">
+                <DialogTrigger className="" asChild>
                     <Button className="flex flex-col items-start gap-4 h-fit w-36 text-xs">
                         <Plus className="w-4 h-4" />
                         <p className="tracking-wide">Invite</p>
@@ -60,7 +60,7 @@ export default function CollabAction() {
                     <DialogHeader className="mb-6">
                     <DialogTitle>Invite collaborators</DialogTitle>
                     <DialogDescription>
-                        Enter the email of who you&apos;d like to invite to this project.
+                        Enter the email(s) of who you&apos;d like to invite to this project separated by a comma.
                     </DialogDescription>
                     </DialogHeader>
 

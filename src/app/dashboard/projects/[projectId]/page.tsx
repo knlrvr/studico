@@ -43,7 +43,7 @@ export default function ProjectPage({
             <div className="flex flex-col sm:flex-row justify-between items-center mb-8 space-y-4 sm:space-y-0 relative">
               
               {/* this feels cheap lmfao */}
-              <h1 className="fixed z-[50] left-[4rem] sm:left-[18.5rem] top-[1.65rem] text-sm">
+              <h1 className="fixed z-[50] left-[4rem] sm:left-[18.5rem] top-[1.65rem] text-sm font-bold tracking-wider">
                 {project.title}
               </h1>
 

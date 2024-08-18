@@ -14,7 +14,7 @@ export default function CreateTask() {
 
     return (
         <Sheet>
-            <SheetTrigger>
+            <SheetTrigger asChild>
                 <Button className="flex flex-col items-start gap-4 h-fit w-36">
                     <Plus className="w-5 h-5" />
                     <p className="text-xs tracking-wide">New Task</p>

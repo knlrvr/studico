@@ -26,8 +26,8 @@ export default function Header() {
 
                         {pathname.includes('projects/') ? (
                             <>
-                                <BreadcrumbItem className="hidden sm:inline-flex">Projects</BreadcrumbItem>
-                                <BreadcrumbSeparator className="hidden sm:inline-flex" />
+                                <BreadcrumbItem className="hidden sm:inline-flex text-muted-foreground">Projects</BreadcrumbItem>
+                                <BreadcrumbSeparator className="hidden sm:inline-flex text-muted-foreground" />
                             </>
                         ) : (
                             <BreadcrumbItem>
