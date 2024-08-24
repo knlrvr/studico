@@ -99,7 +99,7 @@ export default function EditTaskForm({
                 date: currentTask.completeByDate || '',
             })
         }
-    }, [currentTask])
+    }, [currentTask, form])
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
 

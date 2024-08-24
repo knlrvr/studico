@@ -32,8 +32,7 @@ export default function TaskActions({
                     View your task here. Click save or close when you&apos;re done.
                 </SheetDescription>
                 </SheetHeader>
-                <EditTaskForm projectId={projectId}
-                    params={{ taskId: params.taskId }}
+                <EditTaskForm params={{ taskId: params.taskId }}
                 />
             </SheetContent>
         </Sheet>
