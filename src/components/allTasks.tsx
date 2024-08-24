@@ -117,7 +117,7 @@ export default function AllTasks() {
                                         </TableCell>
                                         <TableCell className="flex justify-end">
                                             <Avatar className="">
-                                                <AvatarImage className="w-9 h-9 rounded-full"
+                                                <AvatarImage className="w-6 h-6 rounded-full"
                                                     src={`${task.assignedTo?.userImg}`}
                                                 />
                                             </Avatar>
