@@ -1,6 +1,8 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
+import { format, parseISO } from 'date-fns';
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
@@ -59,4 +61,19 @@ export function formatFileName(fileName: string): string {
   const end = fileName.slice(-4);
 
   return `${start}...${end}`;
+}
+
+// future date
+export function futureDate(dateString: string | undefined): string {
+  if (!dateString) {
+    return 'No date set';
+  }
+  
+  try {
+    const date = parseISO(dateString);
+    return format(date, 'd-MM-yyyy');
+  } catch (error) {
+    console.error('Error parsing date:', error);
+    return 'Invalid date';
+  }
 }

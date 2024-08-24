@@ -9,18 +9,22 @@ export const createTask = mutation({
         category: v.string(),
         priority: v.string(),
         status: v.string(),
+        completeByDate: v.string(),
+
         // cannot change
         createdBy: v.object({
             userId: v.string(),
             userImg: v.string(),
             userName: v.string(),
         }),
+
         // user can change
         assignedTo: v.optional(v.object({
             userId: v.string(),
             userImg: v.string(),
             userName: v.string(),
         })),
+
         // cannot change
         completedBy: v.optional(v.object({
             userId: v.string(),
@@ -44,9 +48,15 @@ export const createTask = mutation({
             title: args.title,
             description: args.description as string,
             category: args.category,
+            completeByDate: args.completeByDate,
             priority: args.priority,
             status: args.status,
             createdBy: {
+                userId: userInfo?.tokenIdentifier as string,
+                userImg: userInfo?.pictureUrl as string,
+                userName: userInfo?.name ?? userInfo?.preferredUsername as string,
+            },
+            assignedTo: {
                 userId: userInfo?.tokenIdentifier as string,
                 userImg: userInfo?.pictureUrl as string,
                 userName: userInfo?.name ?? userInfo?.preferredUsername as string,
@@ -79,18 +89,38 @@ export const editTask = mutation({
         category: v.string(),
         priority: v.string(),
         status: v.string(),
+        completeByDate: v.string(),
+        assignedTo: v.optional(v.object({
+            userId: v.string(),
+            userImg: v.string(),
+            userName: v.string(),
+        })),
     },
     async handler(ctx, args) {
         const { taskId } = args;
-        const newPriority = await ctx.db
+        const user = (await ctx.auth.getUserIdentity());
+
+        if(!user) {
+            throw new ConvexError(
+                'Not authenticated!'
+            )
+        }
+        const newDetails = await ctx.db
             .patch(taskId, {
                 title: args.title,
                 description: args.description,
                 category: args.category,
                 priority: args.priority,
                 status: args.status,
+                completeByDate: args.completeByDate,
+                assignedTo: {
+                    userId: args.assignedTo?.userId as string,
+                    userImg: args.assignedTo?.userImg as string,
+                    userName: args.assignedTo?.userName as string,
+                }
             })
-        return newPriority;
+
+        return newDetails;
     }
 });
 

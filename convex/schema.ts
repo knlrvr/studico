@@ -63,6 +63,7 @@ export default defineSchema({
       category: v.string(),
       priority: v.string(),
       status: v.string(),
+      completeByDate: v.optional(v.string()),
       createdBy: v.object({
           userId: v.string(),
           userImg: v.string(),

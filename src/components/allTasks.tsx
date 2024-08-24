@@ -20,13 +20,17 @@ import {
 
 import { useQuery } from "convex/react"
 import { api } from "../../convex/_generated/api"
-import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
+
+// import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
 
 import CreateTask from "./createTask"
 import { EditPriority } from "./editPriority"
 import { EditStatus } from "./editStatus"
 import TaskActions from "./taskActions"
 import { useProjectId } from "@/app/dashboard/projects/context"
+
+import { futureDate } from "@/lib/utils"
+import { Avatar, AvatarImage } from "@radix-ui/react-avatar"
 
 export default function AllTasks() {
 
@@ -54,8 +58,9 @@ export default function AllTasks() {
                                 <TableHead>Task</TableHead>
                                 <TableHead className="hidden sm:table-cell">Category</TableHead>
                                 <TableHead className="hidden md:table-cell">Priority</TableHead>
-                                <TableHead className="hidden lg:table-cell">Status</TableHead>
-                                <TableHead className="text-right">Created By</TableHead>
+                                <TableHead className="hidden xl:table-cell">Status</TableHead>
+                                <TableHead className="hidden lg:table-cell text-right">Due</TableHead>
+                                <TableHead className="text-right">Assigned</TableHead>
                                 <TableHead className="text-right">Actions</TableHead>
                             </TableRow>
                         </TableHeader>
@@ -90,7 +95,7 @@ export default function AllTasks() {
                                                 <EditPriority projectId={projectId} params={{ taskId: task._id }} taskName={task.title}/>
                                             </div>
                                         </TableCell>
-                                        <TableCell className="hidden lg:table-cell">
+                                        <TableCell className="hidden xl:table-cell">
                                             <div className="flex items-center space-x-2">
                                                 <Badge 
                                                     className={`text-xs text-background ${task.status === 'Incomplete' ? 'bg-red-500' : 'bg-green-500' }`}>
@@ -107,14 +112,14 @@ export default function AllTasks() {
 
                                             </div>
                                         </TableCell>
-                                        <TableCell className="text-right">
-                                            <Avatar>
-                                                <AvatarImage 
-                                                    src={`${task.createdBy?.userImg}`} 
-                                                    alt="user image" 
-                                                    className="h-7 ml-auto w-7 rounded-full"    
+                                        <TableCell className="hidden lg:table-cell text-right text-xs">
+                                            <p>{futureDate(task.completeByDate)}</p>
+                                        </TableCell>
+                                        <TableCell className="flex justify-end">
+                                            <Avatar className="">
+                                                <AvatarImage className="w-9 h-9 rounded-full"
+                                                    src={`${task.assignedTo?.userImg}`}
                                                 />
-                                                <AvatarFallback></AvatarFallback>
                                             </Avatar>
                                         </TableCell>
                                         <TableCell className="text-right">

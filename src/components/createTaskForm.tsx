@@ -1,12 +1,21 @@
 'use client'
 
-import { z } from 'zod'
+import * as React from "react"
+import { format } from "date-fns"
+import { Calendar as CalendarIcon } from "lucide-react"
+ 
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Calendar } from "@/components/ui/calendar"
+
+import { date, z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -21,7 +30,6 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-
 import { Input } from "@/components/ui/input"
 import { LoadingButton } from './loadingButton'
 import { useQuery, useMutation } from 'convex/react'
@@ -29,11 +37,13 @@ import { api } from '../../convex/_generated/api'
 import { Textarea } from './ui/textarea'
 import { useUser } from '@clerk/nextjs'
 import { useProjectId } from '@/app/dashboard/projects/context'
+import { Popover, PopoverContent, PopoverTrigger } from "@radix-ui/react-popover"
 
 const formSchema = z.object({
   title: z.string(),
   description: z.string(),
   category: z.string(),
+  date: z.string(),
   priority: z.string(),
 })
 
@@ -44,7 +54,6 @@ export default function CreateTaskForm() {
     const createTask = useMutation(api.tasks.createTask);
     const taskNotification = useMutation(api.notifications.createNotification);
 
-
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -52,6 +61,7 @@ export default function CreateTaskForm() {
           description: '',
           category: '',
           priority: '',
+          date: new Date().toISOString(),
         },
     })
 
@@ -70,6 +80,7 @@ export default function CreateTaskForm() {
         category: values.category,
         priority: values.priority,
         status: 'Incomplete',
+        completeByDate: values.date,
         createdBy: {
           userId: user?.id as string,
           userImg: user?.imageUrl as string,
@@ -166,6 +177,48 @@ export default function CreateTaskForm() {
                   </SelectContent>
                 </Select>
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="date"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <FormLabel>Due Date</FormLabel>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      variant={"outline"}
+                      className={cn(
+                        "w-[240px] pl-3 text-left font-normal",
+                        !field.value && "text-muted-foreground"
+                      )}
+                    >
+                      {field.value ? (
+                        format(new Date(field.value), "PPP")
+                      ) : (
+                        <span>Pick a date</span>
+                      )}
+                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0 bg-background border border-muted-foreground rounded-lg" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={field.value ? new Date(field.value) : undefined}
+                    onSelect={(date) => field.onChange(date ? date.toISOString() : undefined)}
+                    disabled={(date) =>
+                      date < new Date(new Date().setHours(0, 0, 0, 0))
+                    }
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
               <FormMessage />
             </FormItem>
           )}
