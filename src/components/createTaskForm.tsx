@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 
-import { date, z } from 'zod'
+import { z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
@@ -31,11 +31,16 @@ import {
 
 import { Input } from "@/components/ui/input"
 import { LoadingButton } from './loadingButton'
+
 import { useQuery, useMutation } from 'convex/react'
 import { api } from '../../convex/_generated/api'
+
 import { Textarea } from './ui/textarea'
+
 import { useUser } from '@clerk/nextjs'
 import { useProjectId } from '@/app/dashboard/projects/context'
+
+import Image from "next/image"
 import { Popover, PopoverContent, PopoverTrigger } from "@radix-ui/react-popover"
 
 const formSchema = z.object({
@@ -44,6 +49,11 @@ const formSchema = z.object({
   category: z.string(),
   date: z.string(),
   priority: z.string(),
+  assignedTo: z.object({
+    userId: z.string(),
+    userName: z.string(),
+    userImg: z.string()
+  }),
 })
 
 export default function CreateTaskForm() {
@@ -53,9 +63,12 @@ export default function CreateTaskForm() {
     const createTask = useMutation(api.tasks.createTask);
     const taskNotification = useMutation(api.notifications.createNotification);
 
+    const getMembers = useQuery(api.projects.getProject, { projectId: projectId });
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
+          assignedTo: {},
           title: '',
           description: '',
           category: '',
@@ -86,10 +99,10 @@ export default function CreateTaskForm() {
           userName: user?.fullName as string ?? user?.firstName as string,
         },
         assignedTo: {
-          userId: user?.id as string,
-          userImg: user?.imageUrl as string,
-          userName: user?.fullName as string ?? user?.firstName as string,
-        }
+          userId: values.assignedTo?.userId as string,
+          userName: values.assignedTo?.userName as string,
+          userImg: values.assignedTo?.userImg as string,
+        },  
       })
 
       taskNotification({
@@ -222,11 +235,67 @@ export default function CreateTaskForm() {
             </FormItem>
           )}
         />
+
+        <FormField
+          control={form.control}
+          name="assignedTo" 
+          render={({ field }) => (
+            <FormItem className=''>
+              <FormLabel>Assign</FormLabel>
+              <FormControl>
+                <Select
+                  onValueChange={(value) => {
+                    const selectedMember = getMembers?.members?.find(member => member.userId === value);
+                    field.onChange(selectedMember || null);
+                  }}
+                  value={field.value?.userId || ''} // Only the userId is used here for comparison
+                >
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Select a user">
+                      {field.value ? (
+                        <div className="flex gap-2 space-y-1 justify-start">
+                          <Image
+                            src={field.value.userImg}
+                            alt={`${field.value.userName}'s image`}
+                            height={1000}
+                            width={1000}
+                            className="w-5 h-5 rounded-full"
+                          />
+                          <p>{field.value.userName}</p>
+                        </div>
+                      ) : (
+                        "Select a user"
+                      )}
+                    </SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    {getMembers?.members?.map((member) => (
+                      <SelectItem key={member.userId} value={member.userId}>
+                        <div className="flex gap-2 space-y-1 justify-start">
+                          <Image
+                            src={member.userImg}
+                            alt={`${member.userName}'s image`}
+                            height={1000}
+                            width={1000}
+                            className="w-5 h-5 rounded-full"
+                          />
+                          <p>{member.userName}</p>
+                        </div>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         
         <LoadingButton 
           isLoading={form.formState.isSubmitting}
           loadingText="Saving"
         >Save</LoadingButton>
+
       </form>
     </Form>
     )

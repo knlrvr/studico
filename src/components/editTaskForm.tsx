@@ -1,13 +1,17 @@
 'use client'
 
 import { useEffect } from 'react'
+import { format } from "date-fns"
+import { Calendar as CalendarIcon } from "lucide-react"
+
+import { cn } from "@/lib/utils"
+import { Button } from './ui/button'
+import { Calendar } from './ui/calendar'
+
+
 import { z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-
-import { cn } from "@/lib/utils"
-import { format } from "date-fns"
-import { Calendar as CalendarIcon } from "lucide-react"
 
 import {
   Form,
@@ -28,17 +32,19 @@ import {
 
 import { Input } from "@/components/ui/input"
 import { LoadingButton } from './loadingButton'
+
 import { useQuery, useMutation } from 'convex/react'
 import { api } from '../../convex/_generated/api'
 import { Id } from '../../convex/_generated/dataModel'
-import { Textarea } from './ui/textarea'
-import { useUser } from '@clerk/nextjs'
-import { Button } from './ui/button'
 
-import { Calendar } from './ui/calendar'
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
+import { Textarea } from './ui/textarea'
+
+import { useUser } from '@clerk/nextjs'
 import { useProjectId } from '@/app/dashboard/projects/context'
+
+
 import Image from 'next/image'
+import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover'
 
 const formSchema = z.object({
   title: z.string(),
@@ -83,7 +89,7 @@ export default function EditTaskForm({
           category: '',
           priority: '',
           status: '',
-          date: '',
+          date: new Date().toISOString(),
         },
     })
 
@@ -96,7 +102,6 @@ export default function EditTaskForm({
                 category: currentTask.category,
                 priority: currentTask.priority,
                 status: currentTask.status,
-                date: currentTask.completeByDate || '',
             })
         }
     }, [currentTask, form])
@@ -110,7 +115,7 @@ export default function EditTaskForm({
         priority: values.priority,
         taskId: params?.taskId,
         status: values.status,
-        completeByDate: values?.date,
+        completeByDate: values.date,
         assignedTo: {
           userId: values.assignedTo?.userId as string,
           userName: values.assignedTo?.userName as string,
@@ -127,61 +132,6 @@ export default function EditTaskForm({
     return (
       <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-
-        <FormField
-          control={form.control}
-          name="assignedTo" 
-          render={({ field }) => (
-            <FormItem className='mt-4'>
-              <FormLabel>Assign</FormLabel>
-              <FormControl>
-                <Select
-                  onValueChange={(value) => {
-                    const selectedMember = getMembers?.members?.find(member => member.userId === value);
-                    field.onChange(selectedMember || null);
-                  }}
-                  value={field.value?.userId || ''} // Only the userId is used here for comparison
-                >
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Select a user">
-                      {field.value ? (
-                        <div className="flex gap-2 space-y-1 justify-start">
-                          <Image
-                            src={field.value.userImg}
-                            alt={`${field.value.userName}'s image`}
-                            height={1000}
-                            width={1000}
-                            className="w-5 h-5 rounded-full"
-                          />
-                          <p>{field.value.userName}</p>
-                        </div>
-                      ) : (
-                        "Select a user"
-                      )}
-                    </SelectValue>
-                  </SelectTrigger>
-                  <SelectContent>
-                    {getMembers?.members?.map((member) => (
-                      <SelectItem key={member.userId} value={member.userId}>
-                        <div className="flex gap-2 space-y-1 justify-start">
-                          <Image
-                            src={member.userImg}
-                            alt={`${member.userName}'s image`}
-                            height={1000}
-                            width={1000}
-                            className="w-5 h-5 rounded-full"
-                          />
-                          <p>{member.userName}</p>
-                        </div>
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
 
         <FormField
           control={form.control}
@@ -284,7 +234,6 @@ export default function EditTaskForm({
           )}
         />
         
-
         <FormField
           control={form.control}
           name="date"
@@ -327,10 +276,66 @@ export default function EditTaskForm({
           )}
         />
 
+        <FormField
+          control={form.control}
+          name="assignedTo" 
+          render={({ field }) => (
+            <FormItem className=''>
+              <FormLabel>Assign</FormLabel>
+              <FormControl>
+                <Select
+                  onValueChange={(value) => {
+                    const selectedMember = getMembers?.members?.find(member => member.userId === value);
+                    field.onChange(selectedMember || null);
+                  }}
+                  value={field.value?.userId || ''}
+                >
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Select a user">
+                      {field.value ? (
+                        <div className="flex gap-2 space-y-1 justify-start">
+                          <Image
+                            src={field.value.userImg}
+                            alt={`${field.value.userName}'s image`}
+                            height={1000}
+                            width={1000}
+                            className="w-5 h-5 rounded-full"
+                          />
+                          <p>{field.value.userName}</p>
+                        </div>
+                      ) : (
+                        "Select a user"
+                      )}
+                    </SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    {getMembers?.members?.map((member) => (
+                      <SelectItem key={member.userId} value={member.userId}>
+                        <div className="flex gap-2 space-y-1 justify-start">
+                          <Image
+                            src={member.userImg}
+                            alt={`${member.userName}'s image`}
+                            height={1000}
+                            width={1000}
+                            className="w-5 h-5 rounded-full"
+                          />
+                          <p>{member.userName}</p>
+                        </div>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <LoadingButton 
           isLoading={form.formState.isSubmitting}
           loadingText="Saving"
         >Save</LoadingButton>
+
       </form>
     </Form>
     )
