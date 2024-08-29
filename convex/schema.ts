@@ -69,18 +69,19 @@ export default defineSchema({
           userImg: v.string(),
           userName: v.string(),
       }),
-      assignedTo: v.optional(v.object({
+      assignedTo: v.object({
           userId: v.string(),
           userImg: v.string(),
           userName: v.string(),
-      })),
+      }),
       completedBy: v.optional(v.object({
           userId: v.string(),
           userImg: v.string(),
           userName: v.string(),
       }))
     }).index('by_projectId', ['projectId'])
-      .index('by_projectId_status', ['projectId', 'status']),
+      .index('by_projectId_status', ['projectId', 'status'])
+      .index('by_projectId_assignedTo', ['projectId', 'assignedTo.userId']),
     notifications: defineTable({
       tokenIdentifier: v.optional(v.string()),
       orgId: v.optional(v.string()),

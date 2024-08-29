@@ -2,12 +2,12 @@
 
 import AllTasks from "./allTasks"
 import CompletedTaskList from "./completedTaskList"
-import { DeleteProject } from "./deleteProject"
 import History from "./history"
 import IncompleteTaskList from "./incompleteTaskList"
 import Members from "./members"
 import { ProgressChart } from "./progressChart"
 import RecentProjectFilesPreview from "./recentProjectFilesPreview"
+import UserTasks from "./user-tasks"
 
 export function Overview() {
   
@@ -16,6 +16,10 @@ export function Overview() {
 
       <div className="">
         <ProgressChart />
+      </div>
+
+      <div className="">
+        <UserTasks />
       </div>
 
       <div className="">

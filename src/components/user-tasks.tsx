@@ -18,10 +18,9 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-import { useQuery } from "convex/react"
+import { useConvex, useQuery } from "convex/react"
 import { api } from "../../convex/_generated/api"
 
-import CreateTask from "./createTask"
 import { EditPriority } from "./editPriority"
 import { EditStatus } from "./editStatus"
 import TaskActions from "./taskActions"
@@ -29,8 +28,9 @@ import { useProjectId } from "@/app/dashboard/projects/context"
 
 import { futureDate } from "@/lib/utils"
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar"
+import { useClerk } from "@clerk/nextjs"
 
-export default function AllTasks() {
+export default function UserTasks() {
 
     const projectId = useProjectId();
 
@@ -38,18 +38,18 @@ export default function AllTasks() {
         projectId: projectId,
     })
 
-    const allTasks = useQuery(api.tasks.getTasks, {
-        projectId: projectId,
+    const userTasks = useQuery(api.tasks.getUserTasks, { 
+        projectId: projectId
     })
 
     return (
         <Card>
             <CardHeader className="px-6">
-                <CardTitle>All Tasks</CardTitle>
-                <CardDescription>All tasks for this project.</CardDescription>
+                <CardTitle>Your Tasks</CardTitle>
+                <CardDescription>These tasks have been assigned to you.</CardDescription>
             </CardHeader>
             <CardContent>
-                {allTasks?.length != undefined && allTasks?.length > 0 ? (
+                {userTasks?.length !== undefined && userTasks?.length > 0 ? (
                     <Table>
                         <TableHeader>
                             <TableRow>
@@ -63,7 +63,7 @@ export default function AllTasks() {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {allTasks?.map((task) => {
+                            {userTasks?.map((task) => {
                                 return (
                                     <TableRow key={task._id} className="">
                                         <TableCell>
@@ -129,12 +129,9 @@ export default function AllTasks() {
                         </TableBody>
                     </Table>
                 ) : (
-                    <p className="text-muted-foreground text-sm">No tasks found. Add one now!</p>
+                    <p className="text-muted-foreground text-sm">No tasks have been assigned to you.</p>
                 )}
             </CardContent>
-            <CardFooter className="flex justify-end">
-                <CreateTask />
-            </CardFooter>
         </Card>
     )
 }

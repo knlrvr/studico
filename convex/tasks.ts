@@ -57,9 +57,9 @@ export const createTask = mutation({
                 userName: userInfo?.name ?? userInfo?.preferredUsername as string,
             },
             assignedTo: {
-                userId: userInfo?.tokenIdentifier as string,
-                userImg: userInfo?.pictureUrl as string,
-                userName: userInfo?.name ?? userInfo?.preferredUsername as string,
+                userId: args.assignedTo?.userId as string,
+                userImg: args.assignedTo?.userImg as string,
+                userName: args.assignedTo?.userName as string,
             }
         })
     }
@@ -105,6 +105,7 @@ export const editTask = mutation({
                 'Not authenticated!'
             )
         }
+
         const newDetails = await ctx.db
             .patch(taskId, {
                 title: args.title,
@@ -140,7 +141,6 @@ export const getIncompletedTasks = query({
     return completedTasks;
     }
 })
-
 
 export const getCompletedTasks = query({
     args: {
@@ -209,7 +209,7 @@ export const editPriority = mutation({
         priority: v.string(),
     },
     async handler(ctx, args) {
-        const { taskId, priority } = args;
+        const { taskId } = args;
         const newPriority = await ctx.db
             .patch(taskId, {
                 priority: args.priority,
@@ -231,6 +231,30 @@ export const getCurrentTask = query({
         return currentTask;
     }
 });
+
+export const getUserTasks = query({
+    args: {
+        projectId: v.id('projects'),
+    },
+    async handler(ctx, args) {
+        const user = (await ctx.auth.getUserIdentity());
+
+        if(!user) {
+            throw new ConvexError(
+                'Not authenticated!'
+            )
+        }
+
+        const tasks = await ctx.db.query('tasks')
+        .withIndex('by_projectId_assignedTo', (q) => 
+                q.eq("projectId", args.projectId).eq("assignedTo.userId", user.tokenIdentifier)
+            )
+        .order('desc')
+        .collect();
+
+    return tasks;
+    }
+})
 
 export const deleteTask = mutation({
     args: {
