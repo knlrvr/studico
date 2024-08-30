@@ -70,7 +70,7 @@ export default function CollabAction() {
         )}
         {!projectOwner?.tokenIdentifier?.includes(user?.id as string) && (
             <AlertDialog>
-                <AlertDialogTrigger className="">
+                <AlertDialogTrigger className="" asChild>
                     <Button className="flex flex-col items-start gap-4 h-fit w-36 text-xs bg-red-500 hover:bg-red-600">
                         <LogOut className="w-4 h-4 rotate-180" />
                         <p className="tracking-wide">Leave Project</p>

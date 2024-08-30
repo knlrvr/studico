@@ -81,7 +81,8 @@ export default defineSchema({
       }))
     }).index('by_projectId', ['projectId'])
       .index('by_projectId_status', ['projectId', 'status'])
-      .index('by_projectId_assignedTo', ['projectId', 'assignedTo.userId']),
+      .index('by_projectId_assignedTo', ['projectId', 'assignedTo.userId'])
+      .index('by_projectId_completeByDate', ['projectId', 'completeByDate']),
     notifications: defineTable({
       tokenIdentifier: v.optional(v.string()),
       orgId: v.optional(v.string()),

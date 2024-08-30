@@ -1,5 +1,6 @@
 'use client'
 
+import { Suspense } from "react"
 import AllTasks from "./allTasks"
 import CompletedTaskList from "./completedTaskList"
 import History from "./history"
@@ -7,6 +8,7 @@ import IncompleteTaskList from "./incompleteTaskList"
 import Members from "./members"
 import { ProgressChart } from "./progressChart"
 import RecentProjectFilesPreview from "./recentProjectFilesPreview"
+import SkeletonTable from "./skeleton-table"
 import UserTasks from "./user-tasks"
 
 export function Overview() {
@@ -19,16 +21,24 @@ export function Overview() {
       </div>
 
       <div className="">
-        <UserTasks />
+        <Suspense fallback={<SkeletonTable />}>
+          <UserTasks />
+        </Suspense>
       </div>
 
       <div className="">
-        <AllTasks />
+        <Suspense fallback={<SkeletonTable />}>
+          <AllTasks />
+        </Suspense>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <IncompleteTaskList />
-        <CompletedTaskList />
+        <Suspense fallback={<SkeletonTable />}>
+          <IncompleteTaskList />
+        </Suspense>
+        <Suspense fallback={<SkeletonTable />}>
+          <CompletedTaskList />
+        </Suspense>
       </div>
 
       <div className="">
@@ -36,7 +46,9 @@ export function Overview() {
       </div>
 
       <div className="">
-        <History />
+        <Suspense fallback={<SkeletonTable />}>
+          <History />
+        </Suspense>
       </div>
 
       <div className="">

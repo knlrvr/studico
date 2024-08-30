@@ -159,19 +159,55 @@ export const getCompletedTasks = query({
     }
 })
 
-export const orderTasksByAge = query({
+// export const getTasksByDueDate = query({
+//     args: {
+//         projectId: v.id('projects'),
+//     },
+//     async handler(ctx, args) {
+//         const user = (await ctx.auth.getUserIdentity());
+
+//         if(!user) {
+//             throw new ConvexError(
+//                 'Not authenticated!'
+//             )
+//         }
+
+//         const tasks = await ctx.db.query('tasks')
+//         .withIndex('by_projectId_completeByDate', (q) => 
+//                 q.eq("projectId", args.projectId)
+//             )
+//         .order('desc')
+//         .collect();
+
+//     return tasks;
+//     }
+// })
+
+export const orderTasksByDueDate = query({
     args: {
-        projectId: v.id('projects')
+        projectId: v.id('projects'),
+        sortOrder: v.union(v.literal("asc"), v.literal("desc")), // Accept sortOrder as an argument
     },
     async handler(ctx, args) {
-        await ctx.db.query('tasks')
-        .withIndex('by_projectId', (q) => 
-            q.eq('projectId', args.projectId)    
-        )
-        .order('asc')
-        .collect();
+        const user = await ctx.auth.getUserIdentity();
+
+        if (!user) {
+            throw new ConvexError('Not authenticated!');
+        }
+
+        // Use the database index and sort by completeByDate directly
+        const tasks = await ctx.db.query('tasks')
+            .withIndex('by_projectId_completeByDate', (q) =>
+                q.eq("projectId", args.projectId)
+            )
+            .order(args.sortOrder === "desc" ? "desc" : "asc")
+            .collect();
+
+        return tasks;
     }
 });
+
+
 
 export const completeTask = mutation({
     args: {
