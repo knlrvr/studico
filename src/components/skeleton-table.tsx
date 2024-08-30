@@ -122,6 +122,27 @@ export default function SkeletonTable() {
                         <Skeleton className="w-6 h-6 rounded-full" />
                     </TableCell>
                   </TableRow>
+                  
+                  <TableRow className="">
+                    <TableCell>
+                      <Skeleton className="w-12 h-5 rounded-md" />
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell">
+                        <Skeleton className="w-12 h-5 rounded-md" />
+                    </TableCell>
+                    <TableCell className="hidden md:table-cell">
+                        <Skeleton className="w-12 h-5 rounded-md" />
+                    </TableCell>
+                    <TableCell className="hidden xl:table-cell">
+                    <Skeleton className="w-12 h-5 rounded-md" />
+                    </TableCell>
+                    <TableCell className="hidden lg:table-cell text-right text-xs">
+                        <Skeleton className="w-12 h-5 rounded-md" />
+                    </TableCell>
+                    <TableCell className="flex justify-end items-center">
+                        <Skeleton className="w-6 h-6 rounded-full" />
+                    </TableCell>
+                  </TableRow>
             </TableBody>
         </Table>
   )

@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -16,6 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 
@@ -90,7 +92,7 @@ export default function AllTasks() {
                   <TableRow key={task._id} className="">
                     <TableCell>
                       <div className="font-medium">{task.title}</div>
-                      <div className="hidden text-sm text-muted-foreground lg:inline">
+                      <div className="hidden text-sm text-muted-foreground xl:inline">
                         {task.description}
                       </div>
                     </TableCell>

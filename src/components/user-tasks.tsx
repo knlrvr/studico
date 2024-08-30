@@ -1,10 +1,11 @@
+import { useState } from "react"
+
 import { Badge } from "@/components/ui/badge"
 
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -18,7 +19,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-import { useConvex, useQuery } from "convex/react"
+import { useQuery } from "convex/react"
 import { api } from "../../convex/_generated/api"
 
 import { EditPriority } from "./editPriority"
@@ -28,7 +29,10 @@ import { useProjectId } from "@/app/dashboard/projects/context"
 
 import { futureDate } from "@/lib/utils"
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar"
-import { useClerk } from "@clerk/nextjs"
+
+import { Button } from "./ui/button"
+import SkeletonTable from "./skeleton-table"
+import { ArrowUpDown } from "lucide-react"
 
 export default function UserTasks() {
 
@@ -41,6 +45,8 @@ export default function UserTasks() {
     const userTasks = useQuery(api.tasks.getUserTasks, { 
         projectId: projectId
     })
+
+    const isLoading = userTasks === undefined;
 
     return (
         <Card>
@@ -57,7 +63,7 @@ export default function UserTasks() {
                                 <TableHead className="hidden sm:table-cell">Category</TableHead>
                                 <TableHead className="hidden md:table-cell">Priority</TableHead>
                                 <TableHead className="hidden xl:table-cell">Status</TableHead>
-                                <TableHead className="hidden lg:table-cell text-right">Due</TableHead>
+                                <TableHead className="hidden lg:table-cell text-right">Due</TableHead>                                
                                 <TableHead className="text-right">Assigned</TableHead>
                                 <TableHead className="text-right">Actions</TableHead>
                             </TableRow>
@@ -68,7 +74,7 @@ export default function UserTasks() {
                                     <TableRow key={task._id} className="">
                                         <TableCell>
                                             <div className="font-medium">{task.title}</div>
-                                            <div className="hidden text-sm text-muted-foreground lg:inline">
+                                            <div className="hidden text-sm text-muted-foreground xl:inline">
                                                 {task.description}
                                             </div>
                                         </TableCell>
