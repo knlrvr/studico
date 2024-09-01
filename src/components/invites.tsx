@@ -32,7 +32,7 @@ export default function Invites() {
     return (
         <Dialog>
             <DialogTrigger className="flex justify-start w-fit" asChild>
-                <Button variant='ghost' size='icon' className="relative">
+                <Button variant='ghost' size='icon' className="relative h-fit">
                     <UserRoundPlus className="w-4 h-4" />
                     {hasNewInvites && (
                         <div className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-green-500 text-xs text-background pr-[0.1rem]">
