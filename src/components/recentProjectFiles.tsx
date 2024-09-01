@@ -80,7 +80,7 @@ export default function RecentProjectFiles() {
                                         </div>
                                     )}  
                                 </CardContent>
-                                <CardFooter className="py-1 text-sm flex justify-center">{formatFileName(file.name)}</CardFooter>
+                                <CardFooter className="py-1 text-sm flex justify-center italic">{formatFileName(file.name)}</CardFooter>
                             </Card>
                         </Link>
                     ))}

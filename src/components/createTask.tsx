@@ -20,7 +20,7 @@ export default function CreateTask() {
                     <p className="text-xs tracking-wide">New Task</p>
                 </Button>
             </SheetTrigger>
-            <SheetContent className="overflow-scroll">
+            <SheetContent className="overflow-scroll hide-scroll">
                 <SheetHeader>
                 <SheetTitle>Create Task</SheetTitle>
                 <SheetDescription>

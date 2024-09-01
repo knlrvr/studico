@@ -90,7 +90,7 @@ export default function RecentProjectFilesPreview() {
                                     <File className="w-16 h-16" />
                                 )}  
                       </TableCell>
-                      <TableCell className="font-medium text-right text-neutral-500">{file.name}</TableCell>
+                      <TableCell className="font-medium text-right text-muted-foreground">{file.name}</TableCell>
                   </TableRow>
                   )
               })}
