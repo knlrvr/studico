@@ -7,11 +7,12 @@ import { api } from "../../../convex/_generated/api";
 import ProjectCard from "@/components/projectCard";
 import CreateProject from "@/components/createProject";
 import Invites from "@/components/invites";
+import { Suspense } from "react";
+import SkeletonCard from "@/components/skeleton-card";
 
 export default function Home() {
 
   const organization = useOrganization();
-  const { user } = useUser();
 
   const projects = useQuery(api.projects.getProjects, {
     orgId: organization.organization?.id,
@@ -35,8 +36,10 @@ export default function Home() {
 
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mb-6">
           {projects?.map((project) => (
-            <ProjectCard key={project._id} project={project} />
-          ))}
+            <Suspense key={project._id} fallback={<SkeletonCard />}>
+              <ProjectCard project={project} />
+            </Suspense>
+          ))} 
         </div>
 
       </Authenticated>

@@ -34,7 +34,6 @@ export default function RecentProjectFiles() {
                 <span className="text-sm">Recently uploaded files &mdash;</span>
                 <div className="mt-4 mb-8 grid gap-4 grid-cols-3 sm:grid-cols-4 md:grid-cols-5 max-w-2xl">
                     {files?.map((file) => (
-                        <>
                         <Link key={file._id} href={file.fileUrl as string} target="_blank">
                             <Card 
                                 className="border-none rounded-lg shadow-none flex flex-col justify-between hover:bg-neutral-100 dark:hover:bg-[#222] transition-colors duration-150 py-2"
@@ -84,7 +83,6 @@ export default function RecentProjectFiles() {
                                 <CardFooter className="py-1 text-sm flex justify-center">{formatFileName(file.name)}</CardFooter>
                             </Card>
                         </Link>
-                        </>
                     ))}
                 </div>
                 </>

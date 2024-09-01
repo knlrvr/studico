@@ -31,7 +31,7 @@ export default function Invites() {
 
     return (
         <Dialog>
-            <DialogTrigger className="flex justify-start w-fit">
+            <DialogTrigger className="flex justify-start w-fit" asChild>
                 <Button variant='ghost' size='icon' className="relative">
                     <UserRoundPlus className="w-4 h-4" />
                     {hasNewInvites && (

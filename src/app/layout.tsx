@@ -5,8 +5,6 @@ import { Providers } from "./providers";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
 
-// import "@knocklabs/react-notification-feed/dist/index.css";
-
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
