@@ -1,5 +1,5 @@
 import { useProjectId } from "@/app/dashboard/projects/context";
-import { DeleteProject } from "./deleteProject";
+import { DeleteProject } from "./delete-project";
 import Members from "./members";
 
 import { useQuery } from "convex/react";

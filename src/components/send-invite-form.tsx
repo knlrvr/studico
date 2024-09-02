@@ -10,7 +10,7 @@ import {
   FormItem,
   FormMessage,
 } from '@/components/ui/form';
-import { LoadingButton } from './loadingButton';
+import { LoadingButton } from './loading-button';
 import { useMutation, useQuery } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import { useProjectId } from '@/app/dashboard/projects/context';

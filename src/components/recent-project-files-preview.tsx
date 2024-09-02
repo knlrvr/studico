@@ -24,7 +24,7 @@ import {
 
 import { useQuery } from "convex/react"
 import { api } from "../../convex/_generated/api"
-import ImagePreview from "./imagePreview"
+import ImagePreview from "./image-preview"
 import { useProjectId } from "@/app/dashboard/projects/context"
 
 export default function RecentProjectFilesPreview() {

@@ -17,7 +17,7 @@ import { AudioLines, Ellipsis, File, FileText, Images} from "lucide-react"
 
 import { Id } from "../../convex/_generated/dataModel"
 import Link from "next/link"
-import ImagePreview from "./imagePreview"
+import ImagePreview from "./image-preview"
 
 import {
     DropdownMenu,
@@ -28,9 +28,9 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"  
 
-import SearchBar from "./projectSearch"
+import SearchBar from "./project-search"
 import { useState } from "react"
-import DeleteProjectFile from "./deleteProjectFile"
+import DeleteProjectFile from "./delete-project-file"
 import { useProjectId } from "@/app/dashboard/projects/context"
 
 export default function ProjectFiles() {

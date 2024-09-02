@@ -4,8 +4,8 @@ import { useOrganization, useUser } from "@clerk/nextjs";
 import { Authenticated, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 
-import ProjectCard from "@/components/projectCard";
-import CreateProject from "@/components/createProject";
+import ProjectCard from "@/components/project-card";
+import CreateProject from "@/components/create-project";
 import Invites from "@/components/invites";
 import { Suspense } from "react";
 import SkeletonCard from "@/components/skeleton-card";

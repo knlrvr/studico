@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/form"
 
 import { Input } from "@/components/ui/input"
-import { LoadingButton } from './loadingButton'
+import { LoadingButton } from './loading-button'
 import { Search } from 'lucide-react'
 import { Dispatch, SetStateAction, useEffect } from 'react'
 
@@ -22,7 +22,7 @@ const formSchema = z.object({
   query: z.string().min(0).max(50),
 })
 
-export default function SearchBar({
+export default function UserSearchBar({
     query,
     setQuery
 } : {
@@ -50,10 +50,10 @@ export default function SearchBar({
     };
 
     return (
+        <>
       <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-center w-full space-x-4 pt-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-center w-full space-x-4">
         <Search className='w-4 h-4' />
-
         <FormField
           control={form.control}
           name="query"
@@ -74,5 +74,6 @@ export default function SearchBar({
         />
       </form>
     </Form>
+    </>
     )
 }

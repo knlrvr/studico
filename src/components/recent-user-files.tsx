@@ -7,32 +7,26 @@ import {
 import { 
     AudioLines, 
     File, 
-    FileText
+    FileText 
 } from "lucide-react"
   
 import { useQuery } from "convex/react"
 import { api } from "../../convex/_generated/api"
-import ImagePreview from "./imagePreview"
+import ImagePreview from "./image-preview"
 import { formatFileName } from "@/lib/utils"
 import Link from "next/link"
-import { useProjectId } from "@/app/dashboard/projects/context"
   
-export default function RecentProjectFiles() {
+export default function RecentUserFiles({}) {
   
-    const projectId = useProjectId();
-  
-    const files = useQuery(api.files.getRecentFilesForProject, {
-      projectId,
-    })
+    const files = useQuery(api.files.getRecentFilesForUser)
   
     return (
         <div className="mt-8">
   
-
             {files?.length !== undefined && files?.length > 0 && (
                 <>
-                <span className="text-sm">Recently uploaded files &mdash;</span>
-                <div className="mt-4 mb-8 grid gap-4 grid-cols-3 sm:grid-cols-4 md:grid-cols-5 max-w-2xl">
+                <span className="text-sm text-muted-foreground">Recently uploaded files &mdash;</span>
+                <div className="mt-4 mb-12 grid gap-4 grid-cols-3 sm:grid-cols-4 md:grid-cols-5">
                     {files?.map((file) => (
                         <Link key={file._id} href={file.fileUrl as string} target="_blank">
                             <Card 
@@ -80,7 +74,7 @@ export default function RecentProjectFiles() {
                                         </div>
                                     )}  
                                 </CardContent>
-                                <CardFooter className="py-1 text-sm flex justify-center italic">{formatFileName(file.name)}</CardFooter>
+                                <CardFooter className="py-1 text-sm flex justify-center">{formatFileName(file.name)}</CardFooter>
                             </Card>
                         </Link>
                     ))}

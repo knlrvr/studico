@@ -1,9 +1,9 @@
 'use client'
 
 import { Authenticated } from "convex/react";
-import UserFiles from "@/components/UserFiles";
+import UserFiles from "@/components/user-files";
 import UploadFileUserButton from "@/components/uploadFileUserButton";
-import RecentUserFiles from "@/components/recentUserFiles";
+import RecentUserFiles from "@/components/recent-user-files";
 
 export default function FilesPage() {
 

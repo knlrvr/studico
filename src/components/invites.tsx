@@ -12,7 +12,7 @@ import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { UserRoundPlus } from "lucide-react";
 import { Button } from "./ui/button";
-import InviteAction from "./inviteAction";
+import InviteAction from "./invite-action";
 import { useState } from "react";
 
 export default function Invites() {

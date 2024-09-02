@@ -6,7 +6,7 @@ import { z } from "zod"
 
 import { useMutation, useQuery } from "convex/react"
 import { api } from "../../convex/_generated/api"
-import { LoadingButton } from "./loadingButton"
+import { LoadingButton } from "./loading-button"
 
 import { Id } from "../../convex/_generated/dataModel"
 import { useUser } from "@clerk/nextjs"

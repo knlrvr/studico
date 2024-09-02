@@ -21,10 +21,10 @@ import {
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 
-import CreateTask from "./createTask";
-import { EditPriority } from "./editPriority";
-import { EditStatus } from "./editStatus";
-import TaskActions from "./taskActions";
+import CreateTask from "./create-task";
+import { EditPriority } from "./edit-priority";
+import { EditStatus } from "./edit-status";
+import TaskActions from "./task-actions";
 import { useProjectId } from "@/app/dashboard/projects/context";
 
 import { futureDate } from "@/lib/utils";

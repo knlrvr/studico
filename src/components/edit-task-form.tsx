@@ -31,7 +31,7 @@ import {
 } from "@/components/ui/select"
 
 import { Input } from "@/components/ui/input"
-import { LoadingButton } from './loadingButton'
+import { LoadingButton } from './loading-button'
 
 import { useQuery, useMutation } from 'convex/react'
 import { api } from '../../convex/_generated/api'

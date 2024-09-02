@@ -15,7 +15,7 @@ import { api } from "../../convex/_generated/api"
 
 import { AudioLines, Ellipsis, File, FileText, SquareArrowOutUpRight } from "lucide-react"
 
-import ImagePreview from "./imagePreview"
+import ImagePreview from "./image-preview"
 import Link from "next/link"
 
 import {
@@ -27,9 +27,9 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-import UserSearchBar from "./userSearch"
+import UserSearchBar from "./user-search"
 import { useState } from "react"
-import DeleteUserFile from "./deleteUserFile"
+import DeleteUserFile from "./delete-user-file"
 
 export default function UserFiles() {
 

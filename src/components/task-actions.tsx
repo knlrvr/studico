@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/sheet"
 import { PanelRightOpen } from "lucide-react"
 import { Id } from "../../convex/_generated/dataModel"
-import EditTaskForm from "./editTaskForm"
+import EditTaskForm from "./edit-task-form"
 
 export default function TaskActions({
     params,

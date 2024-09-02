@@ -24,7 +24,7 @@ import {
 import { Button } from "./ui/button"
 import { LogOut, Plus } from "lucide-react"
 import { useState } from "react";
-import SendInviteForm from "./sendInviteForm";
+import SendInviteForm from "./send-invite-form";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { useProjectId } from "@/app/dashboard/projects/context";

@@ -22,7 +22,7 @@ import { useMutation, useQuery } from "convex/react"
 import { api } from "../../convex/_generated/api"
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
 
-import CreateTask from "./createTask"
+import CreateTask from "./create-task"
 import {  Ellipsis } from "lucide-react"
 
 import { 

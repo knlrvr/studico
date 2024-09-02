@@ -7,11 +7,11 @@ import { Id } from "../../../../../convex/_generated/dataModel";
 import { Loader2, Settings } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import ProjectMessages from "@/components/messages";
-import ProjectFiles from "@/components/projectFiles";
-import UploadFileProjectButton from "@/components/uploadFileProjectButton";
+import ProjectFiles from "@/components/project-files";
+import UploadFileProjectButton from "@/components/upload-file-project-button";
 import { Overview } from "@/components/overview";
 import { Notifications } from "@/components/notifications";
-import RecentProjectFiles from "@/components/recentProjectFiles";
+import RecentProjectFiles from "@/components/recent-project-files";
 import { ProjectProvider } from "../context";
 import Link from "next/link";
 import SettingsContent from "@/components/settings";
@@ -100,7 +100,3 @@ export default function ProjectPage({
     </main>
   );
 }
-
-// j576djbf14k3ybh4yen9xwp1ax6y5cec
-
-// j576djbf14k3ybh4yen9xwp1ax6y5cec

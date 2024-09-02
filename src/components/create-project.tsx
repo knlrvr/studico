@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog"
 
 import { useState } from "react";
-import CreateProjectForm from "./createProjectForm";
+import CreateProjectForm from "./create-project-form";
 
 export default function CreateProject() {
 

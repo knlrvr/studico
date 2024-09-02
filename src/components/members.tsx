@@ -26,7 +26,7 @@ import {
     SheetTrigger,
   } from "@/components/ui/sheet"
   
-import CollabAction from "./collabAction";
+import CollabAction from "./collab-action";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { useProjectId } from "@/app/dashboard/projects/context";

@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dialog"  
 import { ArrowUpFromLine } from "lucide-react"
 import { useState } from "react"
-import UploadFileToProject from "./uploadFileToProject"
+import UploadFileToProject from "./upload-file-to-project"
 import { useProjectId } from "@/app/dashboard/projects/context"
 
 export default function UploadFileProjectButton() {

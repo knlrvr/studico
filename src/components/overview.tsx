@@ -1,13 +1,13 @@
 'use client'
 
 import { Suspense } from "react"
-import AllTasks from "./allTasks"
-import CompletedTaskList from "./completedTaskList"
+import AllTasks from "./all-tasks"
+import CompletedTaskList from "./completed-task-list"
 import History from "./history"
 import IncompleteTaskList from "./incompleteTaskList"
 import Members from "./members"
-import { ProgressChart } from "./progressChart"
-import RecentProjectFilesPreview from "./recentProjectFilesPreview"
+import { ProgressChart } from "./progress-chart"
+import RecentProjectFilesPreview from "./recent-project-files-preview"
 import SkeletonTable from "./skeleton-table"
 import UserTasks from "./user-tasks"
 

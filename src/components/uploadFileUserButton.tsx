@@ -13,7 +13,7 @@ import {
 import { ArrowUpFromLine } from "lucide-react"
 import { useState } from "react"
 
-import UploadFileToUser from "./uploadFileToUser"
+import UploadFileToUser from "./upload-file-to-user"
 
 export default function UploadFileUserButton() {
 

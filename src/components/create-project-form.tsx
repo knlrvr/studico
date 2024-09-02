@@ -15,7 +15,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { useMutation } from "convex/react"
 import { api } from "../../convex/_generated/api"
-import { LoadingButton } from "./loadingButton"
+import { LoadingButton } from "./loading-button"
 import { useOrganization } from "@clerk/nextjs"
 
 const formSchema = z.object({
