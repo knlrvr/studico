@@ -1,7 +1,6 @@
 'use client'
 
 import Link from "next/link"
-import { Authenticated, Unauthenticated } from "convex/react"
 import { SignInButton, useClerk } from "@clerk/nextjs"
 import { Button } from "@/components/ui/button"
 import { ArrowUpRight } from "lucide-react"

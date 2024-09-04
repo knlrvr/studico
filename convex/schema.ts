@@ -9,6 +9,31 @@ export default defineSchema({
       tokenIdentifier: v.string(),
     })
     .index('by_tokenIdentifier', ['tokenIdentifier']),
+    posts: defineTable({
+      author: v.object({
+        userId: v.string(),
+        userImg: v.string(),
+        userName: v.string(),
+      }),
+      body: v.string(),
+      likes: v.optional(
+        v.array(v.object({
+          userId: v.string(),
+          userImg: v.string(),
+          userName: v.string(),
+        })
+      )),
+      userImg: v.optional(v.string()),
+      userName: v.optional(v.string()),
+      comments: v.optional(
+        v.array(v.object({
+          userId: v.string(),
+          userImg: v.string(),
+          userName: v.string(),
+          comment: v.string(),
+        }))
+      ),
+    }),
     memberships: defineTable({
       orgId: v.string(),
       userId: v.string(),
@@ -55,7 +80,6 @@ export default defineSchema({
         projectId: v.optional(v.id("projects")),
         tokenIdentifier: v.optional(v.string()),
     }).index("by_projectId", ["projectId"]),
-      // index by token for user messages (soon)
     tasks: defineTable({
       projectId: v.id('projects'),
       title: v.string(),

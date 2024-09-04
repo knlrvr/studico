@@ -1,6 +1,6 @@
 'use client'
 
-import { useOrganization, useUser } from "@clerk/nextjs";
+import { useOrganization } from "@clerk/nextjs";
 import { Authenticated, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 
@@ -10,7 +10,7 @@ import Invites from "@/components/invites";
 import { Suspense } from "react";
 import SkeletonCard from "@/components/skeleton-card";
 
-export default function Home() {
+export default function Projects() {
 
   const organization = useOrganization();
 

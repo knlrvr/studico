@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
-import { Bell, Box, Folder, LayoutDashboard, Menu, MessageSquare, Search, Settings, User } from "lucide-react"
+import { Box, Folder, Menu, GalleryVertical } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
@@ -14,10 +14,23 @@ export default function Component() {
   return (
     <header className="fixed z-[20] sm:border-r bg-background sm:min-h-screen">
       <div className="p-4">
-        <Link href="/dashboard" className="w-fit">
+        <Link href="/dashboard/feed" className="w-fit">
           <span className="hidden sm:inline-block font-extrabold tracking-wider text-xl bg-primary w-fit p-2 rounded-md text-background">Studico</span>
         </Link>
         <nav className="hidden mt-9 items-start gap-2 text-sm font-medium sm:flex flex-col w-40">
+          <Link
+            href="/dashboard/feed"
+            className={cn(
+                "p-2 rounded-lg w-full flex items-center gap-2 transition-colors duration-150 hover:bg-neutral-100 dark:hover:text-background",
+                {
+                    'bg-neutral-200 hover:bg-neutral-200 dark:bg-[#222] dark:hover:text-white': pathname.endsWith('/feed')
+                }
+                )}
+            prefetch={false}
+          >
+            <GalleryVertical className="w-5 h-5" />
+            <span>Feed</span>
+          </Link>
           <Link
             href="/dashboard"
             className={cn(
@@ -58,6 +71,10 @@ export default function Component() {
                 <span className="font-extrabold tracking-wider text-xl bg-primary w-fit p-2 rounded-md text-background">Studico</span>
               </Link>
               <nav className="grid gap-8 mt-10">
+                <Link href="/dashboard/feed" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
+                  <GalleryVertical className="w-5 h-5" />
+                  <span>Feed</span> 
+                </Link>
                 <Link href="/dashboard" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
                   <Box className="w-5 h-5" />
                   <span>Projects</span> 

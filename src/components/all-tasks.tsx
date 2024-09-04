@@ -67,10 +67,11 @@ export default function AllTasks() {
             <TableHeader>
               <TableRow>
                 <TableHead>Task</TableHead>
+                <TableHead></TableHead>
                 <TableHead className="hidden sm:table-cell">Category</TableHead>
                 <TableHead className="hidden md:table-cell">Priority</TableHead>
                 <TableHead className="hidden xl:table-cell">Status</TableHead>
-                <TableHead className="hidden lg:table-cell">
+                <TableHead className="hidden lg:table-cell text-right">
                   <div className="flex items-center gap-2 justify-end">
                     Due
                     <Button
@@ -90,7 +91,7 @@ export default function AllTasks() {
               {orderedTasks?.map((task) => {
                 return (
                   <TableRow key={task._id} className="">
-                    <TableCell>
+                    <TableCell colSpan={2}>
                       <div className="font-medium">{task.title}</div>
                       <div className="hidden text-sm text-muted-foreground xl:inline">
                         {task.description}

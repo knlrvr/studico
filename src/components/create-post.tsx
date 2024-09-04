@@ -1,0 +1,54 @@
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+  } from "@/components/ui/dialog"
+  import { Button } from "@/components/ui/button"
+import CreatePostForm from "./create-post-form"
+import Image from "next/image"
+import { useUser } from "@clerk/nextjs"
+import { Avatar, AvatarImage } from "./ui/avatar"
+import { useState } from "react"
+  
+  export function CreatePost() {
+
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const { user } = useUser();
+
+    return (
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button variant="outline" className="py-8 w-full flex items-center justify-start gap-4">
+            <Image
+                src={`${user?.imageUrl}`}
+                alt={`${user?.fullName}'s image`}
+                width={1000}
+                height={1000}
+                className="w-8 h-8 rounded-full"
+            />
+            <span className="text-muted-foreground">Share something with the community...</span>
+          </Button>
+        </DialogTrigger>
+        <DialogContent className="">
+          <DialogHeader>
+            <div className="flex items-center gap-2">
+                <Avatar className="">
+                    <AvatarImage 
+                        src={user?.imageUrl} 
+                        alt={`${user?.fullName}'s picture`} 
+                        className="w-8 h-8 rounded-full"
+                    />
+                </Avatar>
+                <span className="text-muted-foreground text-sm mb-2">{user?.fullName}</span>
+            </div>
+            <CreatePostForm onSave={() => setIsOpen(!isOpen)} />
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
+    )
+  }
+  

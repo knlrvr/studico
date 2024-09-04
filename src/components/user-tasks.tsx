@@ -30,10 +30,6 @@ import { useProjectId } from "@/app/dashboard/projects/context"
 import { futureDate } from "@/lib/utils"
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar"
 
-import { Button } from "./ui/button"
-import SkeletonTable from "./skeleton-table"
-import { ArrowUpDown } from "lucide-react"
-
 export default function UserTasks() {
 
     const projectId = useProjectId();
@@ -45,8 +41,6 @@ export default function UserTasks() {
     const userTasks = useQuery(api.tasks.getUserTasks, { 
         projectId: projectId
     })
-
-    const isLoading = userTasks === undefined;
 
     return (
         <Card>
@@ -60,6 +54,7 @@ export default function UserTasks() {
                         <TableHeader>
                             <TableRow>
                                 <TableHead>Task</TableHead>
+                                <TableHead></TableHead>
                                 <TableHead className="hidden sm:table-cell">Category</TableHead>
                                 <TableHead className="hidden md:table-cell">Priority</TableHead>
                                 <TableHead className="hidden xl:table-cell">Status</TableHead>
@@ -72,7 +67,7 @@ export default function UserTasks() {
                             {userTasks?.map((task) => {
                                 return (
                                     <TableRow key={task._id} className="">
-                                        <TableCell>
+                                        <TableCell colSpan={2}>
                                             <div className="font-medium">{task.title}</div>
                                             <div className="hidden text-sm text-muted-foreground xl:inline">
                                                 {task.description}
