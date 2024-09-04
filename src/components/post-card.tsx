@@ -114,7 +114,7 @@ export default function PostCard({
               <AvatarFallback>{name.charAt(0)}</AvatarFallback>
             </Avatar>
             <div className="flex flex-col">
-              <span className="">{name}</span>
+              <span className="text-sm font-medium">{name}</span>
               <span className="text-xs text-muted-foreground">{date}</span>
             </div>
           </div>

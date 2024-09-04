@@ -72,7 +72,7 @@ export default function PostPage({
                         />
                         <div className="flex flex-col">
                             <div className="flex flex-col space-y-1 bg-neutral-200 dark:bg-[#222] dark:bg-opacity-50 w-fit rounded-lg px-3 py-1.5 pb-2">
-                                <span className="text-sm text-neutral-500 dark:text-muted-foreground font-medium">{comment.author.userName}</span>
+                                <span className="text-sm text-muted-foreground">{comment.author.userName}</span>
                                 <p className="text-sm tracking-wide">{comment.comment}</p>
                             </div>
 
