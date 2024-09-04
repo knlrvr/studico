@@ -10,6 +10,15 @@ export function cn(...inputs: ClassValue[]) {
 export function timeAgo(milliseconds: number) {
   const now = Date.now();
   const diffInSeconds = Math.floor((now - milliseconds) / 1000);
+  const diffInDays = diffInSeconds / 86400;
+
+  if (diffInDays > 1) {
+    const date = new Date(milliseconds);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // getMonth() is zero-based
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  }
 
   const units = [
     { name: 'year', seconds: 31536000 },
@@ -23,12 +32,13 @@ export function timeAgo(milliseconds: number) {
   for (const unit of units) {
     const count = Math.floor(diffInSeconds / unit.seconds);
     if (count >= 1) {
-      return `${count} ${unit.name}${count > 1 ? 's' : ''} ago`
+      return `${count} ${unit.name}${count > 1 ? 's' : ''} ago`;
     }
   }
 
   return 'just now';
 }
+
 
 // date
 export function timeStamp(unixtime: number): string {

@@ -43,7 +43,10 @@ import { useState } from "react"
                         className="w-8 h-8 rounded-full"
                     />
                 </Avatar>
-                <span className="text-muted-foreground text-sm mb-2">{user?.fullName}</span>
+                <div className="flex flex-col -mt-2">
+                  <span className="text-sm">{user?.fullName}</span>
+                  <span className="text-xs text-muted-foreground">Everyone will see this</span>
+                </div>
             </div>
             <CreatePostForm onSave={() => setIsOpen(!isOpen)} />
           </DialogHeader>

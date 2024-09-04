@@ -75,7 +75,7 @@ export default function CreatePostForm({
               value={post}
               onChange={(e) => setPost(e.target.value)}
               required
-              className="hide-scroll w-full border px-2 py-1.5 rounded-md placeholder:text-neutral-500 text-sm overflow-scroll"
+              className="hide-scroll w-full border px-2 py-1.5 rounded-md placeholder:text-neutral-500 text-sm overflow-scroll bg-transparent"
             />
 
           </div>

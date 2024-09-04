@@ -25,15 +25,26 @@ export default defineSchema({
       )),
       userImg: v.optional(v.string()),
       userName: v.optional(v.string()),
-      comments: v.optional(
-        v.array(v.object({
-          userId: v.string(),
-          userImg: v.string(),
-          userName: v.string(),
-          comment: v.string(),
-        }))
-      ),
+      commentsCount: v.number(),
+      bookmarksCount: v.number(),
     }),
+    comments: defineTable({
+      postId: v.id('posts'),
+      author: v.object({
+        userId: v.string(),
+        userImg: v.string(),
+        userName: v.string(),
+      }),
+      comment: v.string(),
+    })
+    .index('by_postId', ['postId'])
+    .index('by_author', ['author.userId']),
+    bookmarks: defineTable({
+      userId: v.string(),
+      postId: v.id('posts'),
+    })
+    .index('by_userId', ['userId'])
+    .index('by_userId_postId', ['userId', 'postId']),
     memberships: defineTable({
       orgId: v.string(),
       userId: v.string(),

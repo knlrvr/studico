@@ -2,9 +2,15 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { Avatar, AvatarFallback } from "@radix-ui/react-avatar"
-import { Card, CardContent, CardHeader } from "./ui/card"
+import { Card, CardContent, CardFooter, CardHeader } from "./ui/card"
 import { AvatarImage } from "./ui/avatar"
 import { Button } from "./ui/button"
+import LinkFormatter from './link-formatter'
+import { Bookmark, Heart, MessageCircle } from 'lucide-react'
+import { useMutation } from 'convex/react'
+import { api } from '../../convex/_generated/api'
+import { useUser } from '@clerk/nextjs'
+import { Id } from '../../convex/_generated/dataModel'
 
 function TruncatedText({ text, maxLines = 4 }: { text: string; maxLines?: number }) {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -27,9 +33,9 @@ function TruncatedText({ text, maxLines = 4 }: { text: string; maxLines?: number
 
   return (
     <div>
-      <p
+      <div
         ref={textRef}
-        className={`leading-6 ${
+        className={`leading-6 whitespace-pre-wrap break-words ${
           !isExpanded && isTruncated
             ? `overflow-hidden`
             : ''
@@ -44,8 +50,8 @@ function TruncatedText({ text, maxLines = 4 }: { text: string; maxLines?: number
             : {}
         }
       >
-        {text}
-      </p>
+        <LinkFormatter postBody={text} />
+      </div>
       {isTruncated && (
         <Button
           variant="link"
@@ -63,13 +69,28 @@ export default function PostCard({
   name,
   image,
   body,
-  date
+  date,
+  likes, 
+  comments,
+  postId,
+  userHasLiked,
 }: {
   name: string, 
   image: string, 
   body: string,
   date: string,
+  likes: string, 
+  comments: string,
+  postId: Id<'posts'>,
+  userHasLiked: boolean,
 }) {
+
+  const { user } = useUser();
+
+  const likePost = useMutation(api.posts.addLike);
+  const removeLike = useMutation(api.posts.removeLike);
+
+  const bookmarkPost = useMutation(api.bookmarks.bookmarkPost);
 
   return (
     <Card className="p-0 ml-2 shadow-none border-t-0 border-l-0 border-r-0 border-b border-muted-background rounded-none w-full">
@@ -92,9 +113,66 @@ export default function PostCard({
         </div>
       </CardHeader>
 
-      <CardContent className="p-0 mt-4 text-sm pb-12">
+      <CardContent className="p-0 mt-4 text-sm pb-8">
         <TruncatedText text={body} />
       </CardContent>
+
+      <CardFooter className='p-0 pb-4'>
+        <div className="flex justify-between w-full">
+
+          <div className="flex items-center gap-6">
+            {userHasLiked ? (
+              <Button variant='ghost' 
+                className='p-0 h-fit hover:bg-transparent transition-colors duration-150 text-red-500 hover:text-red-500'
+                onClick={() => {
+                  removeLike({
+                    userId: user?.id as string,
+                    userImg: user?.imageUrl as string, 
+                    userName: user?.fullName as string,
+                    postId: postId as Id<'posts'>,
+                  })
+                }}
+              ><Heart className="w-5 h-5" />
+              </Button>
+            ): (
+              <Button variant='ghost' 
+                className='p-0 h-fit hover:bg-transparent hover:text-red-500 transition-colors duration-150 '
+                onClick={() => {
+                  likePost({
+                    userId: user?.id as string,
+                    userImg: user?.imageUrl as string, 
+                    userName: user?.fullName as string,
+                    postId: postId as Id<'posts'>,
+                  })
+                }}
+              ><Heart className="w-5 h-5" />
+              </Button>
+            )}
+            <Button variant='ghost' className="p-0 h-fit hover:bg-transparent hover:text-blue-400 transition-colors duration-150"
+
+            ><MessageCircle className='w-5 h-5' />
+            </Button>
+
+            {/* eventually */}
+            {/* <Button 
+              variant='ghost' 
+              className='p-0 h-fit hover:bg-transparent transition-colors duration-150 hover:text-amber-300'
+              onClick={() => {
+                bookmarkPost({
+                  postId: postId as Id<'posts'>
+                })
+              }}
+            ><Bookmark className="w-5 h-5" />
+            </Button> */}
+          </div>
+
+          <div className="text-xs text-muted-foreground flex items-center gap-1">
+            <p>{likes} likes</p>
+            <p>&bull;</p>
+            <p>{comments} comments</p>
+          </div>
+        </div>
+      </CardFooter>
     </Card>
   )
 }

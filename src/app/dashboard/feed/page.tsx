@@ -14,10 +14,11 @@ import { timeAgo } from '@/lib/utils';
 import { useUser } from '@clerk/nextjs';
 import { PostActions } from '@/components/post-actions';
 import { CreatePost } from '@/components/create-post';
+import { Id } from '../../../../convex/_generated/dataModel';
 
 export default function Feed() {
     const posts = useQuery(api.posts.getPosts);
-
+    
     const { user } = useUser();
 
     return (
@@ -26,31 +27,40 @@ export default function Feed() {
                 <Tabs defaultValue="feed" className="">
                     <TabsList className="w-fit flex justify-between sm:gap-2">
                         <TabsTrigger value="feed">Feed</TabsTrigger>
-                        <TabsTrigger value="saved" disabled>Saved</TabsTrigger>
+                        <TabsTrigger value="bookmarked" disabled>Bookmarks</TabsTrigger>
                     </TabsList>
                     <TabsContent value="feed">
                         <div className="mt-8 space-y-8">
                             <CreatePost />
-                            {posts ? (
-                                posts.map((post) => (
-                                    <div key={post._id} className="flex justify-between items-start">
-                                        <PostCard 
-                                            name={`${post.author.userName}`}
-                                            image={`${post.author.userImg}`}
-                                            body={`${post.body}`}
-                                            date={`${timeAgo(post._creationTime)}`}
-                                        />
-                                        {post.author.userId.includes(user?.id as string) && (
-                                            <PostActions id={post._id} />
-                                        )}
-                                    </div>
-                                ))
-                            ) : (
-                                <p>no</p>
+                            {posts && (
+                                posts.map((post) => {
+                                    const userHasLiked = (post.likes ?? []).some((like) => like.userId === user?.id);
+                                    return (
+                                        <div key={post._id} className="flex justify-between items-start">
+                                            
+                                            <PostCard 
+                                                name={`${post.author.userName}`}
+                                                image={`${post.author.userImg}`}
+                                                body={`${post.body}`}
+                                                date={`${timeAgo(post._creationTime)}`}
+
+                                                likes={`${post.likes?.length}`}
+                                                comments={`${post.commentsCount}`}
+                                                postId={post._id as Id<'posts'>}
+
+                                                userHasLiked={userHasLiked}
+                                            />
+                                            {post.author.userId.includes(user?.id as string) && (
+                                                <PostActions id={post._id} />
+                                            )}
+                                            
+                                        </div>
+                                    )
+                                })
                             )}
                         </div>
                     </TabsContent>
-                    <TabsContent value="saved">
+                    <TabsContent value="bookmarked">
                         <div className="mt-8">
                             saved.
                         </div>
