@@ -1,7 +1,7 @@
 'use client'
 
 import Link from "next/link"
-import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
+import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetDescription, SheetTitle } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import { Box, Folder, Menu, GalleryVertical } from "lucide-react"
 import { usePathname } from "next/navigation"
@@ -65,6 +65,10 @@ export default function Component() {
               <span className="sr-only">Toggle navigation menu</span>
             </Button>
           </SheetTrigger>
+          <SheetHeader>
+            <SheetTitle className="sr-only">Navigation</SheetTitle>
+            <SheetDescription className="sr-only">Navigation Menu</SheetDescription>
+          </SheetHeader>
           <SheetContent side="left" className="md:hidden z-[99]" suppressHydrationWarning>
             <div className="grid gap-4 p-6">
               <Link href="/dashboard" className="w-fit">

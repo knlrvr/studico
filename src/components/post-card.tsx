@@ -6,11 +6,13 @@ import { Card, CardContent, CardFooter, CardHeader } from "./ui/card"
 import { AvatarImage } from "./ui/avatar"
 import { Button } from "./ui/button"
 import LinkFormatter from './link-formatter'
-import { Bookmark, Heart, MessageCircle } from 'lucide-react'
-import { useMutation } from 'convex/react'
+import { CornerRightDown, CornerRightUp, Heart, MessageCircle } from 'lucide-react'
+import { useMutation, useQuery } from 'convex/react'
 import { api } from '../../convex/_generated/api'
 import { useUser } from '@clerk/nextjs'
 import { Id } from '../../convex/_generated/dataModel'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 function TruncatedText({ text, maxLines = 4 }: { text: string; maxLines?: number }) {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -56,9 +58,14 @@ function TruncatedText({ text, maxLines = 4 }: { text: string; maxLines?: number
         <Button
           variant="link"
           onClick={() => setIsExpanded(!isExpanded)}
-          className="mt-2 p-0 h-auto font-normal text-blue-400"
+          className={`flex items-center gap-2 p-0 h-auto font-normal text-blue-400 ${isExpanded ? 'mt-8' : 'mt-2'}`}
         >
-          {isExpanded ? 'View less' : 'View more'}
+          <span>{isExpanded ? `View less` : `View more`}</span>
+          {isExpanded ? 
+            <CornerRightUp className="w-4 h-4 mb-2" /> 
+            : 
+            <CornerRightDown className="w-4 h-4 mt-2" /> 
+          }
         </Button>
       )}
     </div>
@@ -86,14 +93,15 @@ export default function PostCard({
 }) {
 
   const { user } = useUser();
+  const pathname = usePathname();
 
   const likePost = useMutation(api.posts.addLike);
   const removeLike = useMutation(api.posts.removeLike);
 
-  const bookmarkPost = useMutation(api.bookmarks.bookmarkPost);
+  const commentCount = useQuery(api.comments.getComments, { postId: postId });
 
   return (
-    <Card className="p-0 ml-2 shadow-none border-t-0 border-l-0 border-r-0 border-b border-muted-background rounded-none w-full">
+    <Card className="p-0 shadow-none border-t-0 border-l-0 border-r-0 border-b border-muted-background rounded-none w-full">
       <CardHeader className="p-0">
         <div className="flex justify-between items-start">
           <div className="flex items-center gap-3">
@@ -148,28 +156,20 @@ export default function PostCard({
               ><Heart className="w-5 h-5" />
               </Button>
             )}
-            <Button variant='ghost' className="p-0 h-fit hover:bg-transparent hover:text-blue-400 transition-colors duration-150"
-
-            ><MessageCircle className='w-5 h-5' />
-            </Button>
-
-            {/* eventually */}
-            {/* <Button 
-              variant='ghost' 
-              className='p-0 h-fit hover:bg-transparent transition-colors duration-150 hover:text-amber-300'
-              onClick={() => {
-                bookmarkPost({
-                  postId: postId as Id<'posts'>
-                })
-              }}
-            ><Bookmark className="w-5 h-5" />
-            </Button> */}
+            {pathname.includes(`${postId}`) ? (
+              <></>
+            ) : (
+              <Link href={`/dashboard/feed/${postId}`}
+              className="p-0 h-fit hover:bg-transparent hover:text-blue-400 transition-colors duration-150"
+              ><MessageCircle className='w-5 h-5' />
+              </Link>
+            )}
           </div>
 
           <div className="text-xs text-muted-foreground flex items-center gap-1">
             <p>{likes} likes</p>
             <p>&bull;</p>
-            <p>{comments} comments</p>
+            <p>{commentCount?.length} comments</p>
           </div>
         </div>
       </CardFooter>

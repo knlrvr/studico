@@ -16,6 +16,7 @@ import type {
 } from "convex/server";
 import type * as bookmarks from "../bookmarks.js";
 import type * as clerk from "../clerk.js";
+import type * as comments from "../comments.js";
 import type * as files from "../files.js";
 import type * as http from "../http.js";
 import type * as invites from "../invites.js";
@@ -37,6 +38,7 @@ import type * as users from "../users.js";
 declare const fullApi: ApiFromModules<{
   bookmarks: typeof bookmarks;
   clerk: typeof clerk;
+  comments: typeof comments;
   files: typeof files;
   http: typeof http;
   invites: typeof invites;

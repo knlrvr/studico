@@ -1,3 +1,5 @@
+'use client'
+
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -12,15 +14,17 @@ import { api } from "../../convex/_generated/api"
 import { Ellipsis } from "lucide-react"
 import { Id } from "../../convex/_generated/dataModel"
 import { useToast } from "./ui/use-toast"
-  
-  export function PostActions({
+import { useRouter } from "next/navigation"
+
+export function PostActions({
     id
-  } : {
+} : {
     id: string,
-  }) {
+}) {
 
     const deletePost = useMutation(api.posts.deletePost)
     const { toast } = useToast();
+    const router = useRouter();
 
     return (
         <DropdownMenu>
@@ -33,13 +37,15 @@ import { useToast } from "./ui/use-toast"
                 <DropdownMenuItem>
                     <button 
                         onClick={() => {
-                        deletePost({
-                            postId: id as Id<'posts'>,
-                        });
-                        toast({
-                            description: "Your post has been deleted!",
-                        });
-                    }}>
+                            deletePost({
+                                postId: id as Id<'posts'>,
+                            });
+                            toast({
+                                description: "Your post has been deleted!",
+                            });
+                            router.push('/dashboard/feed')
+                        }}
+                    >
                         Delete Post
                     </button>
                 </DropdownMenuItem>

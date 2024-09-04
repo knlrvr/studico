@@ -22,13 +22,13 @@ import { useState } from "react"
     return (
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant="outline" className="py-8 w-full flex items-center justify-start gap-4">
+          <Button variant="outline" className="my-8 py-8 w-full flex items-center justify-start gap-4">
             <Image
                 src={`${user?.imageUrl}`}
                 alt={`${user?.fullName}'s image`}
                 width={1000}
                 height={1000}
-                className="w-8 h-8 rounded-full"
+                className="w-6 h-6 rounded-full"
             />
             <span className="text-muted-foreground">Share something with the community...</span>
           </Button>

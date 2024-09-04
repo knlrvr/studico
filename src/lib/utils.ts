@@ -36,7 +36,7 @@ export function timeAgo(milliseconds: number) {
     }
   }
 
-  return 'just now';
+  return 'Just now';
 }
 
 

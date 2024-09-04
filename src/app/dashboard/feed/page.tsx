@@ -39,6 +39,8 @@ export default function Feed() {
                                         <div key={post._id} className="flex justify-between items-start">
                                             
                                             <PostCard 
+                                                postId={post._id as Id<'posts'>}
+                                                
                                                 name={`${post.author.userName}`}
                                                 image={`${post.author.userImg}`}
                                                 body={`${post.body}`}
@@ -46,7 +48,6 @@ export default function Feed() {
 
                                                 likes={`${post.likes?.length}`}
                                                 comments={`${post.commentsCount}`}
-                                                postId={post._id as Id<'posts'>}
 
                                                 userHasLiked={userHasLiked}
                                             />

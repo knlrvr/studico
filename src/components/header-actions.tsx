@@ -13,7 +13,9 @@ export function HeaderActions() {
             </Unauthenticated>
 
             <Authenticated>
-                <UserButton />
+                <UserButton 
+                    afterSignOutUrl="/"
+                />
             </Authenticated>
 
             <AuthLoading>

@@ -47,6 +47,23 @@ export const getPosts = query({
 
         return posts;
     }
+});
+
+export const getPost = query({
+  args: {
+    postId: v.id('posts')
+  },
+  async handler(ctx, args) {
+    const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
+
+    if (!userId) {
+        return null;
+    }
+
+    const post = await ctx.db.get(args.postId);
+
+    return post;
+  }
 })
 
 export const addLike = mutation({
