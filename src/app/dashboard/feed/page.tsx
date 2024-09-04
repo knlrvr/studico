@@ -33,7 +33,7 @@ export default function Feed() {
                             <CreatePost />
                             {posts ? (
                                 posts.map((post) => (
-                                    <div className="flex justify-between items-start">
+                                    <div key={post._id} className="flex justify-between items-start">
                                         <PostCard 
                                             name={`${post.author.userName}`}
                                             image={`${post.author.userImg}`}
