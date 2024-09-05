@@ -1,3 +1,4 @@
+import { Id } from "./_generated/dataModel";
 import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
@@ -81,6 +82,7 @@ export const removeBookmark = mutation({
 });
 
 export const getUserBookmarks = query({
+  args: {},
   handler: async (ctx) => {
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) {
@@ -88,10 +90,14 @@ export const getUserBookmarks = query({
     }
     const userId = identity.subject;
 
-    return await ctx.db
+    const bookmarks = await ctx.db
       .query("bookmarks")
       .withIndex("by_userId", (q) => q.eq("userId", userId))
       .collect();
+
+    const postIds = bookmarks.map(bookmark => bookmark.postId.toString());
+
+    return postIds;
   },
 });
 

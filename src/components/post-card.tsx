@@ -6,7 +6,7 @@ import { Card, CardContent, CardFooter, CardHeader } from "./ui/card"
 import { AvatarImage } from "./ui/avatar"
 import { Button } from "./ui/button"
 import LinkFormatter from './link-formatter'
-import { CornerRightDown, CornerRightUp, Heart, MessageCircle } from 'lucide-react'
+import { Bookmark, CornerRightDown, CornerRightUp, Heart, MessageCircle } from 'lucide-react'
 import { useMutation, useQuery } from 'convex/react'
 import { api } from '../../convex/_generated/api'
 import { useUser } from '@clerk/nextjs'
@@ -99,6 +99,10 @@ export default function PostCard({
   const removeLike = useMutation(api.posts.removeLike);
 
   const commentCount = useQuery(api.comments.getComments, { postId: postId });
+  const checkBookmark = useQuery(api.bookmarks.isPostBookmarked, { postId: postId });
+
+  const addBookmark = useMutation(api.bookmarks.bookmarkPost);
+  const removeBookmark = useMutation(api.bookmarks.removeBookmark);
 
   return (
     <Card className="p-0 shadow-none border-t-0 border-l-0 border-r-0 border-b border-muted-background rounded-none w-full">
@@ -141,7 +145,7 @@ export default function PostCard({
                   })
                 }}
               >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#ef4444" stroke="#ef4444" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#ef4444" stroke="#ef4444" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
               </Button>
             ): (
               <Button variant='ghost' 
@@ -165,6 +169,29 @@ export default function PostCard({
               ><MessageCircle className='w-5 h-5' />
               </Link>
             )}
+
+            {checkBookmark ? (
+              <Button
+                onClick={() => {
+                  removeBookmark({
+                    postId: postId,
+                  })
+                }}
+                className={`p-0 h-fit bg-transparent hover:bg-transparent text-amber-300`}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#fcd34d" stroke="#fcd34d" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-bookmark"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+              </Button>
+            ) : (
+              <Button
+                onClick={() => {
+                  addBookmark({ postId: postId })
+                }}
+                className={`p-0 h-fit bg-transparent hover:bg-transparent text-primary`}
+              ><Bookmark className="w-5 h-5" /></Button>
+            )}
+
+
+
           </div>
 
           {pathname.includes(`${postId}`) ? (
@@ -182,8 +209,6 @@ export default function PostCard({
               <p>{commentCount?.length} comments</p>
             </Link>
           )}
-
-
         </div>
       </CardFooter>
     </Card>
