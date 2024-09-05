@@ -43,7 +43,7 @@ export default function Invites() {
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
-                <DialogTitle>You&apos;ve been invited!</DialogTitle>
+                <DialogTitle>Invites</DialogTitle>
                 <DialogDescription>
                     If you&apos;ve been invited to collaborate on a project, the invitation will display below.
                 </DialogDescription>

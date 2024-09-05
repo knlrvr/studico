@@ -30,7 +30,7 @@ export default function PostPage({
     return (
         <>
         {post !== undefined && post !== null && (
-            <main className="flex flex-col pt-24 px-4 items-start max-w-2xl pb-8">
+            <main className="flex flex-col pt-24 px-4 items-start max-w-2xl">
             <Link href='/dashboard/feed'
                 className="text-sm flex items-center gap-2 mb-4 text-muted-foreground hover:text-blue-400 hover:underline underline-offset-4 transition-all duration-150"    
             >
@@ -38,7 +38,7 @@ export default function PostPage({
                 <span>Back</span>
             </Link>
 
-            <div className="flex items-start w-full">
+            <div className="flex items-start w-full mt-8">
                 <PostCard 
                     postId={post?._id as Id<'posts'>}
                                                     
@@ -71,7 +71,7 @@ export default function PostPage({
                             className="h-8 w-8 rounded-full"
                         />
                         <div className="flex flex-col">
-                            <div className="flex flex-col space-y-1 bg-neutral-200 dark:bg-[#222] dark:bg-opacity-50 w-fit rounded-lg px-3 py-1.5 pb-2">
+                            <div className="flex flex-col space-y-1 bg-neutral-100 dark:bg-[#222] dark:bg-opacity-50 w-fit rounded-lg px-3 py-1.5 pb-2">
                                 <span className="text-sm text-muted-foreground">{comment.author.userName}</span>
                                 <p className="text-sm tracking-wide">{comment.comment}</p>
                             </div>

@@ -15,6 +15,7 @@ import { useUser } from '@clerk/nextjs';
 import { PostActions } from '@/components/post-actions';
 import { CreatePost } from '@/components/create-post';
 import { Id } from '../../../../convex/_generated/dataModel';
+import { Lock } from 'lucide-react';
 
 export default function Feed() {
     const posts = useQuery(api.posts.getPosts);
@@ -22,12 +23,12 @@ export default function Feed() {
     const { user } = useUser();
 
     return (
-        <main className="flex flex-col pt-[5.9rem] px-4 max-w-2xl">
+        <main className="flex flex-col pt-24 px-4 max-w-2xl">
             <Authenticated>
                 <Tabs defaultValue="feed" className="">
                     <TabsList className="w-fit flex justify-between sm:gap-2">
                         <TabsTrigger value="feed">Feed</TabsTrigger>
-                        <TabsTrigger value="bookmarked" disabled>Bookmarks</TabsTrigger>
+                        <TabsTrigger value="bookmarked" disabled>Bookmarks <Lock className="ml-2 h-3 w-3" /></TabsTrigger>
                     </TabsList>
                     <TabsContent value="feed">
                         <div className="mt-8 space-y-8">

@@ -131,7 +131,7 @@ export default function PostCard({
           <div className="flex items-center gap-6">
             {userHasLiked ? (
               <Button variant='ghost' 
-                className='p-0 h-fit hover:bg-transparent transition-colors duration-150 text-red-500 hover:text-red-500'
+                className='p-0 h-fit hover:bg-transparent transition-colors duration-150'
                 onClick={() => {
                   removeLike({
                     userId: user?.id as string,
@@ -140,7 +140,8 @@ export default function PostCard({
                     postId: postId as Id<'posts'>,
                   })
                 }}
-              ><Heart className="w-5 h-5" />
+              >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#ef4444" stroke="#ef4444" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
               </Button>
             ): (
               <Button variant='ghost' 
@@ -166,11 +167,23 @@ export default function PostCard({
             )}
           </div>
 
-          <div className="text-xs text-muted-foreground flex items-center gap-1">
-            <p>{likes} likes</p>
-            <p>&bull;</p>
-            <p>{commentCount?.length} comments</p>
-          </div>
+          {pathname.includes(`${postId}`) ? (
+            <div 
+              className="text-xs text-muted-foreground flex items-center gap-1">
+              <p>{likes} likes</p>
+              <p>&bull;</p>
+              <p>{commentCount?.length} comments</p>
+            </div>
+          ) : (
+            <Link href={`/dashboard/feed/${postId}`}
+              className="text-xs text-muted-foreground flex items-center gap-1">
+              <p>{likes} likes</p>
+              <p>&bull;</p>
+              <p>{commentCount?.length} comments</p>
+            </Link>
+          )}
+
+
         </div>
       </CardFooter>
     </Card>

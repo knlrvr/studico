@@ -26,9 +26,9 @@ export default function CreateProject() {
                 </Button>
             </DialogTrigger>
             <DialogContent>
-                <DialogHeader className="space-y-8">
+                <DialogHeader className="space-y-2">
                     <DialogTitle>What would you like to call your project?</DialogTitle>
-                    <DialogDescription>
+                    <DialogDescription className="pb-4">
                         This project will be added to your dashboard.
                     </DialogDescription>
 

@@ -34,7 +34,7 @@ export default function Projects() {
           <CreateProject />
         </div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mb-6">
           {projects?.map((project) => (
             <Suspense key={project._id} fallback={<SkeletonCard />}>
               <ProjectCard project={project} />
