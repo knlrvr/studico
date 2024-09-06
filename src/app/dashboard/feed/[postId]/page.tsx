@@ -32,7 +32,7 @@ export default function PostPage({
         {post !== undefined && post !== null && (
             <main className="flex flex-col pt-24 px-4 items-start max-w-2xl">
             <Link href='/dashboard/feed'
-                className="text-sm flex items-center gap-2 mb-4 text-muted-foreground hover:text-blue-400 hover:underline underline-offset-4 transition-all duration-150"    
+                className="w-fit text-sm flex items-center gap-2 mb-4 text-muted-foreground hover:text-blue-400 hover:underline underline-offset-4 transition-all duration-150"    
             >
                 <MoveLeft className="w-4 h-4" />
                 <span>Back</span>

@@ -32,19 +32,19 @@ export default function Component() {
             <GalleryVertical className="w-5 h-5" />
             <span>Feed</span>
           </Link>
-          {/* <Link
-            href="/dashboard/messages"
+          <Link
+            href="/dashboard/conversations"
             className={cn(
                 "p-2 rounded-lg w-full flex items-center gap-2 transition-colors duration-150 hover:bg-neutral-100 dark:hover:text-background",
                 {
-                    'bg-neutral-200 hover:bg-neutral-200 dark:bg-[#222] dark:hover:text-white': pathname.includes('/messages')
+                    'bg-neutral-200 hover:bg-neutral-200 dark:bg-[#222] dark:hover:text-white': pathname.includes('/conversations')
                 }
                 )}
             prefetch={false}
           >
             <Mail className="w-5 h-5" />
             <span>Inbox</span>
-          </Link> */}
+          </Link>
           <Separator className="my-2"/>
           <Link
             href="/dashboard"
@@ -94,10 +94,10 @@ export default function Component() {
                   <GalleryVertical className="w-5 h-5" />
                   <span>Feed</span> 
                 </Link>
-                {/* <Link href="/dashboard/messages" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
+                <Link href="/dashboard/conversations" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
                   <Mail className="w-5 h-5" />
                   <span>Inbox</span> 
-                </Link> */}
+                </Link>
                 <Separator className="my-2"/>
                 <Link href="/dashboard" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
                   <Box className="w-5 h-5" />

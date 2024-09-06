@@ -16,7 +16,6 @@ export default function ProjectMessages() {
     const [isUserScrolling, setIsUserScrolling] = useState(false);
     const messageContainerRef = useRef<HTMLDivElement>(null);
 
-
     const { user } = useUser();
 
     useEffect(() => {
