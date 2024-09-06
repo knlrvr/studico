@@ -15,6 +15,7 @@ import RecentProjectFiles from "@/components/recent-project-files";
 import { ProjectProvider } from "../context";
 import Link from "next/link";
 import SettingsContent from "@/components/settings";
+import { Separator } from "@/components/ui/separator";
 
 export default function ProjectPage({
     params
@@ -87,6 +88,7 @@ export default function ProjectPage({
 
 
             <TabsContent value="chat">
+              <Separator className="-mt-4" />
               <ProjectMessages />
             </TabsContent>
 

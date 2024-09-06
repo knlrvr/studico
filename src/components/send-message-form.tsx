@@ -59,29 +59,6 @@ export default function SendMessageForm({
     }
 
     return (
-      <>
-      {/* rhf is PISSING me off, brother */}
-        {/* <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex gap-2">
-                <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem className="w-full">
-                        <FormControl>
-                          <Input placeholder={`Send Message`} {...field} className=""/>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <LoadingButton 
-                    isLoading={form.formState.isSubmitting}
-                    loadingText="Sending"
-                >Send</LoadingButton>
-            </form>
-        </Form> */}
-
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -128,6 +105,5 @@ export default function SendMessageForm({
             loadingText="Sending"
           >Send</LoadingButton>
         </form>
-      </>
     )
 }

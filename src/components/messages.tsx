@@ -44,7 +44,7 @@ export default function ProjectMessages() {
     }, [messages, isUserScrolling]);
 
     return (
-        <div className="flex flex-col justify-end h-full">
+        <div className="flex flex-col justify-end h-full mt-4">
             <div 
                 className="flex flex-col h-[calc(100vh-250px)] sm:h-[calc(100vh-240px)] overflow-y-auto"
                 ref={messageContainerRef}

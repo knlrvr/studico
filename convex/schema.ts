@@ -8,7 +8,8 @@ export default defineSchema({
       email: v.string(),
       tokenIdentifier: v.string(),
     })
-    .index('by_tokenIdentifier', ['tokenIdentifier']),
+    .index('by_tokenIdentifier', ['tokenIdentifier'])
+    .index('by_email', ['email']),
     posts: defineTable({
       author: v.object({
         userId: v.string(),
@@ -45,25 +46,21 @@ export default defineSchema({
     })
     .index('by_userId', ['userId'])
     .index('by_userId_postId', ['userId', 'postId']),
-    userchats: defineTable({
-      members: v.optional(
-        v.array(v.object({
-          userId: v.string(),
-          userImg: v.string(),
-          userName: v.string(),
-        }))
-      ),
-      isRead: v.boolean(),
-    }).index('by_members', ['members'])
-      .index('by_isRead', ['isRead']),
-    usermessages: defineTable({
-      chatId: v.id('userchats'),
-      sender: v.object({
+    userChats: defineTable({
+      members: v.array(v.string()), 
+      type: v.string(),
+      lastMessage: v.number(),
+    }).index('by_member', ['members']),
+    userMessages: defineTable({
+      chatId: v.id('userChats'),
+      author: v.object({
         userId: v.string(),
         userImg: v.string(),
         userName: v.string(),
       }),
-      body: v.string(),
+      content: v.string(),
+      timestamp: v.number(),
+      readBy: v.array(v.string()),
     }).index('by_chatId', ['chatId']),
     memberships: defineTable({
       orgId: v.string(),
@@ -84,14 +81,6 @@ export default defineSchema({
     }).index('by_tokenIdentifier', ['tokenIdentifier'])
       .index('by_orgId', ['orgId'])
       .index('by_members', ['members']),
-    chatinvites: defineTable({
-      chatId: v.id('userchats'),
-      projectName: v.string(),
-      inviteeEmail: v.string(),
-      inviterId: v.string(),
-      inviterName: v.string(),
-      status: v.string(),
-    }).index('by_inviteeEmail', ['inviteeEmail']),
     invites: defineTable({
       projectId: v.id('projects'),
       projectName: v.string(),
