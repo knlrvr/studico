@@ -22,7 +22,7 @@ export default function UploadFileUserButton() {
     return (
         <Dialog onOpenChange={setIsOpen} open={isOpen}>
             <DialogTrigger asChild>
-            <Button className="flex flex-col items-start gap-4 h-fit w-36">
+            <Button className="flex flex-col items-start gap-4 h-fit min-w-32">
                     <ArrowUpFromLine className="w-5 h-5" />
                     <p className="text-xs tracking-wide">Upload</p>
                 </Button>

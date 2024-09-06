@@ -21,14 +21,14 @@ export default function Projects() {
   return (
     <main className="flex flex-col pt-24 px-4">
       <Authenticated>
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-between items-center w-full mt-1 mb-8">
           <div className="flex flex-col">
             <div className="flex items-center gap-4">
               <h1 className="text-2xl font-bold tracking-wide">Projects</h1>
               <Invites />
             </div>
-            <p className="w-1/2 sm:w-2/3 text-sm text-neutral-500">
-              Create & view projects to manage for your organization or personal account. 
+            <p className="w-2/3 text-sm text-neutral-500">
+              Create & view projects to manage. 
             </p>
           </div>
           <CreateProject />

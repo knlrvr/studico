@@ -45,6 +45,24 @@ export default defineSchema({
     })
     .index('by_userId', ['userId'])
     .index('by_userId_postId', ['userId', 'postId']),
+    userchats: defineTable({
+      members: v.optional(
+        v.array(v.object({
+          userId: v.string(),
+          userImg: v.string(),
+          userName: v.string(),
+        }))
+      ),
+    }).index('by_members', ['members']),
+    usermessages: defineTable({
+      chatId: v.id('userchats'),
+      sender: v.object({
+        userId: v.string(),
+        userImg: v.string(),
+        userName: v.string(),
+      }),
+      body: v.string(),
+    }).index('by_chatId', ['chatId']),
     memberships: defineTable({
       orgId: v.string(),
       userId: v.string(),
@@ -81,15 +99,15 @@ export default defineSchema({
     }).index('by_tokenIdentifier', ['tokenIdentifier'])
       .index('by_projectId', ['projectId']),
     messages: defineTable({
-        author: v.object({
-          sentBy: v.string(),
-          image: v.string(),
-          tokenIdentifier: v.string(),
-        }),
-        message: v.string(),
-        isEdited: v.boolean(),
-        projectId: v.optional(v.id("projects")),
-        tokenIdentifier: v.optional(v.string()),
+      author: v.object({
+        sentBy: v.string(),
+        image: v.string(),
+        tokenIdentifier: v.string(),
+      }),
+      message: v.string(),
+      isEdited: v.boolean(),
+      projectId: v.optional(v.id("projects")),
+      tokenIdentifier: v.optional(v.string()),
     }).index("by_projectId", ["projectId"]),
     tasks: defineTable({
       projectId: v.id('projects'),

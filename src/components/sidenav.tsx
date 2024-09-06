@@ -3,9 +3,10 @@
 import Link from "next/link"
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetDescription, SheetTitle } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
-import { Box, Folder, Menu, GalleryVertical } from "lucide-react"
+import { Box, Folder, Menu, GalleryVertical, Mail } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
+import { Separator } from "./ui/separator"
 
 export default function Component() {
 
@@ -31,6 +32,20 @@ export default function Component() {
             <GalleryVertical className="w-5 h-5" />
             <span>Feed</span>
           </Link>
+          {/* <Link
+            href="/dashboard/messages"
+            className={cn(
+                "p-2 rounded-lg w-full flex items-center gap-2 transition-colors duration-150 hover:bg-neutral-100 dark:hover:text-background",
+                {
+                    'bg-neutral-200 hover:bg-neutral-200 dark:bg-[#222] dark:hover:text-white': pathname.includes('/messages')
+                }
+                )}
+            prefetch={false}
+          >
+            <Mail className="w-5 h-5" />
+            <span>Inbox</span>
+          </Link> */}
+          <Separator className="my-2"/>
           <Link
             href="/dashboard"
             className={cn(
@@ -79,6 +94,11 @@ export default function Component() {
                   <GalleryVertical className="w-5 h-5" />
                   <span>Feed</span> 
                 </Link>
+                {/* <Link href="/dashboard/messages" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
+                  <Mail className="w-5 h-5" />
+                  <span>Inbox</span> 
+                </Link> */}
+                <Separator className="my-2"/>
                 <Link href="/dashboard" className="flex items-center gap-4 text-lg font-medium" prefetch={false}>
                   <Box className="w-5 h-5" />
                   <span>Projects</span> 
