@@ -34,6 +34,8 @@ import { useState } from "react"
           </Button>
         </DialogTrigger>
         <DialogContent className="">
+          <DialogTitle className="sr-only">Create Post</DialogTitle>
+          <DialogDescription className="sr-only">write your post below.</DialogDescription>
           <DialogHeader>
             <div className="flex items-center gap-2">
                 <Avatar className="">

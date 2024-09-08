@@ -65,6 +65,8 @@ export const uploadFileToProject = mutation({
     },
 });
 
+
+
 export const getFilesForUser = query({ 
     args: {
         query: v.optional(v.string()),

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect } from 'react';
+import React, { use } from 'react';
 import { 
     Tabs, 
     TabsContent, 
@@ -26,6 +26,7 @@ type Post = {
         userName: string;
     };
     body: string;
+    picture?: string; // Add this line
     likes?: Array<{
         userId: string;
         userImg: string;
@@ -44,6 +45,7 @@ export default function Feed() {
         if (!postsToRender || postsToRender.length === 0) {
             return <p className="text-muted-foreground text-sm">No posts found.</p>;
         }
+        console.log(posts);
         
         return postsToRender.map((post) => {
             const userHasLiked = post.likes?.some(like => like.userId === user?.id) ?? false;
@@ -59,7 +61,9 @@ export default function Feed() {
                         likes={post.likes?.length.toString() ?? '0'}
                         comments={post.commentsCount.toString()}
                         userHasLiked={userHasLiked}
+                        storageId={post.picture as Id<'_storage'>}
                     />
+
                     {post.author.userId.includes(user?.id as string) && (
                         <PostActions id={post._id} />
                     )}

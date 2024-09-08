@@ -13,6 +13,8 @@ import { useUser } from '@clerk/nextjs'
 import { Id } from '../../convex/_generated/dataModel'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import Image from 'next/image'
+import { string } from 'zod'
 
 function TruncatedText({ text, maxLines = 4 }: { text: string; maxLines?: number }) {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -76,6 +78,7 @@ export default function PostCard({
   name,
   image,
   body,
+  storageId,
   date,
   likes, 
   comments,
@@ -85,13 +88,13 @@ export default function PostCard({
   name: string, 
   image: string, 
   body: string,
+  storageId?: Id<'_storage'>,
   date: string,
   likes: string, 
   comments: string,
   postId: Id<'posts'>,
   userHasLiked: boolean,
 }) {
-
   const { user } = useUser();
   const pathname = usePathname();
 
@@ -103,6 +106,8 @@ export default function PostCard({
 
   const addBookmark = useMutation(api.bookmarks.bookmarkPost);
   const removeBookmark = useMutation(api.bookmarks.removeBookmark);
+
+  const imageUrl = useQuery(api.posts.getPostWithImage, {postId: postId})
 
   return (
     <Card className="p-0 shadow-none border-t-0 border-l-0 border-r-0 border-b border-muted-background rounded-none w-full">
@@ -127,11 +132,21 @@ export default function PostCard({
 
       <CardContent className="p-0 mt-4 text-sm pb-8">
         <TruncatedText text={body} />
+        {imageUrl?.imageUrl && (
+          <div className="mt-4">
+            <Image 
+              src={imageUrl?.imageUrl as Id<'_storage'>} 
+              alt="Post image" 
+              width={500} 
+              height={300} 
+              className="rounded-lg object-cover w-full"
+            />
+          </div>
+        )}
       </CardContent>
 
       <CardFooter className='p-0 pb-4'>
         <div className="flex justify-between w-full">
-
           <div className="flex items-center gap-6">
             {userHasLiked ? (
               <Button variant='ghost' 
@@ -145,7 +160,7 @@ export default function PostCard({
                   })
                 }}
               >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#ef4444" stroke="#ef4444" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#ef4444" stroke="#ef4444" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
               </Button>
             ): (
               <Button variant='ghost' 
@@ -158,15 +173,17 @@ export default function PostCard({
                     postId: postId as Id<'posts'>,
                   })
                 }}
-              ><Heart className="w-5 h-5" />
+              >
+                <Heart className="w-5 h-5" />
               </Button>
             )}
             {pathname.includes(`${postId}`) ? (
               <></>
             ) : (
               <Link href={`/dashboard/feed/${postId}`}
-              className="p-0 h-fit hover:bg-transparent hover:text-blue-400 transition-colors duration-150"
-              ><MessageCircle className='w-5 h-5' />
+                className="p-0 h-fit hover:bg-transparent hover:text-blue-400 transition-colors duration-150"
+              >
+                <MessageCircle className='w-5 h-5' />
               </Link>
             )}
 
@@ -187,16 +204,14 @@ export default function PostCard({
                   addBookmark({ postId: postId })
                 }}
                 className={`p-0 h-fit bg-transparent hover:bg-transparent text-primary`}
-              ><Bookmark className="w-5 h-5" /></Button>
+              >
+                <Bookmark className="w-5 h-5" />
+              </Button>
             )}
-
-
-
           </div>
 
           {pathname.includes(`${postId}`) ? (
-            <div 
-              className="text-xs text-muted-foreground flex items-center gap-1">
+            <div className="text-xs text-muted-foreground flex items-center gap-1">
               <p>{likes} likes</p>
               <p>&bull;</p>
               <p>{commentCount?.length} comments</p>

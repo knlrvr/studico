@@ -6,65 +6,132 @@ export const generateUploadUrl = mutation(async (ctx) => {
 });
 
 export const createPost = mutation({
-    args: { 
-      author: v.object({
-        userId: v.string(),
-        userName: v.string(),
-        userImg: v.string(),
-      }),
-      body: v.string(),
-    },
-    handler: async (ctx, args) => {
-      const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
-  
-      if(!userId) {
-        throw new ConvexError('Not authenticated!')
-      }
-  
-      const userInfo = await ctx.auth.getUserIdentity();
-  
-      await ctx.db.insert("posts", {
-        author: {
-          userId: userId,
-          userName: userInfo?.name ?? '',
-          userImg: userInfo?.pictureUrl ?? '',
-        },
-        body: args.body,
-        likes: [],
-        commentsCount: 0,
-        bookmarksCount: 0,
-      });
-    },
-});
+  args: { 
+    author: v.object({
+      userId: v.string(),
+      userName: v.string(),
+      userImg: v.string(),
+    }),
+    body: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
 
-export const getPosts = query({
-    args: {},
-    async handler(ctx, args) {
-        const posts = await ctx.db
-            .query('posts')
-            .order('desc')
-            .collect();
-
-        return posts;
+    if(!userId) {
+      throw new ConvexError('Not authenticated!')
     }
+
+    const userInfo = await ctx.auth.getUserIdentity();
+
+    const postId = await ctx.db.insert("posts", {
+      author: {
+        userId: userId,
+        userName: userInfo?.name ?? '',
+        userImg: userInfo?.pictureUrl ?? '',
+      },
+      body: args.body,
+      likes: [],
+      commentsCount: 0,
+      bookmarksCount: 0,
+    });
+
+    return postId;
+  },
 });
 
-export const getPost = query({
+export const updatePostImage = mutation({
   args: {
-    postId: v.id('posts')
+    postId: v.id('posts'),
+    storageId: (v.id('_storage')),
+    name: v.string(),
   },
   async handler(ctx, args) {
     const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
 
     if (!userId) {
-        return null;
+        throw new ConvexError('Not authenticated!')
     }
 
-    const post = await ctx.db.get(args.postId);
+    await ctx.db.patch(args.postId, {
+      picture: args.storageId,
+    });
 
-    return post;
+    await ctx.db.insert('files', {
+      name: args.name,
+      type: 'image',
+      storageId: args.storageId,
+      postId: args.postId,
+      tokenIdentifier: userId,
+    });
+  }
+});
+
+export const getPosts = query({
+  args: {},
+  async handler(ctx) {
+    
+    const posts = await ctx.db
+      .query('posts')
+      .order('desc')
+      .collect();
+
+    return posts;
+  }
+});
+
+export const getPostWithImage = query({
+  args: { postId: v.id('posts') },
+  async handler(ctx, args) {
+    // Fetch the post
+    const post = await ctx.db.get(args.postId)
+    
+    if (!post) {
+      throw new Error('Post not found')
+    }
+
+    // Fetch the associated file (image) for the post
+    const file = await ctx.db
+      .query('files')
+      .withIndex('by_postId', (q) => q.eq('postId', args.postId))
+      .first()
+
+    let imageUrl = null
+    if (file) {
+      // Get the URL for the image
+      imageUrl = await ctx.storage.getUrl(file.storageId)
+    }
+
+    // Return the post with the image URL
+    return {
+      ...post,
+      imageUrl
+    }
   }
 })
+
+export const getPost = query({
+  args: {
+      postId: v.id('posts')
+  },
+  async handler(ctx, args) {
+      const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
+
+      if (!userId) {
+          return null;
+      }
+
+      const post = await ctx.db.get(args.postId);
+
+      if (post && post.picture) {
+          return {
+              ...post,
+              imageUrl: await ctx.storage.getUrl(post.picture),
+          };
+      }
+
+      return post;
+  }
+});
 
 export const addLike = mutation({
   args: { 

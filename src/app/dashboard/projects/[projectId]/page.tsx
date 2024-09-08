@@ -36,7 +36,7 @@ export default function ProjectPage({
   }
 
   return (
-    <main className="flex flex-col pt-24 px-4">
+    <main className="flex flex-col pt-20 sm:pt-24 px-4">
 
       <ProjectProvider projectId={params.projectId}>
 

@@ -16,6 +16,7 @@ export default defineSchema({
         userImg: v.string(),
         userName: v.string(),
       }),
+      picture: v.optional(v.string()),
       body: v.string(),
       likes: v.optional(
         v.array(v.object({
@@ -46,22 +47,6 @@ export default defineSchema({
     })
     .index('by_userId', ['userId'])
     .index('by_userId_postId', ['userId', 'postId']),
-    userChats: defineTable({
-      members: v.array(v.string()), 
-      type: v.string(),
-      lastMessage: v.number(),
-    }).index('by_member', ['members']),
-    userMessages: defineTable({
-      chatId: v.id('userChats'),
-      author: v.object({
-        userId: v.string(),
-        userImg: v.string(),
-        userName: v.string(),
-      }),
-      content: v.string(),
-      timestamp: v.number(),
-      readBy: v.array(v.string()),
-    }).index('by_chatId', ['chatId']),
     memberships: defineTable({
       orgId: v.string(),
       userId: v.string(),
@@ -95,8 +80,10 @@ export default defineSchema({
       storageId: v.id('_storage'),
       tokenIdentifier: v.optional(v.string()),
       projectId: v.optional(v.string()),
+      postId: v.optional(v.id('posts')),
     }).index('by_tokenIdentifier', ['tokenIdentifier'])
-      .index('by_projectId', ['projectId']),
+      .index('by_projectId', ['projectId'])
+      .index('by_postId', ['postId']),
     messages: defineTable({
       author: v.object({
         sentBy: v.string(),
