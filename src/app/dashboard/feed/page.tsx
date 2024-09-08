@@ -26,7 +26,7 @@ type Post = {
         userName: string;
     };
     body: string;
-    picture?: string; // Add this line
+    picture?: string;
     likes?: Array<{
         userId: string;
         userImg: string;
@@ -94,7 +94,7 @@ export default function Feed() {
     };
     
     return (
-        <main className="flex flex-col pt-24 px-4 max-w-2xl">
+        <main className="flex flex-col pt-24 px-4 max-w-2xl pb-8">
             <Authenticated>
                 <Tabs defaultValue="feed" className="">
                     <TabsList className="w-fit flex justify-between sm:gap-2">
