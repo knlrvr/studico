@@ -13,7 +13,7 @@ import {
 import { useQuery } from "convex/react"
 import { api } from "../../convex/_generated/api"
 
-import { AudioLines, Ellipsis, File, FileText, SquareArrowOutUpRight } from "lucide-react"
+import { AudioLines, Ellipsis, File, FileText } from "lucide-react"
 
 import ImagePreview from "./image-preview"
 import Link from "next/link"
@@ -74,7 +74,7 @@ export default function UserFiles() {
                 return (
                     <TableRow key={file._id} className="">
                         <TableCell 
-                            className="font-medium text-neutral-500 text-center">
+                            className=" text-neutral-500">
                                 {file.type === "image/jpeg" && (
                                     <ImagePreview src={file?.fileUrl as string } />
                                 )}

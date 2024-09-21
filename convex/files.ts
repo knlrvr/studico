@@ -65,7 +65,41 @@ export const uploadFileToProject = mutation({
     },
 });
 
+export const uploadFileToUser = mutation({
+    args: {
+        name: v.string(),
+        type: v.string(),
+        storageId: v.id('_storage'),
+        projectId: v.optional(v.id('projects')),
+    },
+    async handler(ctx, args) {
+        const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier
 
+        if(!userId) {
+            throw new ConvexError('Not authenticated!')
+        }
+
+        let file: Id<"files">;
+
+        if (args.projectId) {
+
+            file = await ctx.db.insert('files', {
+                name: args.name,
+                type: args.type,
+                storageId: args.storageId as Id<"_storage">,
+                projectId: args.projectId,
+            });
+        } else { 
+            file = await ctx.db.insert('files', {
+                name: args.name,
+                type: args.type,
+                storageId: args.storageId as Id<"_storage">,
+                tokenIdentifier: userId,
+            })
+        }
+        
+    },
+});
 
 export const getFilesForUser = query({ 
     args: {

@@ -28,7 +28,7 @@ export default function UploadFileToUser({
     onUpload: () => void;
 }) {
 
-    const uploadFile = useMutation(api.files.uploadFileToProject);
+    const uploadFile = useMutation(api.files.uploadFileToUser);
     const generateUploadUrl = useMutation(api.files.generateUploadUrl);
 
     const form = useForm<z.infer<typeof formSchema>>({

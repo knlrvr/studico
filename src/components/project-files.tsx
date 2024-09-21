@@ -13,9 +13,8 @@ import {
 import { useQuery } from "convex/react"
 import { api } from "../../convex/_generated/api"
 
-import { AudioLines, Ellipsis, File, FileText, Images} from "lucide-react"
+import { AudioLines, Ellipsis, File, FileText } from "lucide-react"
 
-import { Id } from "../../convex/_generated/dataModel"
 import Link from "next/link"
 import ImagePreview from "./image-preview"
 
