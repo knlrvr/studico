@@ -25,7 +25,7 @@ export default function CreatePostForm({
     const [isUploading, setIsUploading] = useState(false);
 
     const createPost = useMutation(api.posts.createPost);
-    const generateUploadUrl = useMutation(api.files.generateUploadUrl);
+    const generateUploadUrl = useMutation(api.posts.generateUploadUrl);
     const updatePostImage = useMutation(api.posts.updatePostImage);
 
     const form = useForm<z.infer<typeof formSchema>>({

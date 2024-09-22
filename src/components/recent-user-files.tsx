@@ -34,6 +34,9 @@ export default function RecentUserFiles({}) {
                             >
                                 <CardContent className="flex justify-center">
 
+                                    {file.type === "image" && (
+                                        <ImagePreview src={file?.fileUrl as string } />
+                                    )}
                                     {file.type === "image/jpeg" && (
                                         <ImagePreview src={file?.fileUrl as string } />
                                     )}

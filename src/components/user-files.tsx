@@ -75,6 +75,9 @@ export default function UserFiles() {
                     <TableRow key={file._id} className="">
                         <TableCell 
                             className=" text-neutral-500">
+                                {file.type === "image" && (
+                                    <ImagePreview src={file?.fileUrl as string } />
+                                )}
                                 {file.type === "image/jpeg" && (
                                     <ImagePreview src={file?.fileUrl as string } />
                                 )}
