@@ -67,7 +67,7 @@ export default function ProjectMessages() {
                                             {messageTime(message._creationTime)}
                                         </span>
                                     </div>
-                                    <p className="text-sm mt-1">{message.message}</p>
+                                    <pre className="text-sm mt-1 font-sans whitespace-pre-wrap break-words">{message.message}</pre>
                                 </div>
                             </div>
 
