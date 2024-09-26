@@ -156,7 +156,7 @@ export const getRecentFilesForUser = query({
             .query('files')
             .withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', userId ))
             .order('desc') 
-            .take(3);
+            .take(5);
 
         return Promise.all(
             recentFiles.map(async (file) => ({
