@@ -22,6 +22,10 @@ Users may sign in via Google or create an account. Auth is handled completely by
 ## View
 The live site can be found [here](https://studico.vercel.app). 
 
+Login details: 
+- email: userone@studico.com
+- password: Secure1101@
+
 <a name="build"></a>
 ## Built With
 [![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/) [![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://react.dev/) [![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/) [![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/docs/installation) [![Convex](https://img.shields.io/badge/Convex-dc2626?style=for-the-badge&logoColor=white)](https://www.convex.dev/) [![Clerk](https://img.shields.io/badge/Clerk-8A2BE2?style=for-the-badge&logoColor=white)](https://clerk.com/)
