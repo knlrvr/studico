@@ -36,7 +36,7 @@ export default function UserFiles() {
     const [query, setQuery] = useState<string>('');
 
     const files = useQuery(api.files.getFilesForUser, {
-        query: '' || undefined,
+        query: '',
     });
 
     const filteredFiles = files?.filter(file => file.name.toLowerCase().includes(query.toLowerCase()));
