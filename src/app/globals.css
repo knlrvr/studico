@@ -96,3 +96,7 @@
 .hide-scroll::-webkit-scrollbar { 
   display: none;  /* Safari and Chrome */
 }
+
+.message-input {
+  field-sizing: content;
+}

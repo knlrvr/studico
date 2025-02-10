@@ -80,7 +80,7 @@ export default function SendMessageForm({
             })
 
           }}  
-          className="flex items-center gap-2"
+          className="flex items-end gap-2"
         >
           <div className="
               grid
@@ -88,7 +88,7 @@ export default function SendMessageForm({
               [&>textarea]:text-inherit
               [&>textarea]:resize-none
               w-full
-              h-[40px]
+              min-h-[40px]
           ">
             <textarea 
               rows={1}
@@ -96,10 +96,10 @@ export default function SendMessageForm({
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               required
-              className="hide-scroll w-full border px-2 py-1.5 rounded-md placeholder:text-neutral-500 text-sm overflow-scroll"
+              className="message-input hide-scroll w-full border px-2 py-1.5 rounded-md placeholder:text-neutral-500 text-sm"
             />
           </div>
-
+          
           <LoadingButton 
             isLoading={form.formState.isSubmitting}
             loadingText="Sending"
